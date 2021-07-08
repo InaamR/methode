@@ -139,23 +139,16 @@ if (preg_match("/config/", $page)) {
 
                                             if(!empty($_POST['login']) || !empty($_POST['pass'])) {
                                                 extract($_POST);
-                                                if(Connexion::verifLogin($login) == 0) {
-                                                    echo '<div class="alert alert-danger mt-1 alert-validation-msg" role="alert"><i class="feather icon-info mr-1 align-middle"></i><span>log erroné</span></div>';
-                                                }
-                                            }
+                                                if(Connexion::verifLogin($login) == FALSE) {
+                                                    echo '<div role="alert" aria-live="polite" aria-atomic="true" class="alert alert-danger" data-v-aa799a9e=""><!----><h4 class="alert-heading"> Attention </h4><div class="alert-body"><span>Identifiant erroné</span></div></div>';
+                                                }else{
 
-                                            if(!empty($_POST['login']) || !empty($_POST['pass'])) {
-                                                extract($_POST);
-                                                if(Connexion::verifPass($pass, $login) == 0) {
-                                                    echo '<div class="alert alert-danger mt-1 alert-validation-msg" role="alert"><i class="feather icon-info mr-1 align-middle"></i><span>pass erroné</span></div>';
+                                                    if(Connexion::verifPass($pass, $login) == FALSE) {
+                                                        echo '<div role="alert" aria-live="polite" aria-atomic="true" class="alert alert-danger" data-v-aa799a9e=""><!----><h4 class="alert-heading"> Attention </h4><div class="alert-body"><span>Mot de passe erroné</span></div></div>';
+                                                    }
+
                                                 }
                                             }
-                                            if(!empty($_POST['captcha']) || !empty($_POST['pass']) || !empty($_POST['captcha'])) {
-                                                extract($_POST);
-                                                if(Captcha::captchaVerif() == 0) {
-                                                    echo '<div class="alert alert-danger mt-1 alert-validation-msg" role="alert"><i class="feather icon-info mr-1 align-middle"></i><span>captch erroné</span></div>';
-                                                }
-                                            } 
 
 
 
@@ -176,12 +169,6 @@ if (preg_match("/config/", $page)) {
                                                         <label for="user-name"><b>Mot de passe *:</b></label>   
                                                         <div class="controls">
                                                         <input type="password" name="pass" class="form-control" id="user-password" required data-validation-required-message="Le champ est obligatoire">
-                                                        </div>
-                                                        </div>
-
-                                                        <div class="form-group">
-                                                        <div class="controls">
-                                                        <input type="number" name="captcha" class="form-control" id="user-captcha" placeholder="'.$captcha_2->captcha().'" required data-validation-required-message="Le champ est obligatoire">
                                                         </div>
                                                         </div>
 
@@ -225,23 +212,16 @@ if (preg_match("/config/", $page)) {
 
                                             if(!empty($_POST['login']) || !empty($_POST['pass'])) {
                                                 extract($_POST);
-                                                if(Connexion::verifLogin($login) == 0) {
-                                                    echo '<div class="alert alert-danger mt-1 alert-validation-msg" role="alert"><i class="feather icon-info mr-1 align-middle"></i><span>log ghalet</span></div>';
-                                                }
-                                            }
+                                                if(Connexion::verifLogin($login) == FALSE) {
+                                                    echo '<div role="alert" aria-live="polite" aria-atomic="true" class="alert alert-danger" data-v-aa799a9e=""><!----><h4 class="alert-heading"> Attention </h4><div class="alert-body"><span>Identifiant erroné</span></div></div>';
+                                                }else{
 
-                                            if(!empty($_POST['login']) || !empty($_POST['pass'])) {
-                                                extract($_POST);
-                                                if(Connexion::verifPass($pass, $login) == 0) {
-                                                    echo '<div class="alert alert-danger mt-1 alert-validation-msg" role="alert"><i class="feather icon-info mr-1 align-middle"></i><span>pass ghalet</span></div>';
+                                                    if(Connexion::verifPass($pass, $login) == FALSE) {
+                                                        echo '<div role="alert" aria-live="polite" aria-atomic="true" class="alert alert-danger" data-v-aa799a9e=""><!----><h4 class="alert-heading"> Attention </h4><div class="alert-body"><span>Mot de passe erroné</span></div></div>';
+                                                    }
+
                                                 }
                                             }
-                                            if(!empty($_POST['captcha']) || !empty($_POST['pass']) || !empty($_POST['captcha'])) {
-                                                extract($_POST);
-                                                if(Captcha::captchaVerif() == 0) {
-                                                    echo '<div class="alert alert-danger mt-1 alert-validation-msg" role="alert"><i class="feather icon-info mr-1 align-middle"></i><span>captch ghalet</span></div>';
-                                                }
-                                            } 
 
 
 
@@ -262,12 +242,6 @@ if (preg_match("/config/", $page)) {
                                                         <label for="user-name"><b>Mot de passe *:</b></label>   
                                                         <div class="controls">
                                                         <input type="password" name="pass" class="form-control" id="user-password" required data-validation-required-message="Le champ est obligatoire">
-                                                        </div>
-                                                        </div>
-
-                                                        <div class="form-group">
-                                                        <div class="controls">
-                                                        <input type="number" name="captcha" class="form-control" id="user-captcha" placeholder="'.$captcha->captcha().'" required data-validation-required-message="Le champ est obligatoire">
                                                         </div>
                                                         </div>
 

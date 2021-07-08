@@ -74,10 +74,11 @@ class Cryptage {
 	
 	// Fonction de cryptage
 	public static function crypter($var) {
-		$sel = "48@tiOP";
+		$hash = password_hash($var, PASSWORD_DEFAULT);
+		/*$sel = "48@tiOP";
 		$Cript = md5($var);
-		$crypt = sha1($Cript, $sel);
-		return $crypt;
+		$crypt = sha1($Cript, $sel);*/
+		return $hash;
 	}
 	// creation d'une chaine aleatoire
 	public static function chaine($nb_car, $chaine='AZERTYUIOPQSDFGHJKLMWXCVBNazertyuiopqsdfghjklmwxcvbn123456789') {
@@ -257,7 +258,7 @@ class Inscription {
 			break;	
 				
 			case 3 :
-			$resultat = 'Votre inscription est termin&eacute;e, un administarteur ou un mod&eacute;rateur doit la valider,<br />un email de confirmation vous sera envoy&eacute; d&egrave;s que se sera effectu&eacute;,<br />pensez a v&eacute;rifier vos spams.';
+			$resultat = 'Votre inscription est terminée, elle doit être valider par un administrateur, vous recevrez une confirmation par e-mail, pensez à vérifier votre spam.';
 			break;	
 		}
 		return $resultat;
@@ -345,7 +346,7 @@ class Connexion {
 	// 		Si login existe pas => retourne faux
 	// Si le captcha est faux => retourne faux
 	public static function connexionCreate() {
-		if(Captcha::captchaVerif() AND !empty($_POST['login']) AND !empty($_POST['pass'])) {
+		if(!empty($_POST['login']) AND !empty($_POST['pass'])) {
 			if(Connexion::verifLogin($_POST['login'])) {
 				if(Connexion::verifPass($_POST['pass'], $_POST['login'])) {
 					$_SESSION['id'] = Membre::recupId($_POST['login']);
@@ -381,12 +382,12 @@ class Connexion {
 		$resultat = Bdd::connectBdd()->prepare(SELECT.ALL.MEMBRE.LOGIN);
 		$resultat -> bindParam(':login', $login, PDO::PARAM_STR, 50);
 		$resultat -> execute();
-		$donnee = $resultat -> fetch(PDO::FETCH_ASSOC);
-		if(Cryptage::crypter($pass) === $donnee['password']) {
+		$donnee = $resultat -> fetch(PDO::FETCH_ASSOC);		
+		if (password_verify($pass, $donnee['password'])) {
 			return true;
 		}
 		else {
-			return true;
+			return false;
 		}
 	}
 	// La fonction de gestion des jetons de connexion lors de la connexion d'un membre
@@ -447,7 +448,7 @@ class Connexion {
 			switch($donnee['niveau']) {
 				case 1 :
 				$_SESSION['niveau'] = '1'; 
-				$redirect = redirection(URLSITE.'/membre/index.php');
+				$redirect = redirection(URLSITE.'/simple_user/index.php');
 				break;
 				
 				case 2 :
@@ -459,6 +460,11 @@ class Connexion {
 				$_SESSION['niveau'] = '3';
 				$redirect = redirection(URLSITE.'/administrateur/index.php');
 				break;
+
+				case 3 :
+					$_SESSION['niveau'] = '4';
+					$redirect = redirection(URLSITE.'/inviter/index.php');
+					break;
 			}
 		}
 		elseif($donnee['activation'] === '5') {
@@ -589,8 +595,8 @@ class ProtectEspace {
 	//				Redirection vers la page d'information de bannissement
 	//			Sinon
 	//				Retourne Vrai
-	public static function membre($id, $captcha, $jeton, $niveau) {
-		if(empty($id) OR empty($captcha) OR empty($jeton)) {
+	public static function membre($id, $jeton, $niveau) {
+		if(empty($id) OR empty($jeton)) {
 			redirection(URLSITE.'/deconnexion.php');
 		}
 		else {
@@ -630,8 +636,8 @@ class ProtectEspace {
 	//				Redirection vers la page d'information de bannissement
 	//			Sinon
 	//				Retourne Vrai
-	public static function moderateur($id, $captcha, $jeton, $niveau) {
-		if(empty($id) OR empty($captcha) OR empty($jeton)) {
+	public static function moderateur($id, $jeton, $niveau) {
+		if(empty($id) OR empty($jeton)) {
 			redirection(URLSITE.'/deconnexion.php');
 		}
 		else {
@@ -671,8 +677,8 @@ class ProtectEspace {
 	//				Redirection vers la page d'information de bannissement
 	//			Sinon
 	//				Retourne Vrai
-	public static function administrateur($id, $captcha, $jeton, $niveau) {
-		if(empty($id) OR empty($captcha) OR empty($jeton)) {
+	public static function administrateur($id, $jeton, $niveau) {
+		if(empty($id) OR empty($jeton)) {
 			redirection(URLSITE.'/administrateur/admin/deconnexion.php');
 		}
 		else {
@@ -1349,12 +1355,12 @@ class Admin {
 		$lien = URLSITE.'/administrateur/admin/';
 		return $lien;
 	}
-	public static function menuequipe() {
-		$lien = URLSITE.'/administrateur/equipe/';
+	public static function menucomm() {
+		$lien = URLSITE.'/administrateur/communication/';
 		return $lien;
 	}
-	public static function menuniveau() {
-		$lien = URLSITE.'/administrateur/niveau/';
+	public static function menunavigation() {
+		$lien = URLSITE.'/administrateur/navigation/';
 		return $lien;
 	}
 	public static function menusocle() {
