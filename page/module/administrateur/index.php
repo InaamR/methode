@@ -33,7 +33,7 @@ if(empty($_SESSION['id'])){
 
 }else{
 
-    ProtectEspace::administrateur($_SESSION['id'], $_SESSION['captcha'], $_SESSION['jeton'], $_SESSION['niveau']);
+    ProtectEspace::administrateur($_SESSION['id'], $_SESSION['jeton'], $_SESSION['niveau']);
 
 }
 ?>

@@ -115,15 +115,11 @@ if (preg_match("/config/", $page)) {
 
                                             if(Connexion::connexionCreate()) {
 
-                                                echo '
-                                                ssss
-                                                ';
                                                 redirection(URLSITE.'/index.php', $time=10);
 
                                             }
                                             else{
                                                 
-                                            $captcha_2 = new Captcha;
                                             echo'
                                             <div class="col-lg-12 col-12 p-0">
                                             <div class="card rounded-0 mb-0 px-2">
@@ -196,7 +192,6 @@ if (preg_match("/config/", $page)) {
                                             }
                                         }
                                         else {
-                                            $captcha = new Captcha;
                                             echo'
                                             <div class="col-lg-12 col-12 p-0">
                                             <div class="card rounded-0 mb-0 px-2">
