@@ -118,7 +118,7 @@ if (preg_match("/config/", $page)) {
 											extract($_POST);
 
 											echo
-                                                '<div class="alert alert-danger mt-1 alert-validation-msg" role="alert">
+                                                '<div class="alert alert-success mt-1 alert-validation-msg" role="alert">
                                                     <i class="feather icon-info mr-1 align-middle"></i>
                                                     <span>'.Inscription::inscrire($identifiant, $email, $passeUn, $passeDe).'</span>
                                                 </div>';
