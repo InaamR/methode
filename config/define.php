@@ -16,20 +16,20 @@ define('DELETE', 'DELETE ');
 define('ALL', '*');
 // les tables
 define('MEMBRE', ' FROM methode_membres');
-define('JETON', ' FROM methode_Secure');
-define('ACTIVATION', ' FROM methode_Activation');
-define('JETONMAIL', ' FROM methode_ActivationMail');
-define('MESSAGE', ' FROM methode_Messagerie');
-define('SMILEY', ' FROM methode_Smiley');
-define('ACCESPROFIL', ' FROM methode_AccesFiches');
-define('AVATAR', ' FROM methode_Avatar');
+define('JETON', ' FROM methode_secure');
+define('ACTIVATION', ' FROM methode_activation');
+define('JETONMAIL', ' FROM methode_activationMail');
+define('MESSAGE', ' FROM methode_messagerie');
+define('SMILEY', ' FROM methode_smiley');
+define('ACCESPROFIL', ' FROM methode_accesfiches');
+define('AVATAR', ' FROM methode_avatar');
 // les tables sans FROM
 define('MEMBREZ', 'methode_membres');
-define('JETONZ', 'methode_Secure');
-define('ACTIVATIONZ', 'methode_Activation');
-define('JETONMAILZ', 'methode_ActivationMail');
-define('MESSAGEZ', 'methode_Messagerie');
-define('ACCESPROFILZ', 'methode_AccesFiches');
+define('JETONZ', 'methode_secure');
+define('ACTIVATIONZ', 'methode_activation');
+define('JETONMAILZ', 'methode_activationMail');
+define('MESSAGEZ', 'methode_messagerie');
+define('ACCESPROFILZ', 'methode_accesfiches');
 // les variables de recherche sur la table membres
 define('ID', ' WHERE id=:id');
 define('NOI', ' WHERE id!=:id');
