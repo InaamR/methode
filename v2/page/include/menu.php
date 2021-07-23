@@ -45,26 +45,40 @@
                 <ul class="menu-content">
                         <?php
                         
-                        if($file == 'liste_comm.php'){
-                            
-                            echo'<li class="active">';
-                        }else{
-                            echo'<li class="">';
-                        }
+                            if($file == 'liste_comm.php'){
+                                
+                                echo'<li class="active">';
+                            }else{
+                                echo'<li class="">';
+                            }
                         ?>
                         <a class="d-flex align-items-center" href="http://<?php echo $_SERVER['SERVER_NAME']?>/<?php echo $PARAM_url_non_doc_site; ?>/page/module/administrateur/communication/liste_comm.php">
                             <i data-feather="circle"></i>
                             <span class="menu-item text-truncate" data-i18n="Gestion des Communications">Gestion Comm.</span>
                         </a>
                     </li> 
+                    <?php
+                        
+                            if($file == 'liste_equipe.php'){
+                                
+                                echo'<li class="active">';
+                            }else{
+                                echo'<li class="">';
+                            }
+                        ?>
+                        <a class="d-flex align-items-center" href="http://<?php echo $_SERVER['SERVER_NAME']?>/<?php echo $PARAM_url_non_doc_site; ?>/page/module/administrateur/equipe/liste_equipe.php">
+                            <i data-feather="circle"></i>
+                            <span class="menu-item text-truncate" data-i18n="Archive">Equipe</span>
+                        </a>
+                    </li>
                         <?php
                         
-                        if($file == 'liste_comm_archive.php'){
-                            
-                            echo'<li class="active">';
-                        }else{
-                            echo'<li class="">';
-                        }
+                            if($file == 'liste_comm_archive.php'){
+                                
+                                echo'<li class="active">';
+                            }else{
+                                echo'<li class="">';
+                            }
                         ?>
                         <a class="d-flex align-items-center" href="http://<?php echo $_SERVER['SERVER_NAME']?>/<?php echo $PARAM_url_non_doc_site; ?>/page/module/administrateur/communication/liste_comm_archive.php">
                             <i data-feather="circle"></i>

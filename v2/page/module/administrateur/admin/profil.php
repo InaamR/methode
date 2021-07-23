@@ -114,7 +114,7 @@ if(!empty($_POST['maj'])) {
     <!-- END: Page CSS-->
 
     <!-- BEGIN: Custom CSS-->
-    <link rel="stylesheet" type="text/css" href="https://<?php echo $_SERVER['SERVER_NAME']?>/intranet_etai/assets/css/style.css">
+    <link rel="stylesheet" type="text/css" href="https://<?php echo $_SERVER['SERVER_NAME']?>/<?php echo $PARAM_url_non_doc_site; ?>/assets/css/style.css">
     <!-- END: Custom CSS-->
 	
     
@@ -125,7 +125,7 @@ if(!empty($_POST['maj'])) {
 <!-- END: Head-->
 <!-- BEGIN: Body-->
 
-<body class="vertical-layout vertical-menu-modern 2-columns navbar-floating footer-static" data-open="click" data-menu="vertical-menu-modern" data-col="2-columns">
+<body class="vertical-layout vertical-menu-modern 2-columns navbar-floating footer-static menu-collapsed pace-done" data-open="click" data-menu="vertical-menu-modern" data-col="2-columns">
 
 
     <!-- BEGIN: Header-->
@@ -259,7 +259,7 @@ if(!empty($_POST['maj'])) {
 													<div class="col-12">
                                                         <div class="form-group row">
                                                             <div class="col-md-2">
-                                                                <span>Votre Prénom</span>
+                                                                <span>Votre prénom</span>
                                                             </div>
                                                             <div class="col-md-8">
                                                                 <div class="position-relative has-icon-left">
@@ -278,7 +278,7 @@ if(!empty($_POST['maj'])) {
 													<div class="col-12">
                                                         <div class="form-group row">
                                                             <div class="col-md-2">
-                                                                <span>Votre Nom</span>
+                                                                <span>Votre nom</span>
                                                             </div>
                                                             <div class="col-md-8">
                                                                 <div class="position-relative has-icon-left">
@@ -297,7 +297,7 @@ if(!empty($_POST['maj'])) {
 													<div class="col-12">
                                                         <div class="form-group row">
                                                             <div class="col-md-2">
-                                                                <span>Votre Genre </span>
+                                                                <span>Votre genre </span>
                                                             </div>
                                                             <div class="col-md-8">
 															<ul class="list-unstyled mb-0">
@@ -338,7 +338,7 @@ if(!empty($_POST['maj'])) {
 													<div class="col-12">
                                                         <div class="form-group row">
                                                             <div class="col-md-2">
-                                                                <span>Votre Date de Naissance</span>
+                                                                <span>Votre date de naissance</span>
                                                             </div>
                                                             <div class="col-md-8">
                                                                 <div class="position-relative has-icon-left">
@@ -357,7 +357,7 @@ if(!empty($_POST['maj'])) {
 													<div class="col-12">
                                                         <div class="form-group row">
                                                             <div class="col-md-2">
-                                                                <span>Votre Email</span>
+                                                                <span>Votre e-mail</span>
                                                             </div>
                                                             <div class="col-md-8">
                                                                 <div class="position-relative has-icon-left">
@@ -395,7 +395,7 @@ if(!empty($_POST['maj'])) {
 													<div class="col-12">
                                                         <div class="form-group row">
                                                             <div class="col-md-2">
-                                                                <span>Votre Adresse</span>
+                                                                <span>Votre adresse</span>
                                                             </div>
                                                             <div class="col-md-8">
                                                                 <div class="position-relative has-icon-left">
@@ -414,7 +414,7 @@ if(!empty($_POST['maj'])) {
 													<div class="col-12">
                                                         <div class="form-group row">
                                                             <div class="col-md-2">
-                                                                <span>Votre Code Postal</span>
+                                                                <span>Votre code postal</span>
                                                             </div>
                                                             <div class="col-md-8">
                                                                 <div class="position-relative has-icon-left">
@@ -434,7 +434,7 @@ if(!empty($_POST['maj'])) {
 													<div class="col-12">
                                                         <div class="form-group row">
                                                             <div class="col-md-2">
-                                                                <span>Votre Ville</span>
+                                                                <span>Votre ville</span>
                                                             </div>
                                                             <div class="col-md-8">
                                                                 <div class="position-relative has-icon-left">
@@ -453,7 +453,7 @@ if(!empty($_POST['maj'])) {
 													<div class="col-12">
                                                         <div class="form-group row">
                                                             <div class="col-md-2">
-                                                                <span>Votre Description</span>
+                                                                <span>Votre description</span>
                                                             </div>
                                                             <div class="col-md-10">
                                                                 <div class="position-relative has-icon-left">
@@ -467,6 +467,77 @@ if(!empty($_POST['maj'])) {
                                                         </div>
                                                     </div>
 
+
+                                                                    <div class="col-12 mb-2">
+                                                                        <div class="border rounded p-2">
+                                                                            <h4 class="mb-1">Photo de profile :</h4>                                                
+
+                                                                            <div class="media flex-column flex-md-row">
+
+                                                                                <?php
+                                                                                    if(!empty($id_produit))
+                                                                                    {
+                                                                                        echo '<img src="'.$img1['eg_image_produit_nom'].'" id="blog-feature-image-1" class="rounded mr-2 mb-1 mb-md-0" width="150" alt="Blog Featured Image" />';
+                                                                                    }
+                                                                                    else
+                                                                                    {
+                                                                                        echo '<img src="../../../../app-assets/images/slider/03.jpg" id="blog-feature-image-1" class="rounded mr-2 mb-1 mb-md-0" width="150" alt="Blog Featured Image" />';
+                                                                                    }
+                                                                                ?>
+
+                                                                                <div class="media-body">
+
+                                                                                    <!-- <small class="text-muted">Aucune limite de taille et de poids pour les images !</small> -->
+
+                                                                                    <p class="my-50">
+                                                                                        <a id="blog-image-text-1">
+
+                                                                                            <?php 
+                                                                                                if(!empty($id_produit)){
+                                                                                                    echo $img1['eg_image_produit_nom'];
+                                                                                                }else{
+                                                                                                    echo 'C:\fakepath\image.jpg';
+                                                                                                }
+                                                                                            ?>
+                                                                                            
+                                                                                        </a>
+                                                                                    </p>
+
+                                                                                    <div class="d-inline-block col-12">
+                                                                                            <div class="custom-file">
+                                                                                                <div class="col-md-12 col-6">
+                                                                                                    <div class="form-group">
+                                                                                                        <input id="ckfinder-input-1" type="text" class="form-control" name="img1" value="<?php 
+                                                                                                            $photo = Membre::visibilite($_SESSION['id'], 'prenom');
+                                                                                                            if(!empty($id_produit)){
+                                                                                                                echo $img1['eg_image_produit_nom'];
+                                                                                                            }
+                                                                                                            ?>" /> 
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                                <div class="col-md-12 col-4">
+                                                                                                    <div class="form-group">
+                                                                                                        <a id="ckfinder-popup-1" class="btn btn-dark waves-effect waves-float waves-light">
+                                                                                                            <i data-feather="upload" class="mr-25"></i>
+                                                                                                            <span>Parcourir</span>
+                                                                                                        </a> 
+                                                                                                    </div>
+                                                                                                </div>                                       
+                                                                                                
+
+                                                                                            </div>
+                                                                                    </div>
+
+                                                                                </div>
+                                                                            </div>
+
+
+                                                                        </div>
+                                                                        
+                                                                    </div>
+                                                                
+
+
 													<div class="col-md-12">
 														<input type="submit" class="btn btn-primary mr-1 mb-1" value="Mettre &agrave; jour le Profile" name="maj" class="input">
                                                         <button type="reset" class="btn btn-outline-secondary mr-1 mb-1">Annuler</button>
@@ -474,80 +545,8 @@ if(!empty($_POST['maj'])) {
 
 
 												</div>
-                                                <div class="row">                           
-                                                    <div class="col-12 mb-2">
-                                                        <div class="border rounded p-2">
-                                                            <h4 class="mb-1">Photo de profile *:</h4>                                                
-
-                                                            <div class="media flex-column flex-md-row">
-
-                                                                <?php
-                                                                if(!empty($id_produit))
-                                                                {
-                                                                    echo '<img src="'.$img1['eg_image_produit_nom'].'" id="blog-feature-image-1" class="rounded mr-2 mb-1 mb-md-0" width="150" alt="Blog Featured Image" />';
-                                                                }
-                                                                else
-                                                                {
-                                                                    echo '<img src="../../../../app-assets/images/slider/03.jpg" id="blog-feature-image-1" class="rounded mr-2 mb-1 mb-md-0" width="150" alt="Blog Featured Image" />';
-                                                                }
-                                                                ?>
-
-                                                                <div class="media-body">
-
-                                                                    <small class="text-muted">Aucune limite de taille et de poids pour les images !</small>
-
-                                                                    <p class="my-50">
-                                                                        <a id="blog-image-text-1">
-
-                                                                            <?php 
-                                                                            if(!empty($id_produit)){
-                                                                                echo $img1['eg_image_produit_nom'];
-                                                                            }else{
-                                                                                echo 'C:\fakepath\image.jpg';
-                                                                            }
-                                                                            ?>
-                                                                            
-                                                                        </a>
-                                                                    </p>
-
-                                                                    <div class="d-inline-block col-12 ">
-                                                                            <div class="custom-file">
-
-                                                                                <div class="col-md-4 col-6">
-                                                                                    <div class="form-group">
-                                                                                    <input id="ckfinder-input-1" type="text" class="form-control" name="img1" value="<?php 
-                                                                                        $photo = Membre::visibilite($_SESSION['id'], 'prenom');
-                                                                                        if(!empty($id_produit)){
-                                                                                            echo $img1['eg_image_produit_nom'];
-                                                                                        }
-                                                                                        ?>" required/> 
-                                                                                    </div>
-                                                                                </div>
-                                                                                <div class="col-md-4 col-6">
-                                                                                    <div class="form-group">
-                                                                                    <a id="ckfinder-popup-1" class="btn btn-dark waves-effect waves-float waves-light">
-                                                                                        <i data-feather="upload" class="mr-25"></i>
-                                                                                        <span>Choisir une premiere image</span>
-                                                                                    </a> 
-                                                                                    </div>
-                                                                                </div>                                       
-                                                                                
-
-                                                                            </div>
-                                                                    </div>
-
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-12 mt-50">
-                                                        <button type="submit" class="btn btn-primary mr-1">Enregistrement de votre photo</button>
-                                                        <button type="reset" class="btn btn-outline-secondary">Annuler</button>
-                                                    </div>
-
-                                                </div>
+                                                
+                                                
                                             </div>
                                         </form>
                                     </div>
