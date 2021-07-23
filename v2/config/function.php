@@ -1401,6 +1401,12 @@ class Admin {
 		$lien = URLSITE.'/administrateur/identite_vehicule/';
 		return $lien;
 	}
+
+	public static function menuchapitre() {
+		$lien = URLSITE.'/administrateur/chapitre/';
+		return $lien;
+	}
+	
 		
 } // Fin de la classe administrateur
 ?>
