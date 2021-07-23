@@ -35,36 +35,53 @@
                     <span class="menu-title text-truncate" data-i18n="Accueil">Accueil</span>
                 </a>
             </li>
-            <li class=" navigation-header"><span data-i18n="Section Direction">Section Direction</span><i data-feather="more-horizontal"></i></li>
+            <li class=" navigation-header"><span data-i18n="Section Direction">Gestion des services</span><i data-feather="more-horizontal"></i></li>
 
             <li class=" nav-item">
                 <a class="d-flex align-items-center" href="#">
                     <i class="fas fa-rss" aria-hidden="true"></i>
-                    <span class="menu-title text-truncate" data-i18n="Com. Générale" id="communication">Comm. Générale</span>
+                    <span class="menu-title text-truncate" data-i18n="Com. Générale" id="communication">Services</span>
                 </a>
                 <ul class="menu-content">
-                        <?php
+                       
+                    <?php
                         
-                        if($file == 'liste_comm.php'){
-                            
-                            echo'<li class="active">';
-                        }else{
-                            echo'<li class="">';
-                        }
+                            if($file == 'liste_equipe.php'){
+                                
+                                echo'<li class="active">';
+                            }else{
+                                echo'<li class="">';
+                            }
                         ?>
-                        <a class="d-flex align-items-center" href="http://<?php echo $_SERVER['SERVER_NAME']?>/<?php echo $PARAM_url_non_doc_site; ?>/page/module/administrateur/communication/liste_comm.php">
+                        <a class="d-flex align-items-center" href="http://<?php echo $_SERVER['SERVER_NAME']?>/<?php echo $PARAM_url_non_doc_site; ?>/page/module/administrateur/equipe/liste_equipe.php">
                             <i data-feather="circle"></i>
-                            <span class="menu-item text-truncate" data-i18n="Gestion des Communications">Gestion Comm.</span>
+                            <span class="menu-item text-truncate" data-i18n="Archive">Equipe</span>
                         </a>
-                    </li> 
+                    </li>
+
+                    <?php
+                        
+                            if($file == 'liste_niveau.php'){
+                                
+                                echo'<li class="active">';
+                            }else{
+                                echo'<li class="">';
+                            }
+                        ?>
+                        <a class="d-flex align-items-center" href="http://<?php echo $_SERVER['SERVER_NAME']?>/<?php echo $PARAM_url_non_doc_site; ?>/page/module/administrateur/niveau/liste_niveau.php">
+                            <i data-feather="circle"></i>
+                            <span class="menu-item text-truncate" data-i18n="Archive">Niveau</span>
+                        </a>
+                    </li>
+
                         <?php
                         
-                        if($file == 'liste_comm_archive.php'){
-                            
-                            echo'<li class="active">';
-                        }else{
-                            echo'<li class="">';
-                        }
+                            if($file == 'liste_comm_archive.php'){
+                                
+                                echo'<li class="active">';
+                            }else{
+                                echo'<li class="">';
+                            }
                         ?>
                         <a class="d-flex align-items-center" href="http://<?php echo $_SERVER['SERVER_NAME']?>/<?php echo $PARAM_url_non_doc_site; ?>/page/module/administrateur/communication/liste_comm_archive.php">
                             <i data-feather="circle"></i>

@@ -786,10 +786,10 @@ class Membre {
 		$resultat -> execute();
 		$donnee = $resultat -> fetch(PDO::FETCH_ASSOC);
 		if($donnee[$info] === '1') {
-			return 'Cacher le détail';
+			return 'Masquer';
 		}
 		else {
-			return 'Rendre Visible le détail';
+			return 'Afficher';
 		}
 	}
 	// Mise a jour du profil du membre
@@ -1371,8 +1371,12 @@ class Admin {
 		$lien = URLSITE.'/administrateur/admin/';
 		return $lien;
 	}
-	public static function menucomm() {
-		$lien = URLSITE.'/administrateur/communication/';
+	public static function menuequipe() {
+		$lien = URLSITE.'/administrateur/equipe/';
+		return $lien;
+	}
+	public static function menuniveau() {
+		$lien = URLSITE.'/administrateur/niveau/';
 		return $lien;
 	}
 	public static function menunavigation() {
