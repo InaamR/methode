@@ -35,7 +35,7 @@
                     <span class="menu-title text-truncate" data-i18n="Accueil">Accueil</span>
                 </a>
             </li>
-            <li class=" navigation-header"><span data-i18n="Section Direction">Service (Avoir)</span><i data-feather="more-horizontal"></i></li>
+            <li class=" navigation-header"><span data-i18n="Section Direction">Gestion des services</span><i data-feather="more-horizontal"></i></li>
 
             <li class=" nav-item">
                 <a class="d-flex align-items-center" href="#">
@@ -55,9 +55,25 @@
                         ?>
                         <a class="d-flex align-items-center" href="http://<?php echo $_SERVER['SERVER_NAME']?>/<?php echo $PARAM_url_non_doc_site; ?>/page/module/administrateur/equipe/liste_equipe.php">
                             <i data-feather="circle"></i>
-                            <span class="menu-item text-truncate" data-i18n="Archive">Equipes</span>
+                            <span class="menu-item text-truncate" data-i18n="Archive">Equipe</span>
                         </a>
                     </li>
+
+                    <?php
+                        
+                            if($file == 'liste_niveau.php'){
+                                
+                                echo'<li class="active">';
+                            }else{
+                                echo'<li class="">';
+                            }
+                        ?>
+                        <a class="d-flex align-items-center" href="http://<?php echo $_SERVER['SERVER_NAME']?>/<?php echo $PARAM_url_non_doc_site; ?>/page/module/administrateur/niveau/liste_niveau.php">
+                            <i data-feather="circle"></i>
+                            <span class="menu-item text-truncate" data-i18n="Archive">Niveau</span>
+                        </a>
+                    </li>
+
                         <?php
                         
                             if($file == 'liste_comm_archive.php'){
