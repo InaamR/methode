@@ -27,23 +27,26 @@ if (preg_match("/config/", $page)) {
     }
 }
 
-/*page_protect();
-if (!checkAdmin()) {
-    die("Secured");
-    exit();
-}*/
+if(empty($_SESSION['id'])){
+
+    ProtectEspace::administrateur("", "", "");
+
+}else{
+
+    ProtectEspace::administrateur($_SESSION['id'], $_SESSION['jeton'], $_SESSION['niveau']);
+
+}
 
 $job = '';
 $id = '';
-$st = '';
 
 if (isset($_GET['job'])) {
     $job = $_GET['job'];
 
-    if ($job == 'get_liste_equipe' || $job == 'add_equipe' || $job == 'equipe_edit' || $job == 'del_equipe') {
+    if ($job == 'get_liste_equipe' || $job == 'add_equipe' || $job == 'edit_equipe' || $job == 'del_equipe') {
 
-        if (isset($_GET['id'])) {
-            $id = $_GET['id'];
+        if (isset($_POST['id'])) {
+            $id = $_POST['id'];
             if (!is_numeric($id)) {
                 $id = '';
             }
@@ -60,14 +63,14 @@ $mysql_data = [];
 if ($job != '') {
     if ($job == 'get_liste_equipe') {
 
-        $PDO_query_equipe = Bdd::connectBdd()->prepare("SELECT * FROM user_equipe_methode ORDER BY equipe_name ASC");
+        $PDO_query_equipe = Bdd::connectBdd()->prepare("SELECT * FROM methode_equipe ORDER BY equipe_name ASC");
         $PDO_query_equipe->execute();
 
         while ($equipe = $PDO_query_equipe->fetch()) {
 
             $functions = '
             <a href="modif_equipe.php?id='.$equipe['equipe_id'].'" class="btn btn-info btn-sm">Modifier</a>
-            <a href="#" id="delete-record" data-id="' .$equipe['equipe_id'].'" data-name="' .$equipe['equipe_name'].'" class="btn btn-danger btn-sm">Supprimer</a>
+            <a id="delete-record" data-id="' .$equipe['equipe_id'].'" data-name="' .$equipe['equipe_name'].'" class="btn btn-danger btn-sm">Supprimer</a>
             ';
 
 
@@ -107,19 +110,16 @@ if ($job != '') {
         $PDO_query_equipe = null;
 
 
-    } elseif ($job == 'add_comm') {
-        try {
-            $query = Bdd::connectBdd()->prepare("INSERT INTO etai_intranet_comm (`etai_intranet_comm_titre`, `etai_intranet_comm_sous_titre`, `etai_intranet_comm_date`, `etai_intranet_comm_desc`, `etai_intranet_comm_img`, `etai_intranet_comm_statut`, `etai_intranet_comm_cat`, `etai_intranet_comm_email_user`, `etai_intranet_comm_user`)
-			 VALUES (:comm_titre, :comm_sous_titre, now(), :article, :img, :statut, :cat, :email, :user)");
+    } elseif ($job == 'add_equipe') {
 
-            $query->bindParam(":comm_titre", $_POST['titre'], PDO::PARAM_STR);
-            $query->bindParam(":comm_sous_titre", $_POST['stitre'], PDO::PARAM_STR);
-            $query->bindParam(":article", $_POST['article'], PDO::PARAM_STR);
-            $query->bindParam(":img", $_POST['img'], PDO::PARAM_STR);
-            $query->bindParam(":statut", $_POST['statut'], PDO::PARAM_INT);
-            $query->bindParam(":cat", $_POST['cat'], PDO::PARAM_INT);
-            $query->bindParam(":email", $_POST['email'], PDO::PARAM_STR);
-            $query->bindParam(":user", $_POST['user'], PDO::PARAM_STR);
+        try {
+            $query = Bdd::connectBdd()->prepare("INSERT INTO methode_equipe (`equipe_date`, `equipe_name`, `equipe_abr`, `equipe_statut`, `equipe_user`)
+			 VALUES (now(), :equipe_name, :equipe_abr, :equipe_statut, :equipe_user)");
+
+            $query->bindParam(":equipe_name", $_POST['nom'], PDO::PARAM_STR);
+            $query->bindParam(":equipe_abr", $_POST['abr'], PDO::PARAM_STR);
+            $query->bindParam(":equipe_statut", $_POST['statut'], PDO::PARAM_INT);
+            $query->bindParam(":equipe_user", $_POST['user'], PDO::PARAM_INT);
 
             $query->execute();
             $query->closeCursor();
@@ -133,47 +133,35 @@ if ($job != '') {
             $message = 'Échec de requête';
         }
         $query = null;
-        $bdd = null;
 
-
-
-        
     } elseif ($job == 'del_equipe') {
-        if ($id == '') {
-            $result = 'error';
-            $message = 'Échec id';
-        } else {
+        
             
-                $query_select_del = Bdd::connectBdd()->prepare("DELETE FROM `user_equipe_methode` WHERE equipe_id = :equipe_id");
+                $query_select_del = Bdd::connectBdd()->prepare("DELETE FROM methode_equipe WHERE equipe_id = :equipe_id");
                 $query_select_del->bindParam(":equipe_id", $id, PDO::PARAM_INT);
                 $query_select_del->execute(); 
                 $query_select_del->closeCursor();
 
                 $result = 'success';
-                $message = 'Succès de requête';
+                $message = 'Succès de requête'.$id;
            
-        }
-    } elseif ($job == 'comm_edit') {
-        if ($id == '') {
-            $result = 'Échec';
-            $message = 'Échec id';
-        } else {
-            $query = Bdd::connectBdd()->prepare("UPDATE etai_intranet_comm SET etai_intranet_comm_user = :etai_intranet_comm_user, etai_intranet_comm_email_user = :etai_intranet_comm_email_user, etai_intranet_comm_date = NOW(), etai_intranet_comm_cat = :etai_intranet_comm_cat, etai_intranet_comm_titre = :etai_intranet_comm_titre, etai_intranet_comm_sous_titre = :etai_intranet_comm_sous_titre, etai_intranet_comm_desc = :etai_intranet_comm_desc, etai_intranet_comm_img = :etai_intranet_comm_img, etai_intranet_comm_statut = :etai_intranet_comm_statut  WHERE etai_intranet_comm_id = :etai_intranet_comm_id");
-            $query->bindParam(":etai_intranet_comm_id", $id, PDO::PARAM_INT);
-            $query->bindParam(":etai_intranet_comm_user", $_POST['user'], PDO::PARAM_STR);
-            $query->bindParam(":etai_intranet_comm_email_user", $_POST['email'], PDO::PARAM_STR);
-            $query->bindParam(":etai_intranet_comm_cat", $_POST['cat'], PDO::PARAM_INT);
-            $query->bindParam(":etai_intranet_comm_titre", $_POST['titre'], PDO::PARAM_STR);
-            $query->bindParam(":etai_intranet_comm_sous_titre", $_POST['stitre'], PDO::PARAM_STR);
-            $query->bindParam(":etai_intranet_comm_desc", $_POST['article'], PDO::PARAM_STR);
-            $query->bindParam(":etai_intranet_comm_img", $_POST['img'], PDO::PARAM_STR);
-            $query->bindParam(":etai_intranet_comm_statut", $_POST['statut'], PDO::PARAM_INT);
+        
+    } elseif ($job == 'edit_equipe') {
+        
+            $query = Bdd::connectBdd()->prepare("UPDATE methode_equipe SET equipe_name = :equipe_name, equipe_abr = :equipe_abr, equipe_date = NOW(), equipe_statut = :equipe_statut, equipe_user = :equipe_user  WHERE equipe_id = :equipe_id");
+
+            $query->bindParam(":equipe_id", $_POST['id'], PDO::PARAM_INT);
+            $query->bindParam(":equipe_name", $_POST['nom'], PDO::PARAM_STR);
+            $query->bindParam(":equipe_abr", $_POST['abr'], PDO::PARAM_STR);
+            $query->bindParam(":equipe_statut", $_POST['statut'], PDO::PARAM_INT);
+            $query->bindParam(":equipe_user", $_POST['user'], PDO::PARAM_INT);
             $query->execute();
             $query->closeCursor();
+
             $result = 'success';
             $message = 'Succès de requête';
         }
-    }
+    
 }
 
 $data = [

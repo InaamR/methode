@@ -1,7 +1,3 @@
-/**
- * DataTables Basic
- */
-
 $(function () {
   'use strict';
 
@@ -10,12 +6,8 @@ $(function () {
       dt_date_table = $('.dt-date'),
       assetPath = '../app-assets/';
   
-  var form_comm = $('#form_comm');
+  var form_comm = $('#form_comm');  
 
-  
-
-  // DataTable with buttons
-  // --------------------------------------------------------------------
   if (dt_basic_table.length) {
     var dt_basic = dt_basic_table.DataTable({
       ajax: 'table/php/data_liste_equipe.php?job=get_liste_equipe',
@@ -204,108 +196,95 @@ $(function () {
     $('div.head-label').html('<h6 class="mb-0">Liste des équipes</h6>');
   
   }
-  // Flat Date picker
+
   if (dt_date_table.length) {
     dt_date_table.flatpickr({
       monthSelectorType: 'static',
       dateFormat: 'm/d/Y'
     });
-  }
+  } 
 
-  // Add New record
-  // ? Remove/Update this code as per your requirements ?
-  var count = 101;
-  $('.data-submit').on('click', function () {
-    var $new_name = $('.add-new-record .dt-full-name').val(),
-      $new_post = $('.add-new-record .dt-post').val(),
-      $new_email = $('.add-new-record .dt-email').val(),
-      $new_date = $('.add-new-record .dt-date').val(),
-      $new_salary = $('.add-new-record .dt-salary').val();
-
-    if ($new_name != '') {
-      dt_basic.row
-        .add({
-          responsive_id: null,
-          id: count,
-          full_name: $new_name,
-          post: $new_post,
-          email: $new_email,
-          start_date: $new_date,
-          salary: '$' + $new_salary,
-          status: 5
-        })
-        .draw();
-      count++;
-      $('.modal').modal('hide');
-    }
-  });
-
-  // Delete Record
+  // Verifier la supp
   $(document).on('click', '#delete-record', function (e) {
+
     Swal.fire({
-		  title: 'Êtes-vous sûr ?',
-		  text: "Vous ne pourrez pas annuler cela !",
-		  type: 'warning',
-		  showCancelButton: true,
-		  confirmButtonColor: '#3085d6',
-		  cancelButtonColor: '#d33',
-		  confirmButtonText: 'Supprimer',
-		  confirmButtonClass: 'btn btn-primary',
-		  cancelButtonClass: 'btn btn-danger ml-1',
-      cancelButtonText: 'Annuler',
-		  buttonsStyling: false,
-		}).then(function (result) {
-		  if (result.value) {
-							e.preventDefault();
-							var id      = $("#delete-record").data('id');
-							var name      = $("#delete-record").data('name');
-							var request = $.ajax({
-							url:          'table/php/data_liste_equipe.php?job=del_equipe&id=' + id,
-							cache:        false,
-							dataType:     'json',
-							contentType:  'application/json; charset=utf-8',
-							type:         'get'
-							});
-							
-							request.done(function(output){
-								if (output.result == 'success'){
-									  Swal.fire({
-										  type: "success",
-										  title: 'Supprimée!',
-										  text: "Equipe '" + name + "' supprimée avec succès.",
-										  confirmButtonClass: 'btn btn-success',
-										});
-                    dt_basic.ajax.reload();
-								} else {
-									Swal.fire({
-									  title: 'Annulée',
-									  text: "Une erreur s'est produite lors de l'enregistrement " + textStatus,
-									  type: 'error',
-									  confirmButtonClass: 'btn btn-success',
-									})
-								}
-							});
-							request.fail(function(jqXHR, textStatus){
-								Swal.fire({
-								  title: 'Annulée',
-								  text: "Une erreur s'est produite lors de l'enregistrement " + textStatus,
-								  type: 'error',
-								  confirmButtonClass: 'btn btn-success',
-								})
-							})
-			
-		  }
-		  else if (result.dismiss === Swal.DismissReason.cancel) {
-			  
-			Swal.fire({
-			  title: 'Annulée',
-			  text: 'Votre fichier est en sécurité',
-			  type: 'error',
-			  confirmButtonClass: 'btn btn-success',
-			})
-		  }
-		})
-  }); 
+      title: 'Êtes-vous sûr ?',
+      text: "Vous ne pourrez pas annuler cela !",
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Oui, supprimez-le !',
+      confirmButtonClass: 'btn btn-primary',
+      cancelButtonClass: 'btn btn-danger ml-1',
+      buttonsStyling: false
+
+    }).then(function (result) {
+
+      if (result.value) {
+
+              e.preventDefault();
+              var onSuccess = function (data) {
+                console.log('Success');
+                
+                Swal.fire({
+                  type: "success",
+                  title: 'Supprimé !',
+                  text: "Équipe '" + name + "' supprimée avec succès.",
+                  confirmButtonClass: 'btn btn-success',
+                });
+                //$(".dtr-bs-modal").removeClass("show");
+                //$(".modal-backdrop").removeClass("show");
+                dt_basic.ajax.reload();
+            
+              };
+      
+              var onError = function (jqXHR, textStatus, errorThrown) {
+                  console.log(jqXHR);
+                  console.log(textStatus);
+                  console.log(errorThrown);
+                  Swal.fire({
+                    title: 'Annulée',
+                    text: "Une erreur s'est produite lors de l'enregistrement " + textStatus,
+                    type: 'error',
+                    confirmButtonClass: 'btn btn-danger',
+                  })
+              
+              };
+              
+              var onBeforeSend = function () {
+                  console.log("Loading");          
+                  
+                  
+              };
+              var $id      = $("#delete-record").data('id');
+              var name      = $("#delete-record").data('name');
+              var request = $.ajax({
+                url:          'table/php/data_liste_equipe.php?job=del_equipe',
+                data:         'id=' + $id,
+                type:         'post',
+                async: false,
+                beforeSend: onBeforeSend,
+                error: onError,
+                success: onSuccess
+              });
+              
+              
+      
+      }
+      else if (result.dismiss === Swal.DismissReason.cancel) {			  
+        Swal.fire({
+          title: 'Annulée',
+          text: 'Votre produit est en sécurité !',
+          type: 'error',
+          confirmButtonClass: 'btn btn-danger',
+        });
+        $(".dtr-bs-modal").removeClass("show");
+        $(".modal-backdrop").removeClass("show");
+      }
+    })
+    
+  });   
 
   $(document).on('submit', '.add', function(e){
 	  			
@@ -315,7 +294,7 @@ $(function () {
 
       var onSuccess = function (data) {
         console.log('Success');
-        window.location.assign("liste_comm.php");
+        window.location.assign("liste_equipe.php");
     
       };
       var onError = function (jqXHR, textStatus, errorThrown) {
@@ -358,12 +337,11 @@ $(function () {
 
 		e.preventDefault();
 
-      var id        = $('#jquery-val-form').attr('data-id');
       var form_data = $('#jquery-val-form').serialize();
 
       var onSuccess = function (data) {
         console.log('Success');
-        window.location.assign("liste_comm.php");
+        window.location.assign("liste_equipe.php");
     
       };
       var onError = function (jqXHR, textStatus, errorThrown) {
@@ -389,7 +367,7 @@ $(function () {
           });
       };
 		  var request   = $.ajax({
-        url:          'table/php/data_liste_comm.php?job=comm_edit&id=' + id,
+        url:          'table/php/data_liste_equipe.php?job=edit_equipe',
         data:         form_data,
         type:         'post',
         async: false,
@@ -399,8 +377,6 @@ $(function () {
       });
 		
 	});
-
-
 
 });
 });
