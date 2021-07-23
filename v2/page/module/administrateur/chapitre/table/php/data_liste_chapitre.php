@@ -60,38 +60,38 @@ $mysql_data = [];
 if ($job != '') {
     if ($job == 'get_liste_chapitre') {
 
-        $PDO_query_chapitre = Bdd::connectBdd()->prepare("SELECT * FROM menu_chapitre ORDER BY menu_chapitre_id ASC");
+        $PDO_query_chapitre = Bdd::connectBdd()->prepare("SELECT * FROM methode_chapitre ORDER BY methode_chapitre_id ASC");
         $PDO_query_chapitre->execute();
 
         while ($chapitre = $PDO_query_chapitre->fetch()) {
 
             $functions = '
-            <a href="modif_comm.php?id='.$chapitre['menu_chapitre_id'].'" class="btn btn-info btn-sm">Modifier</a>
-            <a href="#" id="delete-record" data-id="' .$chapitre['menu_chapitre_id'].'" data-name="' .$chapitre['menu_chapitre_nom'].'" class="btn btn-danger btn-sm">Supprimer</a>            
+            <a href="modif_comm.php?id='.$chapitre['methode_chapitre_id'].'" class="btn btn-info btn-sm">Modifier</a>
+            <a href="#" id="delete-record" data-id="' .$chapitre['methode_chapitre_id'].'" data-name="' .$chapitre['methode_chapitre_nom'].'" class="btn btn-danger btn-sm">Supprimer</a>            
             ';
 
-            $query = Bdd::connectBdd()->prepare("SELECT menu_socle_nom FROM menu_socle WHERE menu_socle_id = :menu_socle_id");
-            $query->bindParam(":menu_socle_id", $chapitre['menu_socle_id'], PDO::PARAM_INT);
+            $query = Bdd::connectBdd()->prepare("SELECT methode_socle_nom FROM methode_socle WHERE methode_socle_id = :methode_socle_id");
+            $query->bindParam(":methode_socle_id", $chapitre['methode_socle_id'], PDO::PARAM_INT);
             $query->execute();	
             $query_socle = $query->fetch();
             $query->closeCursor();
 
 
-            $date = date_create($chapitre['menu_chapitre_date']);
+            $date = date_create($chapitre['methode_chapitre_date']);
             $date_create = date_format($date, "d/m/Y");
 
-            $name_user = Membre::info($chapitre['menu_chapitre_user'], 'nom').' '.Membre::info($chapitre['menu_chapitre_user'], 'prenom');
+            $name_user = Membre::info($chapitre['methode_chapitre_user'], 'nom').' '.Membre::info($chapitre['methode_chapitre_user'], 'prenom');
 
-            $chapitre = $chapitre['menu_chapitre_nom'];
-            $socle = $query_socle['menu_socle_nom'];
+            $chapitre = $chapitre['methode_chapitre_nom'];
+            $socle = $query_socle['methode_socle_nom'];
 
             $chemin = '<b>'.$socle.'</b> > '.$socle;
 
 
-            $id = $chapitre['menu_chapitre_id'];       
+            $id_chapitre = $chapitre['methode_chapitre_id'];       
 
 
-            switch($chapitre['menu_chapitre_statut'])
+            switch($chapitre['methode_chapitre_statut'])
             {
                 case '1':
                     $statut = '<div class="badge badge-light-success">Actif</div>';
@@ -102,7 +102,7 @@ if ($job != '') {
 
             $mysql_data[] = [
                 "responsive_id" => "",
-                "id" => $id,
+                "id" => $id_chapitre,
                 "full_name" => $name_user,
                 "titre" => $chemin,
                 "start_date" => $date_create,
