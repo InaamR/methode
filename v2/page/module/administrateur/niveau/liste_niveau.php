@@ -175,7 +175,7 @@ if(empty($_SESSION['id'])){
                             <h2 class="content-header-title float-left mb-0">SERVICES</h2>
                             <div class="breadcrumb-wrapper">
                                 <ol class="breadcrumb">
-                                    <li class="breadcrumb-item">Niveau</li>
+                                    <li class="breadcrumb-item">Niveaux</li>
                                 </ol>
                             </div>
                         </div>

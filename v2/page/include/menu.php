@@ -71,6 +71,21 @@
                         </a>
                     </li>
 
+                    <?php
+                        
+                            if($file == 'liste_sous_chapitre.php'){
+                                
+                                echo'<li class="active">';
+                            }else{
+                                echo'<li class="">';
+                            }
+                        ?>
+                        <a class="d-flex align-items-center" href="http://<?php echo $_SERVER['SERVER_NAME']?>/<?php echo $PARAM_url_non_doc_site; ?>/page/module/administrateur/sous_chapitre/liste_sous_chapitre.php">
+                            <i data-feather="circle"></i>
+                            <span class="menu-item text-truncate" data-i18n="Archive">Sous chapitre</span>
+                        </a>
+                    </li>
+
                 </ul>
             </li>
 
