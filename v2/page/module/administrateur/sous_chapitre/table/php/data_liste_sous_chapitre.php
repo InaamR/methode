@@ -63,8 +63,7 @@ $mysql_data = [];
 if ($job != '') {
     if ($job == 'get_liste_sous_chapitre') {
 
-        $PDO_query_sous_chapitre = Bdd::connectBdd()->prepare("SELECT * FROM methode_sous_chapitre AND methode_chapitre_id = :methode_chapitre_id ORDER BY methode_sous_chapitre_nom ASC");
-        $PDO_query_sous_chapitre->bindParam(":methode_chapitre_id", $chapitre['methode_chapitre_id']);
+        $PDO_query_sous_chapitre = Bdd::connectBdd()->prepare("SELECT * FROM methode_sous_chapitre ORDER BY methode_sous_chapitre_id DESC");
         $PDO_query_sous_chapitre->execute();
 
         while ($sous_chapitre = $PDO_query_sous_chapitre->fetch()) {
@@ -74,13 +73,25 @@ if ($job != '') {
             <a id="delete-record" data-id="' .$sous_chapitre['methode_sous_chapitre_id'].'" data-name="' .$sous_chapitre['methode_sous_chapitre_nom'].'" class="btn btn-danger btn-sm">Supprimer</a>
             ';
 
+            $query = Bdd::connectBdd()->prepare("SELECT * FROM methode_chapitre WHERE methode_chapitre_id = :methode_chapitre_id");
+            $query->bindParam(":methode_chapitre_id", $sous_chapitre['methode_chapitre_id'], PDO::PARAM_INT);
+            $query->execute();	
+            $query_chapitre = $query->fetch();
+            $query->closeCursor();
+
 
             $date = date_create($sous_chapitre['methode_sous_chapitre_date']);
-            $name_user = Membre::info($_SESSION['id'], 'nom').' '.Membre::info($_SESSION['id'], 'prenom');
-            $titre = $sous_chapitre['equipe_name'];
-            $id = $sous_chapitre['methode_sous_chapitre_id'];
-            $sous_chapitre = $sous_chapitre['methode_sous_chapitre_nom'];
-            $chapitre = $chapitre['methode_chapitre_id'];
+            $date_create = date_format($date, "d/m/Y");
+
+            $name_user = Membre::info($sous_chapitre['methode_sous_chapitre_user'], 'nom').' '.Membre::info($sous_chapitre['methode_sous_chapitre_user'], 'prenom');
+
+            $sous_chapitre_bread = $sous_chapitre['methode_sous_chapitre_nom'];
+            $chapitre_nom = $query_chapitre['methode_chapitre_nom'];
+
+            $chemin = '<b>'.$chapitre_nom.'</b> > '.$sous_chapitre_bread;
+
+
+            $id_sous_chapitre = $sous_chapitre['methode_sous_chapitre_id']; 
 
 
             switch($sous_chapitre['methode_sous_chapitre_statut'])
@@ -96,9 +107,8 @@ if ($job != '') {
                 "responsive_id" => "",
                 "id" => $id,
                 "full_name" => $name_user,
-                "titre" => $titre,
-                "sous_chapitre" => $sous_chapitre,
-                "chapitre" => $chapitre,
+                "sous_chapitre" => $sous_chapitre_bread,                
+                "post" => $chemin,
                 "start_date" => date_format($date, "d/m/Y"),
                 "status" => $statut,
                 "Actions" => $functions
@@ -113,22 +123,22 @@ if ($job != '') {
         $PDO_query_sous_chapitre = null;
 
 
-    } elseif ($job == 'add_equipe') {
+    } elseif ($job == 'add_sous_chapitre') {
 
         try {
-            $query = Bdd::connectBdd()->prepare("INSERT INTO methode_equipe (`equipe_date`, `equipe_name`, `equipe_abr`, `equipe_statut`, `equipe_user`)
-			 VALUES (now(), :equipe_name, :equipe_abr, :equipe_statut, :equipe_user)");
+            $query = Bdd::connectBdd()->prepare("INSERT INTO methode_sous_chapitre (`methode_sous_chapitre_date`, `methode_sous_chapitre_nom`, `methode_chapitre_id`, `methode_sous_chapitre_statut`, `methode_sous_chapitre_user`)
+			 VALUES (now(), :methode_sous_chapitre_nom, :methode_chapitre_id, :methode_sous_chapitre_statut, :methode_sous_chapitre_user)");
 
-            $query->bindParam(":equipe_name", $_POST['nom'], PDO::PARAM_STR);
-            $query->bindParam(":equipe_abr", $_POST['abr'], PDO::PARAM_STR);
-            $query->bindParam(":equipe_statut", $_POST['statut'], PDO::PARAM_INT);
-            $query->bindParam(":equipe_user", $_POST['user'], PDO::PARAM_INT);
+            $query->bindParam(":methode_sous_chapitre_nom", $_POST['nom'], PDO::PARAM_STR);
+            $query->bindParam(":methode_chapitre_id", $_POST['chapitre'], PDO::PARAM_STR);
+            $query->bindParam(":methode_sous_chapitre_statut", $_POST['statut'], PDO::PARAM_INT);
+            $query->bindParam(":methode_sous_chapitre_user", $_POST['user'], PDO::PARAM_INT);
 
             $query->execute();
             $query->closeCursor();
 
             $result = 'success';
-            $message = 'Niveau ajouté avec succés';
+            $message = 'Sous chapitre ajouté avec succés';
             
         } catch (PDOException $x) {
             die("Secured");

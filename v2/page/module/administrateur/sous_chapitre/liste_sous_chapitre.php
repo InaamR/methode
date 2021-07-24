@@ -176,6 +176,7 @@ if(empty($_SESSION['id'])){
                             <div class="breadcrumb-wrapper">
                                 <ol class="breadcrumb">
                                     <li class="breadcrumb-item">Sous chapitres</li>
+                                    <li class="breadcrumb-item">Liste des sous chapitres</li>
                                 </ol>
                             </div>
                         </div>
@@ -207,8 +208,7 @@ if(empty($_SESSION['id'])){
                                                     <th></th>
                                                     <th>id</th>
                                                     <th>Nom et prénom</th>
-                                                    <th>sous chapitre</th>
-                                                    <th>Chapitre</th>     
+                                                    <th>Sous chapitre</th>
                                                     <th>Date d'insertion</th>
                                                     <th>Statut</th>
                                                     <th></th>
