@@ -100,7 +100,7 @@ $(function () {
           // For Responsive
           className: 'control',
           orderable: false,
-          responsivePriority: 4,
+          responsivePriority: 2,
           targets: 0
         },
         {

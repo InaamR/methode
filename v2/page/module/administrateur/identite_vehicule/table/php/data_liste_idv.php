@@ -165,7 +165,7 @@ if ($job != '') {
 
                 "start_date" => $date_create,
                 "statut" => $statut,
-                "Actions" => $functions
+                "Actions" => ""
             ];
         }
 
