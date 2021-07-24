@@ -40,7 +40,7 @@ $st = '';
 if (isset($_GET['job'])) {
     $job = $_GET['job'];
 
-    if ($job == 'get_liste_chapitre' || $job == 'add_comm' || $job == 'comm_edit' || $job == 'del_com') {
+    if ($job == 'get_liste_chapitre' || $job == 'add_chapitre' || $job == 'edit_chapitre' || $job == 'del_chapitre') {
 
         if (isset($_POST['id'])) {
             $id = $_POST['id'];
@@ -66,11 +66,11 @@ if ($job != '') {
         while ($chapitre = $PDO_query_chapitre->fetch()) {
 
             $functions = '
-            <a href="modif_comm.php?id='.$chapitre['methode_chapitre_id'].'" class="btn btn-info btn-sm">Modifier</a>
+            <a href="modif_chapitre.php?id='.$chapitre['methode_chapitre_id'].'" class="btn btn-info btn-sm">Modifier</a>
             <a href="#" id="delete-record" data-id="' .$chapitre['methode_chapitre_id'].'" data-name="' .$chapitre['methode_chapitre_nom'].'" class="btn btn-danger btn-sm">Supprimer</a>            
             ';
 
-            $query = Bdd::connectBdd()->prepare("SELECT methode_socle_nom FROM methode_socle WHERE methode_socle_id = :methode_socle_id");
+            $query = Bdd::connectBdd()->prepare("SELECT * FROM methode_socle WHERE methode_socle_id = :methode_socle_id");
             $query->bindParam(":methode_socle_id", $chapitre['methode_socle_id'], PDO::PARAM_INT);
             $query->execute();	
             $query_socle = $query->fetch();
@@ -82,10 +82,10 @@ if ($job != '') {
 
             $name_user = Membre::info($chapitre['methode_chapitre_user'], 'nom').' '.Membre::info($chapitre['methode_chapitre_user'], 'prenom');
 
-            $chapitre = $chapitre['methode_chapitre_nom'];
+            $chapitre_bread = $chapitre['methode_chapitre_nom'];
             $socle = $query_socle['methode_socle_nom'];
 
-            $chemin = '<b>'.$socle.'</b> > '.$socle;
+            $chemin = '<b>'.$socle.'</b> > '.$chapitre_bread;
 
 
             $id_chapitre = $chapitre['methode_chapitre_id'];       
@@ -104,7 +104,8 @@ if ($job != '') {
                 "responsive_id" => "",
                 "id" => $id_chapitre,
                 "full_name" => $name_user,
-                "titre" => $chemin,
+                "chapitre" => $chapitre_bread,                
+                "post" => $chemin,
                 "start_date" => $date_create,
                 "statut" => $statut,
                 "Actions" => $functions
@@ -117,68 +118,61 @@ if ($job != '') {
         $PDO_query_chapitre = null;
 
 
-    } elseif ($job == 'add_comm') {
+    } elseif ($job == 'add_chapitre') {
+
         try {
-            $query = Bdd::connectBdd()->prepare("INSERT INTO etai_intranet_comm (`etai_intranet_comm_titre`, `etai_intranet_comm_sous_titre`, `etai_intranet_comm_date`, `etai_intranet_comm_desc`, `etai_intranet_comm_img`, `etai_intranet_comm_statut`, `etai_intranet_comm_cat`, `etai_intranet_comm_email_user`, `etai_intranet_comm_user`)
-			 VALUES (:comm_titre, :comm_sous_titre, now(), :article, :img, :statut, :cat, :email, :user)");
 
-            $query->bindParam(":comm_titre", $_POST['titre'], PDO::PARAM_STR);
-            $query->bindParam(":comm_sous_titre", $_POST['stitre'], PDO::PARAM_STR);
-            $query->bindParam(":article", $_POST['article'], PDO::PARAM_STR);
-            $query->bindParam(":img", $_POST['img'], PDO::PARAM_STR);
-            $query->bindParam(":statut", $_POST['statut'], PDO::PARAM_INT);
-            $query->bindParam(":cat", $_POST['cat'], PDO::PARAM_INT);
-            $query->bindParam(":email", $_POST['email'], PDO::PARAM_STR);
-            $query->bindParam(":user", $_POST['user'], PDO::PARAM_STR);
+            $query = Bdd::connectBdd()->prepare("INSERT INTO methode_chapitre (`methode_chapitre_nom`, `methode_socle_id`, `methode_chapitre_date`, `methode_chapitre_statut`, `methode_chapitre_user`)
+			 VALUES (:methode_chapitre_nom, :methode_socle_id, now(), :methode_chapitre_statut, :methode_chapitre_user)");
 
+            $query->bindParam(":methode_chapitre_nom", $_POST['nom'], PDO::PARAM_STR);
+            $query->bindParam(":methode_socle_id", $_POST['socle'], PDO::PARAM_INT);
+            $query->bindParam(":methode_chapitre_statut", $_POST['statut'], PDO::PARAM_INT);
+            $query->bindParam(":methode_chapitre_user", $_POST['user'], PDO::PARAM_INT);
             $query->execute();
             $query->closeCursor();
 
             $result = 'success';
-            $message = 'Niveau ajouté avec succés';
+            $message = 'Chapitre ajouté avec succés';
             
-        } catch (PDOException $x) {
+        }catch (PDOException $x) {
+
             die("Secured");
+
             $result = 'error';
             $message = 'Échec de requête';
         }
         $query = null;
-        $bdd = null;
-    } elseif ($job == 'del_com') {
-        if ($id == '') {
-            $result = 'error';
-            $message = 'Échec id';
-        } else {
+        
+    } elseif ($job == 'del_chapitre') {
+        
             
-                $query_select_del = Bdd::connectBdd()->prepare("DELETE FROM `etai_intranet_comm` WHERE etai_intranet_comm_id = :etai_intranet_comm_id");
-                $query_select_del->bindParam(":etai_intranet_comm_id", $id, PDO::PARAM_INT);
+                $query_select_del = Bdd::connectBdd()->prepare("DELETE FROM `methode_chapitre` WHERE methode_chapitre_id = :methode_chapitre_id");
+                $query_select_del->bindParam(":methode_chapitre_id", $id, PDO::PARAM_INT);
                 $query_select_del->execute(); 
                 $query_select_del->closeCursor();
 
                 $result = 'success';
                 $message = 'Succès de requête';
            
-        }
-    } elseif ($job == 'comm_edit') {
-        if ($id == '') {
-            $result = 'Échec';
-            $message = 'Échec id';
-        } else {
-            $query = Bdd::connectBdd()->prepare("UPDATE etai_intranet_comm SET etai_intranet_comm_user = :etai_intranet_comm_user, etai_intranet_comm_email_user = :etai_intranet_comm_email_user, etai_intranet_comm_date = NOW(), etai_intranet_comm_cat = :etai_intranet_comm_cat, etai_intranet_comm_titre = :etai_intranet_comm_titre, etai_intranet_comm_sous_titre = :etai_intranet_comm_sous_titre, etai_intranet_comm_desc = :etai_intranet_comm_desc, etai_intranet_comm_img = :etai_intranet_comm_img, etai_intranet_comm_statut = :etai_intranet_comm_statut  WHERE etai_intranet_comm_id = :etai_intranet_comm_id");
-            $query->bindParam(":etai_intranet_comm_id", $id, PDO::PARAM_INT);
-            $query->bindParam(":etai_intranet_comm_user", $_POST['user'], PDO::PARAM_STR);
-            $query->bindParam(":etai_intranet_comm_email_user", $_POST['email'], PDO::PARAM_STR);
-            $query->bindParam(":etai_intranet_comm_cat", $_POST['cat'], PDO::PARAM_INT);
-            $query->bindParam(":etai_intranet_comm_titre", $_POST['titre'], PDO::PARAM_STR);
-            $query->bindParam(":etai_intranet_comm_sous_titre", $_POST['stitre'], PDO::PARAM_STR);
-            $query->bindParam(":etai_intranet_comm_desc", $_POST['article'], PDO::PARAM_STR);
-            $query->bindParam(":etai_intranet_comm_img", $_POST['img'], PDO::PARAM_STR);
-            $query->bindParam(":etai_intranet_comm_statut", $_POST['statut'], PDO::PARAM_INT);
+        
+    } elseif ($job == 'edit_chapitre') {
+        
+
+            $query = Bdd::connectBdd()->prepare("UPDATE methode_chapitre SET methode_chapitre_nom = :methode_chapitre_nom, methode_socle_id = :methode_socle_id, methode_chapitre_date = NOW(), methode_chapitre_statut = :methode_chapitre_statut, methode_chapitre_user = :methode_chapitre_user  WHERE methode_chapitre_id = :methode_chapitre_id");
+
+            $query->bindParam(":methode_chapitre_id", $_POST['id_chapitre'], PDO::PARAM_INT);
+            $query->bindParam(":methode_chapitre_nom", $_POST['nom'], PDO::PARAM_STR);
+            $query->bindParam(":methode_socle_id", $_POST['socle'], PDO::PARAM_INT);
+            $query->bindParam(":methode_chapitre_statut", $_POST['statut'], PDO::PARAM_INT);
+            $query->bindParam(":methode_chapitre_user", $_POST['user'], PDO::PARAM_INT);
+
             $query->execute();
             $query->closeCursor();
+
             $result = 'success';
-            $message = 'Succès de requête';
-        }
+            $message = 'Chapitre modifié avec succés';
+        
     }
 }
 
