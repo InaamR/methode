@@ -63,31 +63,33 @@ $mysql_data = [];
 if ($job != '') {
     if ($job == 'get_liste_sous_chapitre') {
 
-        $PDO_query_sous_chapitre = Bdd::connectBdd()->prepare("SELECT * FROM methode_equipe ORDER BY equipe_name ASC");
-        $PDO_query_equipe->execute();
+        $PDO_query_sous_chapitre = Bdd::connectBdd()->prepare("SELECT * FROM methode_sous_chapitre AND methode_chapitre_id = :methode_chapitre_id ORDER BY methode_sous_chapitre_nom ASC");
+        $PDO_query_sous_chapitre->bindParam(":methode_chapitre_id", $chapitre['methode_chapitre_id']);
+        $PDO_query_sous_chapitre->execute();
 
-        while ($sous_chapitre = $PDO_query_equipe->fetch()) {
+        while ($sous_chapitre = $PDO_query_sous_chapitre->fetch()) {
 
             $functions = '
-            <a href="modif_equipe.php?id='.$equipe['equipe_id'].'" class="btn btn-info btn-sm">Modifier</a>
-            <a id="delete-record" data-id="' .$equipe['equipe_id'].'" data-name="' .$equipe['equipe_name'].'" class="btn btn-danger btn-sm">Supprimer</a>
+            <a href="modif_sous_chapitre.php?id='.$sous_chapitre['methode_sous_chapitre_id'].'" class="btn btn-info btn-sm">Modifier</a>
+            <a id="delete-record" data-id="' .$sous_chapitre['methode_sous_chapitre_id'].'" data-name="' .$sous_chapitre['methode_sous_chapitre_nom'].'" class="btn btn-danger btn-sm">Supprimer</a>
             ';
 
 
-            $date = date_create($equipe['equipe_date']);
+            $date = date_create($sous_chapitre['methode_sous_chapitre_date']);
             $name_user = Membre::info($_SESSION['id'], 'nom').' '.Membre::info($_SESSION['id'], 'prenom');
-            $titre = $equipe['equipe_name'];
-            $id = $equipe['equipe_id'];
-            $abr_equipe = $equipe['equipe_abr'];
+            $titre = $sous_chapitre['equipe_name'];
+            $id = $sous_chapitre['methode_sous_chapitre_id'];
+            $sous_chapitre = $sous_chapitre['methode_sous_chapitre_nom'];
+            $chapitre = $chapitre['methode_chapitre_id'];
 
 
-            switch($equipe['equipe_statut'])
+            switch($sous_chapitre['methode_sous_chapitre_statut'])
             {
                 case '1':
-                    $statut = '<div class="badge badge-light-success">Active</div>';
+                    $statut = '<div class="badge badge-light-success">Actif</div>';
                 break;                         
                 default:
-                    $statut = '<div class="badge badge-light-danger">Inactive</div>';
+                    $statut = '<div class="badge badge-light-danger">Inactif</div>';
             }
 
             $mysql_data[] = [
@@ -95,19 +97,20 @@ if ($job != '') {
                 "id" => $id,
                 "full_name" => $name_user,
                 "titre" => $titre,
-                "abr_equipe" => $abr_equipe,
+                "sous_chapitre" => $sous_chapitre,
+                "chapitre" => $chapitre,
                 "start_date" => date_format($date, "d/m/Y"),
                 "status" => $statut,
                 "Actions" => $functions
             ];
         }
 
-        $PDO_query_equipe->closeCursor();
+        $PDO_query_sous_chapitre->closeCursor();
         $result = 'success';
         $message = 'Succès de requête';
 
         $bdd = null;
-        $PDO_query_equipe = null;
+        $PDO_query_sous_chapitre = null;
 
 
     } elseif ($job == 'add_equipe') {
