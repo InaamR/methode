@@ -20,7 +20,3 @@ WE WILL RELEASE FUTURE UPDATES SO IN ORDER TO NOT OVERWRITE YOUR STYLES IT'S BET
 
 #basic-datatable .card .dataTables_wrapper .datatables-basic thead .sorting {
   text-align: center; }
-
-#basic-datatable .card .dataTables_wrapper .datatables-basic tbody tr td a {
-  font-size: 17px;
-  margin-right: 8px; }

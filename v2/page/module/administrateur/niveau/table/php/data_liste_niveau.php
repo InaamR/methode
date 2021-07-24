@@ -70,7 +70,7 @@ if ($job != '') {
 
             $functions = '
             <a href="modif_niveau.php?id='.$niveau['niveau_id'].'" class="btn btn-info btn-sm">Modifier</a>
-            <a id="delete-record" data-id="' .$niveau['niveau_id'].'" data-name="' .$niveau['niveau_name'].'" class="btn btn-danger btn-sm">Supprimer</a>
+            <a id="delete-record" data-id="'.$niveau['niveau_id'].'" data-name="' .$niveau['niveau_name'].'" class="btn btn-danger btn-sm">Supprimer</a>
             ';
 
 
@@ -131,11 +131,11 @@ if ($job != '') {
         }
         $query = null;
 
-    } elseif ($job == 'del_equipe') {
+    } elseif ($job == 'del_niveau') {
         
             
-                $query_select_del = Bdd::connectBdd()->prepare("DELETE FROM methode_niveau_user WHERE equipe_id = :equipe_id");
-                $query_select_del->bindParam(":equipe_id", $id, PDO::PARAM_INT);
+                $query_select_del = Bdd::connectBdd()->prepare("DELETE FROM methode_niveau_user WHERE niveau_id = :niveau_id");
+                $query_select_del->bindParam(":niveau_id", $id, PDO::PARAM_INT);
                 $query_select_del->execute(); 
                 $query_select_del->closeCursor();
 
