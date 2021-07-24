@@ -37,7 +37,8 @@ if(empty($_SESSION['id'])){
 if(!empty($_GET["id"])){$id_sous_chapitre = $_GET["id"];}else{$id_sous_chapitre = "";}
 
 
-$PDO_query_sous_chapitre_unique = Bdd::connectBdd()->prepare("SELECT * FROM menu_sous_chapitre WHERE menu_sous_chapitre_id = :id ORDER BY menu_sous_chapitre_id ASC");
+$PDO_query_sous_chapitre_unique = Bdd::connectBdd()->prepare("SELECT * FROM methode_sous_chapitre WHERE methode_sous_chapitre_id = :id AND methode_chapitre_id = :methode_chapitre_id ORDER BY methode_sous_chapitre_id ASC");
+$PDO_query_sous_chapitre_unique->bindParam(":methode_chapitre_id", $chapitre['methode_chapitre_id']);
 $PDO_query_sous_chapitre_unique->bindParam(":id", $sous_chapitre, PDO::PARAM_INT);
 $PDO_query_sous_chapitre_unique->execute();
 $sous_chapitre = $PDO_query_sous_chapitre_unique->fetch();
@@ -181,9 +182,9 @@ $PDO_query_sous_chapitre_unique->closeCursor();
                             <div class="breadcrumb-wrapper">
                                 <ol class="breadcrumb d-md-flex d-none">
                                     <li class="breadcrumb-item">
-                                        <a href="liste_equipe.php">Équipes</a>
+                                        <a href="liste_sous_chapitre.php">Sous chapitres</a>
                                     </li>
-                                    <li class="breadcrumb-item active">Gestion des équipes</li>
+                                    <li class="breadcrumb-item active">Gestion des sous chapitres</li>
                                 </ol>
                             </div>
                         </div>
@@ -191,7 +192,7 @@ $PDO_query_sous_chapitre_unique->closeCursor();
                 </div>
                 <div class="content-header-right text-md-right col-md-4 col-4">
                     <div class="form-group breadcrumb-right float-right d-flex">
-                        <a class="btn btn-success" href="liste_equipe.php">Retour à la liste</a>
+                        <a class="btn btn-success" href="liste_sous_chapitre.php">Retour à la liste</a>
                     </div>
                 </div>
             </div>
@@ -214,16 +215,16 @@ $PDO_query_sous_chapitre_unique->closeCursor();
                                     </div>
                                     
                                     <!-- Form -->
-                                    <form method="post" id="jquery-val-form" class="<?php if(empty($id_equipe)){echo 'add';}else{echo 'edit';} ?>" data-id="<?php echo $id_equipe; ?>">
+                                    <form method="post" id="jquery-val-form" class="<?php if(empty($id_sous_chapitre)){echo 'add';}else{echo 'edit';} ?>" data-id="<?php echo $id_sous_chapitre; ?>">
                                                             
                                         <input name="user" type="hidden" value="<?php echo Membre::info($_SESSION['id'], 'nom').' '.Membre::info($_SESSION['id'], 'prenom');?>">
-                                        <input name="id" type="hidden" value="<?php echo $id_equipe;?>">
+                                        <input name="id" type="hidden" value="<?php echo $id_sous_chapitre;?>">
 
                                         <div class="row">
 
                                             <div class="col-md-12 col-12">
                                                 <div class="form-group mb-2">
-                                                    <label for="basic-default-nom">Nom de l'équipe *:</label>
+                                                    <label for="basic-default-nom">Nom du sou chapitre *:</label>
                                                     <input
                                                     type="text"
                                                     class="form-control"
@@ -231,7 +232,7 @@ $PDO_query_sous_chapitre_unique->closeCursor();
                                                     name="nom"
                                                     placeholder="..."
                                                     maxlength="255"
-                                                    value="<?php if(!empty($id_equipe)){echo $equipe['equipe_name'];}?>"
+                                                    value="<?php if(!empty($id_sous_chapitre)){echo $id_sous_chapitre['methode_sous_chapitre_nom'];}?>"
                                                     required
                                                     />                                                 
                                                 </div>
@@ -240,10 +241,10 @@ $PDO_query_sous_chapitre_unique->closeCursor();
 
                                             <div class="col-md-6 col-12">
                                                 <div class="form-group mb-2">
-                                                    <label for="basic-default-abr">Abréviation de l'équipe *:</label>
+                                                    <label for="basic-default-abr">Nom du chapitre *:</label>
                                                     <input type="text" id="basic-default-abr" class="form-control" name="abr" value="<?php
-                                                            if(!empty($id_equipe))
-                                                            {echo $equipe['equipe_abr'];}                                                           
+                                                            if(!empty($id_chapitre))
+                                                            {echo $chapitre['methode_chapitre_nom'];}                                                           
                                                             ?>" placeholder="..." required/>
                                                     
                                                 </div>
@@ -252,33 +253,33 @@ $PDO_query_sous_chapitre_unique->closeCursor();
 
                                             <div class="col-md-6 col-12">
                                                 <div class="form-group mb-2">
-                                                    <label for="blog-edit-statut">Statut de l'équipe *:</label>
+                                                    <label for="blog-edit-statut">Statut du sous chapitre *:</label>
                                                     <select class="select2 form-control" id="blog-edit-statut" name="statut" required>
 
                                                         <?php 
-                                                                switch($equipe['equipe_statut'])
+                                                                switch($sous_chapitre['methode_sous_chapitre_statut'])
                                                                 {
                                                                     
                                                                     case '1':
                                                                             echo '
-                                                                            <option value="1" selected>Active</option>
-                                                                            <option value="0">Inactive</option>
+                                                                            <option value="1" selected>Actif</option>
+                                                                            <option value="0">Inactif</option>
                                                                             ';
                                                                         
                                                                     break;
                                                                     
                                                                     case '0':
                                                                             echo '
-                                                                            <option value="1">Active</option>
-                                                                            <option value="0" selected>Inactive</option>
+                                                                            <option value="1">Actif</option>
+                                                                            <option value="0" selected>Inactif</option>
                                                                             ';
                                                                         
                                                                     break;
 
                                                                     default:
                                                                         echo '
-                                                                        <option value="1" selected>Active</option>
-                                                                        <option value="0">Inactive</option>
+                                                                        <option value="1" selected>Actif</option>
+                                                                        <option value="0">Inactif</option>
                                                                         ';
                                                                     
                                                                 }
@@ -371,7 +372,7 @@ $PDO_query_sous_chapitre_unique->closeCursor();
     <script src="https://<?php echo $_SERVER['SERVER_NAME']?>/<?php echo $PARAM_url_non_doc_site?>/app-assets/vendors/js/forms/validation/jquery.validate.min.js"></script>
     <!-- END: Page JS-->
 
-    <script charset="utf-8"  src="<?php echo Admin::menuequipe();?>table/js/webapp_liste_equipe.js"></script>
+    <script charset="utf-8"  src="<?php echo Admin::menusouschapitre();?>table/js/webapp_liste_sous_chapitre.js"></script>
     
 
     <script>        

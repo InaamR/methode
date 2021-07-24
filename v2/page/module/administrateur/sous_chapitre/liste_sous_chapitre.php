@@ -299,7 +299,7 @@ if(empty($_SESSION['id'])){
     <!-- END: Theme JS-->
 
     <!-- BEGIN: Page JS-->
-    <script charset="utf-8"  src="<?php echo Admin::menusous_chapitre();?>table/js/webapp_liste_sous_chapitre.js"></script>
+    <script charset="utf-8"  src="<?php echo Admin::menusouschapitre();?>table/js/webapp_liste_sous_chapitre.js"></script>
 
     <script src="https://<?php echo $_SERVER['SERVER_NAME']?>/<?php echo $PARAM_url_non_doc_site?>/app-assets/vendors/js/extensions/sweetalert2.all.min.js"></script>
     <script src="https://<?php echo $_SERVER['SERVER_NAME']?>/<?php echo $PARAM_url_non_doc_site?>/app-assets/vendors/js/extensions/polyfill.min.js"></script>
