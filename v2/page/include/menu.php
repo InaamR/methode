@@ -44,8 +44,7 @@
                 </a>
                 <ul class="menu-content">
                        
-                    <?php
-                        
+                        <?php                        
                             if($file == 'liste_equipe.php'){
                                 
                                 echo'<li class="active">';
@@ -59,10 +58,8 @@
                         </a>
                     </li>
 
-                    <?php
-                        
-                            if($file == 'liste_niveau.php'){
-                                
+                        <?php                        
+                            if($file == 'liste_niveau.php'){                                
                                 echo'<li class="active">';
                             }else{
                                 echo'<li class="">';
@@ -77,38 +74,19 @@
                 </ul>
             </li>
 
-            <li class=" navigation-header"><span data-i18n="Section Collaborateur">Section Collaborateur</span><i data-feather="more-horizontal"></i></li>
+            <li class=" navigation-header"><span data-i18n="Gestion des planning">Gestion des planning</span><i data-feather="more-horizontal"></i></li>
 
-            <li class=" nav-item"><a class="d-flex align-items-center" href="app-email.html"><i class="fas fa-link" aria-hidden="true">                
-                </i><span class="menu-title text-truncate" data-i18n="">Liens Utiles</span></a>
-            </li>
-            <li class=" nav-item"><a class="d-flex align-items-center" href="#"><i class="fas fa-shield-virus" aria-hidden="true"></i><span class="menu-title text-truncate" data-i18n="Pages">Hygiène & Santé </span></a>
+            
+            <li class=" nav-item"><a class="d-flex align-items-center" href="#"><i class="far fa-handshake" aria-hidden="true"></i><span class="menu-title text-truncate" data-i18n="Options planning">Options planning</span></a>
                 <ul class="menu-content">
-                    <li><a class="d-flex align-items-center" href="#"><i data-feather="circle"></i><span class="menu-item text-truncate" data-i18n="">COVID-19</span></a>
-                    </li>
-                    <li><a class="d-flex align-items-center" href="#"><i data-feather="circle"></i><span class="menu-item text-truncate" data-i18n="">Vie interne</span></a>
-                    </li>
-                    <li><a class="d-flex align-items-center" href="#"><i data-feather="circle"></i><span class="menu-item text-truncate" data-i18n="">Planning du medecin</span></a>
-                    </li>
-                </ul>
-            </li>
-            <li class=" nav-item"><a class="d-flex align-items-center" href="#"><i class="far fa-handshake" aria-hidden="true"></i><span class="menu-title text-truncate" data-i18n="Vie Sociale">Vie Sociale</span></a>
-                <ul class="menu-content">
-                    <li><a class="d-flex align-items-center" href="#"><i data-feather="circle"></i><span class="menu-item text-truncate" data-i18n="">Info service</span></a>
-                    </li>
-                    <li><a class="d-flex align-items-center" href="#"><i data-feather="circle"></i><span class="menu-item text-truncate" data-i18n="">Events</span></a>
-                    </li>
-                    <li><a class="d-flex align-items-center" href="#"><i data-feather="circle"></i><span class="menu-item text-truncate" data-i18n="">Animation</span></a>
-                    </li>
-                    <li><a class="d-flex align-items-center" href="#"><i data-feather="circle"></i><span class="menu-item text-truncate" data-i18n="">Quiz</span></a>
-                    </li>
-                    <li><a class="d-flex align-items-center" href="#"><i data-feather="circle"></i><span class="menu-item text-truncate" data-i18n="">Jeux</span></a>
-                    </li>
-                    <li><a class="d-flex align-items-center" href="#"><i data-feather="circle"></i><span class="menu-item text-truncate" data-i18n="">Conventions</span></a>
-                    </li>
-                    <li><a class="d-flex align-items-center" href="#"><i data-feather="circle"></i><span class="menu-item text-truncate" data-i18n="">Suggestions</span></a>
-                    </li>
-                    <li><a class="d-flex align-items-center" href="#"><i data-feather="circle"></i><span class="menu-item text-truncate" data-i18n="">Sondage</span></a>
+                    <?php                        
+                        if($file == 'liste_chapitre.php'){                            
+                            echo'<li class="active">';
+                        }else{
+                            echo'<li class="">';
+                        }
+                    ?>
+                        <a class="d-flex align-items-center" href="http://<?php echo $_SERVER['SERVER_NAME']?>/<?php echo $PARAM_url_non_doc_site; ?>/page/module/administrateur/chapitre/liste_chapitre.php"><i data-feather="circle"></i><span class="menu-item text-truncate" data-i18n="">Chapitres</span></a>
                     </li>
                 </ul>
             </li>
