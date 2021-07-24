@@ -1,3 +1,7 @@
+/**
+ * DataTables Basic
+ */
+
 $(function () {
   'use strict';
 
@@ -6,20 +10,23 @@ $(function () {
       dt_date_table = $('.dt-date'),
       assetPath = '../app-assets/';
   
-  var form_comm = $('#form_comm');  
+  var form_comm = $('#form_comm');
 
+  
+
+  // DataTable with buttons
+  // --------------------------------------------------------------------
   if (dt_basic_table.length) {
     var dt_basic = dt_basic_table.DataTable({
-      ajax: 'table/php/data_liste_equipe.php?job=get_liste_equipe',
+      ajax: 'table/php/data_liste_socle.php?job=get_liste_socle',
       columns: [    
         { data: 'responsive_id' },
         { data: 'id' },
         { data: 'id' }, // used for sorting so will hide this column    
         { data: 'full_name' },
-        { data: 'titre' },
-        { data: 'abr_equipe' },
+        { data: 'socle' },
         { data: 'start_date' },
-        { data: 'status' },
+        { data: 'statut' },
         { data: 'Actions' }
       ],
       columnDefs: [
@@ -74,7 +81,7 @@ $(function () {
             var colorClass = $user_img === '' ? ' bg-light-' + $state + ' ' : '';
             // Creates full output for row
             var $row_output =
-              '<div class="d-flex justify-content-center align-items-center">' +'<div class="avatar ' +
+              '<div class="d-flex justify-content-left align-items-center">' +'<div class="avatar ' +
               colorClass +
               ' mr-1">' +
               $output +
@@ -190,33 +197,38 @@ $(function () {
         search: "Recherche :",
         zeroRecords: "Aucunes données disponibles !",
         infoEmpty: "Aucun enregistrement disponible",
-        infoFiltered: "(filtré depuis _MAX_ total des enregistrements)"
+        infoFiltered: "(filtré depuis _MAX_ total des enregistrements)",
+        loadingRecords: "Chargement des socles en cours ..."
       }
     });
-    $('div.head-label').html('<h6 class="mb-0">Liste des équipes</h6>');
+    $('div.head-label').html('<h6 class="mb-0">Liste des socle</h6>');
   
   }
-
+  // Flat Date picker
   if (dt_date_table.length) {
     dt_date_table.flatpickr({
       monthSelectorType: 'static',
       dateFormat: 'm/d/Y'
     });
-  } 
+  }
 
-  // Verifier la supp
-  $(document).on('click', '#delete-record', function (e) {
+   
 
+   // Verifier la supp
+   $(document).on('click', '#delete-record', function (e) {
+    var id      = $(this).data('id');
+    var name      = $(this).data('name');
     Swal.fire({
       title: 'Êtes-vous sûr ?',
-      text: "Vous ne pourrez pas annuler cela !",
+      text: "",
       type: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
       cancelButtonColor: '#d33',
-      confirmButtonText: 'Oui, supprimez-le !',
+      confirmButtonText: 'Supprimer',
       confirmButtonClass: 'btn btn-primary',
       cancelButtonClass: 'btn btn-danger ml-1',
+      cancelButtonText: 'Annuler',
       buttonsStyling: false
 
     }).then(function (result) {
@@ -230,7 +242,7 @@ $(function () {
                 Swal.fire({
                   type: "success",
                   title: 'Supprimé !',
-                  text: "Équipe '" + name + "' supprimée avec succès.",
+                  text: "Socle '" + name + "' supprimé avec succès.",
                   confirmButtonClass: 'btn btn-success',
                 });
                 //$(".dtr-bs-modal").removeClass("show");
@@ -257,11 +269,10 @@ $(function () {
                   
                   
               };
-              var $id      = $("#delete-record").data('id');
-              var name      = $("#delete-record").data('name');
+
               var request = $.ajax({
-                url:          'table/php/data_liste_equipe.php?job=del_equipe',
-                data:         'id=' + $id,
+                url:          'table/php/data_liste_socle.php?job=del_socle',
+                data:         'id=' + id,
                 type:         'post',
                 async: false,
                 beforeSend: onBeforeSend,
@@ -284,7 +295,7 @@ $(function () {
       }
     })
     
-  });   
+  });  
 
   $(document).on('submit', '.add', function(e){
 	  			
@@ -294,7 +305,7 @@ $(function () {
 
       var onSuccess = function (data) {
         console.log('Success');
-        window.location.assign("liste_equipe.php");
+        window.location.assign("liste_socle.php");
     
       };
       var onError = function (jqXHR, textStatus, errorThrown) {
@@ -307,22 +318,25 @@ $(function () {
       
       var onBeforeSend = function () {
           console.log("Loading");
-          $.blockUI({
-            message: '<div class="spinner-border text-white" role="status"></div>',
+          $('#submit').text('Envoi en cours'); // Onchange la valeur pour avoir un retour visuel
+          $('#submit').attr("disabled", true); // On s'assure du fait que le bouton ne sera plus cliquable, tu peut meme rajouter une classe ?!?!
+          $('.add').block({
+            message: '<div class="spinner-border text-primary" role="status"></div>',
             timeout: 1000,
             css: {
               backgroundColor: 'transparent',
               border: '0'
             },
             overlayCSS: {
-              opacity: 0.5
+              backgroundColor: '#fff',
+              opacity: 0.8
             }
           });
           
       };
 	  
       var request   = $.ajax({
-        url:          'table/php/data_liste_equipe.php?job=add_equipe',
+        url:          'table/php/data_liste_socle.php?job=add_socle',
         data:         form_data,
         type:         'post',
         async: false,
@@ -341,7 +355,7 @@ $(function () {
 
       var onSuccess = function (data) {
         console.log('Success');
-        window.location.assign("liste_equipe.php");
+        window.location.assign("liste_socle.php");
     
       };
       var onError = function (jqXHR, textStatus, errorThrown) {
@@ -354,20 +368,23 @@ $(function () {
       
       var onBeforeSend = function () {
           console.log("Loading");          
-          $.blockUI({
-            message: '<div class="spinner-border text-white" role="status"></div>',
+          $('#submit').text('Envoi en cours'); // Onchange la valeur pour avoir un retour visuel
+          $('#submit').attr("disabled", true); // On s'assure du fait que le bouton ne sera plus cliquable, tu peut meme rajouter une classe ?!?!
+          $('.add').block({
+            message: '<div class="spinner-border text-primary" role="status"></div>',
             timeout: 1000,
             css: {
               backgroundColor: 'transparent',
               border: '0'
             },
             overlayCSS: {
-              opacity: 0.5
+              backgroundColor: '#fff',
+              opacity: 0.8
             }
           });
       };
 		  var request   = $.ajax({
-        url:          'table/php/data_liste_equipe.php?job=edit_equipe',
+        url:          'table/php/data_liste_socle.php?job=edit_socle',
         data:         form_data,
         type:         'post',
         async: false,
@@ -377,6 +394,8 @@ $(function () {
       });
 		
 	});
+
+
 
 });
 });

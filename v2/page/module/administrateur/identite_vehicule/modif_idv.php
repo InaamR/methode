@@ -1,7 +1,6 @@
 <?php 
 
 session_start();
-
 if (empty($page)) {
     $page = "function";
     // On limite l'inclusion aux fichiers.php en ajoutant dynamiquement l'extension
@@ -34,14 +33,14 @@ if(empty($_SESSION['id'])){
     ProtectEspace::administrateur($_SESSION['id'], $_SESSION['jeton'], $_SESSION['niveau']);
 
 }
-if(!empty($_GET["id"])){$id_equipe = $_GET["id"];}else{$id_equipe = "";}
+if(!empty($_GET["id"])){$id_socle = $_GET["id"];}else{$id_socle = "";}
 
 
-$PDO_query_equipe_unique = Bdd::connectBdd()->prepare("SELECT * FROM methode_equipe WHERE equipe_id = :id ORDER BY equipe_id ASC");
-$PDO_query_equipe_unique->bindParam(":id", $id_equipe, PDO::PARAM_INT);
-$PDO_query_equipe_unique->execute();
-$equipe = $PDO_query_equipe_unique->fetch();
-$PDO_query_equipe_unique->closeCursor();
+$PDO_query_socle_unique = Bdd::connectBdd()->prepare("SELECT * FROM methode_socle WHERE methode_socle_id = :id");
+$PDO_query_socle_unique->bindParam(":id", $id_socle, PDO::PARAM_INT);
+$PDO_query_socle_unique->execute();
+$socle = $PDO_query_socle_unique->fetch();
+$PDO_query_socle_unique->closeCursor();
 ?>
 
 <!DOCTYPE html>
@@ -52,11 +51,10 @@ $PDO_query_equipe_unique->closeCursor();
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=0,minimal-ui">
-    <title><?php if(!empty($_GET["id"])){echo'Équipe | Modification - '.$PARAM_nom_site.'';}else{echo'Équipe | Ajout - '.$PARAM_nom_site.'';} ?></title>
+    <title><?php if(!empty($_GET["id"])){echo'Socle | Modification - '.$PARAM_nom_site;}else{echo'Socle | Ajout - '.$PARAM_nom_site;} ?></title>
     <link rel="apple-touch-icon" href="https://<?php echo $_SERVER['SERVER_NAME']?>/<?php echo $PARAM_url_non_doc_site?>/app-assets/images/ico/apple-icon-120.png">
     <link rel="shortcut icon" type="image/x-icon" href="https://<?php echo $_SERVER['SERVER_NAME']?>/<?php echo $PARAM_url_non_doc_site?>/app-assets/images/ico/favicon-16x16.png">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500;1,600"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500;1,600" rel="stylesheet">
 
     <!-- BEGIN: Vendor CSS-->
     <link rel="stylesheet" type="text/css" href="https://<?php echo $_SERVER['SERVER_NAME']?>/<?php echo $PARAM_url_non_doc_site?>/app-assets/vendors/css/vendors.min.css">
@@ -77,7 +75,6 @@ $PDO_query_equipe_unique->closeCursor();
     <!-- BEGIN: Page CSS-->
     <link rel="stylesheet" type="text/css" href="https://<?php echo $_SERVER['SERVER_NAME']?>/<?php echo $PARAM_url_non_doc_site?>/app-assets/css/core/menu/menu-types/vertical-menu.css">
     <link rel="stylesheet" type="text/css" href="https://<?php echo $_SERVER['SERVER_NAME']?>/<?php echo $PARAM_url_non_doc_site?>/app-assets/css/themes/bordered-layout.css">
-    <link rel="stylesheet" type="text/css" href="https://<?php echo $_SERVER['SERVER_NAME']?>/<?php echo $PARAM_url_non_doc_site?>/app-assets/css/plugins/forms/form-quill-editor.css">
     <link rel="stylesheet" type="text/css" href="https://<?php echo $_SERVER['SERVER_NAME']?>/<?php echo $PARAM_url_non_doc_site?>/app-assets/css/pages/page-blog.css">
     <link rel="stylesheet" type="text/css" href="https://<?php echo $_SERVER['SERVER_NAME']?>/<?php echo $PARAM_url_non_doc_site?>/app-assets/css/plugins/forms/form-validation.css">
     <link rel="stylesheet" type="text/css" href="https://<?php echo $_SERVER['SERVER_NAME']?>/<?php echo $PARAM_url_non_doc_site?>/app-assets/css/plugins/forms/pickers/form-flat-pickr.css">
@@ -92,77 +89,78 @@ $PDO_query_equipe_unique->closeCursor();
 </head>
 <!-- END: Head-->
 
+<!-- BEGIN: Body-->
 
 <body class="vertical-layout vertical-menu-modern  navbar-floating footer-static menu-collapsed pace-done" data-open="click" data-menu="vertical-menu-modern" data-col="">
 
     <!-- BEGIN: Header-->
     <?php
-        $page = '';
-        if (empty($page)) {
-        $page = "top";
-        // On limite l'inclusion aux fichiers.php en ajoutant dynamiquement l'extension
-        // On supprime également d'éventuels espaces
-        $page = trim($page.".php");
-        
-        }
-        
-        // On évite les caractères qui permettent de naviguer dans les répertoires
-        $page = str_replace("../","protect",$page);
-        $page = str_replace(";","protect",$page);
-        $page = str_replace("%","protect",$page);
-        
-        // On interdit l'inclusion de dossiers protégés par htaccess
-        if (preg_match("/include/",$page)) {
-        echo "Vous n'avez pas accès à ce répertoire";
-        }
-        
-        else {
-        
-            // On vérifie que la page est bien sur le serveur
-            if (file_exists("../../../include/".$page) && $page != 'index.php') {
-            include("../../../include/".$page); 
-            }
-        
-            else {
-                echo "Page inexistante !";
-            }
-        }
+	$page = '';
+	if (empty($page)) {
+	 $page = "top";
+	 // On limite l'inclusion aux fichiers.php en ajoutant dynamiquement l'extension
+	 // On supprime également d'éventuels espaces
+	 $page = trim($page.".php");
+	
+	}
+	
+	// On évite les caractères qui permettent de naviguer dans les répertoires
+	$page = str_replace("../","protect",$page);
+	$page = str_replace(";","protect",$page);
+	$page = str_replace("%","protect",$page);
+	
+	// On interdit l'inclusion de dossiers protégés par htaccess
+	if (preg_match("/include/",$page)) {
+	 echo "Vous n'avez pas accès à ce répertoire";
+	 }
+	
+	else {
+	
+		// On vérifie que la page est bien sur le serveur
+		if (file_exists("../../../include/".$page) && $page != 'index.php') {
+		   include("../../../include/".$page); 
+		}
+	
+		else {
+			echo "Page inexistante !";
+		}
+	}
 	
 	?>
     <!-- END: Header-->
 
     <!-- BEGIN: Main Menu-->
     <?php
-        $page = '';
-        if (empty($page)) {
-        $page = "menu";
-        // On limite l'inclusion aux fichiers.php en ajoutant dynamiquement l'extension
-        // On supprime également d'éventuels espaces
-        $page = trim($page.".php");
-        
-        }
-        
-        // On évite les caractères qui permettent de naviguer dans les répertoires
-        $page = str_replace("../","protect",$page);
-        $page = str_replace(";","protect",$page);
-        $page = str_replace("%","protect",$page);
-        
-        // On interdit l'inclusion de dossiers protégés par htaccess
-        if (preg_match("/include/",$page)) {
-        echo "Vous n'avez pas accès à ce répertoire";
-        }
-        
-        else {
-        
-            // On vérifie que la page est bien sur le serveur
-            if (file_exists("../../../include/".$page) && $page != 'index.php') {
-            include("../../../include/".$page); 
-            }
-        
-            else {
-                echo "Page inexistante !";
-            }
-        }
+	$page = '';
+	if (empty($page)) {
+	 $page = "menu";
+	 // On limite l'inclusion aux fichiers.php en ajoutant dynamiquement l'extension
+	 // On supprime également d'éventuels espaces
+	 $page = trim($page.".php");
+	
+	}
+	
+	// On évite les caractères qui permettent de naviguer dans les répertoires
+	$page = str_replace("../","protect",$page);
+	$page = str_replace(";","protect",$page);
+	$page = str_replace("%","protect",$page);
+	
+	// On interdit l'inclusion de dossiers protégés par htaccess
+	if (preg_match("/include/",$page)) {
+	 echo "Vous n'avez pas accès à ce répertoire";
+	 }
+	
+	else {
+	
+		// On vérifie que la page est bien sur le serveur
+		if (file_exists("../../../include/".$page) && $page != 'index.php') {
+		   include("../../../include/".$page); 
+		}
+	
+		else {
+			echo "Page inexistante !";
+		}
+	}
 	
 	?>
     <!-- END: Main Menu-->
@@ -172,29 +170,28 @@ $PDO_query_equipe_unique->closeCursor();
         <div class="content-overlay"></div>
         <div class="header-navbar-shadow"></div>
         <div class="content-wrapper">
-
             <div class="content-header row">
-                <div class="content-header-left col-md-8 col-8 mb-2">
+                <div class="content-header-left col-md-9 col-12 mb-2">
                     <div class="row breadcrumbs-top">
                         <div class="col-12">
-                            <h2 class="content-header-title float-left mb-0">SERVICES</h2>
+                            <h2 class="content-header-title float-left mb-0">GESTION DES PLANNING</h2>
                             <div class="breadcrumb-wrapper">
-                                <ol class="breadcrumb d-md-flex d-none">
-                                    <li class="breadcrumb-item">
-                                        <a href="liste_equipe.php">Équipes</a>
-                                    </li>
-                                    <li class="breadcrumb-item active">Gestion des équipes</li>
+                                <ol class="breadcrumb">
+                                    <li class="breadcrumb-item">Socles</li>
+                                    <li class="breadcrumb-item"><a href="liste_socle.php">Liste des socles</a></li>
+                                    <li class="breadcrumb-item">Gestion des socle</li>
                                 </ol>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="content-header-right text-md-right col-md-4 col-4">
-                    <div class="form-group breadcrumb-right float-right d-flex">
-                        <a class="btn btn-success" href="liste_equipe.php">Retour à la liste</a>
-                    </div>
+                <div class="content-header-right text-md-right col-md-3 col-4">
+                <div class="form-group breadcrumb-right">
+                        <a class="btn-icon btn btn-primary btn-round btn-sm waves-effect waves-float waves-light" href="liste_socle.php">Retour à la liste</a>
+                        </div>
                 </div>
             </div>
+
             <!-- Begin : main content -->
             <div class="content-body">
                 <!-- Blog Edit -->
@@ -214,16 +211,16 @@ $PDO_query_equipe_unique->closeCursor();
                                     </div>
                                     
                                     <!-- Form -->
-                                    <form method="post" id="jquery-val-form" class="<?php if(empty($id_equipe)){echo 'add';}else{echo 'edit';} ?>" data-id="<?php echo $id_equipe; ?>">
+                                    <form method="post" id="jquery-val-form" class="<?php if(!empty($id_socle)){echo 'edit';}else{echo 'add';} ?>" data-id="<?php echo $id_socle; ?>">
                                                             
-                                        <input name="user" type="hidden" value="<?php echo Membre::info($_SESSION['id'], 'nom').' '.Membre::info($_SESSION['id'], 'prenom');?>">
-                                        <input name="id" type="hidden" value="<?php echo $id_equipe;?>">
+                                        <input name="user" type="hidden" value="<?php echo Membre::info($_SESSION['id'], 'id');?>">
+                                        <input name="id_socle" type="hidden" value="<?php echo $id_socle;?>">
 
                                         <div class="row">
 
                                             <div class="col-md-12 col-12">
                                                 <div class="form-group mb-2">
-                                                    <label for="basic-default-nom">Nom de l'équipe *:</label>
+                                                    <label for="basic-default-nom">Nom du socle *:</label>
                                                     <input
                                                     type="text"
                                                     class="form-control"
@@ -231,63 +228,58 @@ $PDO_query_equipe_unique->closeCursor();
                                                     name="nom"
                                                     placeholder="..."
                                                     maxlength="255"
-                                                    value="<?php if(!empty($id_equipe)){echo $equipe['equipe_name'];}?>"
+                                                    value="<?php if(!empty($id_socle)){echo $socle['methode_socle_nom'];}?>"
                                                     required
                                                     />                                                 
                                                 </div>
                                             </div>
 
-
-                                            <div class="col-md-6 col-12">
+                                            <div class="col-md-12 col-12">
                                                 <div class="form-group mb-2">
-                                                    <label for="basic-default-abr">Abréviation de l'équipe *:</label>
-                                                    <input type="text" id="basic-default-abr" class="form-control" name="abr" value="<?php
-                                                            if(!empty($id_equipe))
-                                                            {echo $equipe['equipe_abr'];}                                                           
-                                                            ?>" placeholder="..." required/>
-                                                    
-                                                </div>
-                                            </div>
-
-
-                                            <div class="col-md-6 col-12">
-                                                <div class="form-group mb-2">
-                                                    <label for="blog-edit-statut">Statut de l'équipe *:</label>
+                                                    <label for="blog-edit-statut">Statut du socle *:</label>
                                                     <select class="select2 form-control" id="blog-edit-statut" name="statut" required>
 
                                                         <?php 
-                                                                switch($equipe['equipe_statut'])
+
+                                                            if(!empty($id_socle)){
+                                                                switch($socle['methode_socle_statut'])
                                                                 {
                                                                     
                                                                     case '1':
+
                                                                             echo '
-                                                                            <option value="1" selected>Active</option>
-                                                                            <option value="0">Inactive</option>
+                                                                            <option value="1" selected>Actif</option>
+                                                                            <option value="0">Non-actif</option>
                                                                             ';
+                                                                           
                                                                         
                                                                     break;
+                                                                    
+                                                                    
                                                                     
                                                                     case '0':
+
                                                                             echo '
-                                                                            <option value="1">Active</option>
-                                                                            <option value="0" selected>Inactive</option>
+                                                                            <option value="1">Actif</option>
+                                                                            <option value="0" selected>Non-actif</option>
                                                                             ';
                                                                         
                                                                     break;
-
-                                                                    default:
-                                                                        echo '
-                                                                        <option value="1" selected>Active</option>
-                                                                        <option value="0">Inactive</option>
-                                                                        ';
-                                                                    
                                                                 }
+                                                            }else{
+
+                                                                echo '
+                                                                    <option value="1" selected>Actif</option>
+                                                                    <option value="0" >Non-actif</option>
+                                                                    ';
+
+                                                            }
                                                         ?>
                                                     </select>
                                                 </div>
                                             </div>
                                             <div class="col-12 mt-50">
-                                                <button type="submit" class="btn btn-primary mr-1">Enregistrement</button>
+                                                <button type="submit" class="btn btn-primary mr-1" id="submit">Enregistrement</button>
                                                 <button type="reset" class="btn btn-outline-secondary">Vider les champs</button>
                                             </div>
                                         </div>
@@ -302,6 +294,7 @@ $PDO_query_equipe_unique->closeCursor();
             </div>
             <!-- End : main content -->
 
+            
         </div>
     </div>
     <!-- END: Content-->
@@ -311,37 +304,37 @@ $PDO_query_equipe_unique->closeCursor();
 
     <!-- BEGIN: Footer-->
     <?php
-        $page = '';
-        if (empty($page)) {
-        $page = "footer";
-        // On limite l'inclusion aux fichiers.php en ajoutant dynamiquement l'extension
-        // On supprime également d'éventuels espaces
-        $page = trim($page.".php");
-        
-        }
-        
-        // On évite les caractères qui permettent de naviguer dans les répertoires
-        $page = str_replace("../","protect",$page);
-        $page = str_replace(";","protect",$page);
-        $page = str_replace("%","protect",$page);
-        
-        // On interdit l'inclusion de dossiers protégés par htaccess
-        if (preg_match("/include/",$page)) {
-        echo "Vous n'avez pas accès à ce répertoire";
-        }
-        
-        else {
-        
-            // On vérifie que la page est bien sur le serveur
-            if (file_exists("../../../include/".$page) && $page != 'index.php') {
-            include("../../../include/".$page); 
-            }
-        
-            else {
-                echo "Page inexistante !";
-            }
-        }
-        
+	$page = '';
+	if (empty($page)) {
+	 $page = "footer";
+	 // On limite l'inclusion aux fichiers.php en ajoutant dynamiquement l'extension
+	 // On supprime également d'éventuels espaces
+	 $page = trim($page.".php");
+	
+	}
+	
+	// On évite les caractères qui permettent de naviguer dans les répertoires
+	$page = str_replace("../","protect",$page);
+	$page = str_replace(";","protect",$page);
+	$page = str_replace("%","protect",$page);
+	
+	// On interdit l'inclusion de dossiers protégés par htaccess
+	if (preg_match("/include/",$page)) {
+	 echo "Vous n'avez pas accès à ce répertoire";
+	 }
+	
+	else {
+	
+		// On vérifie que la page est bien sur le serveur
+		if (file_exists("../../../include/".$page) && $page != 'index.php') {
+		   include("../../../include/".$page); 
+		}
+	
+		else {
+			echo "Page inexistante !";
+		}
+	}
+	
 	?> 
     <!-- END: Footer-->
 
@@ -369,13 +362,18 @@ $PDO_query_equipe_unique->closeCursor();
     <script src="https://<?php echo $_SERVER['SERVER_NAME']?>/<?php echo $PARAM_url_non_doc_site?>/app-assets/js/scripts/extensions/ext-component-sweet-alerts.js"></script>
     <script src="https://<?php echo $_SERVER['SERVER_NAME']?>/<?php echo $PARAM_url_non_doc_site?>/app-assets/js/scripts/extensions/ext-component-blockui.js"></script>
     <script src="https://<?php echo $_SERVER['SERVER_NAME']?>/<?php echo $PARAM_url_non_doc_site?>/app-assets/vendors/js/forms/validation/jquery.validate.min.js"></script>
+    
     <!-- END: Page JS-->
 
-    <script charset="utf-8"  src="<?php echo Admin::menuequipe();?>table/js/webapp_liste_equipe.js"></script>
+    <script charset="utf-8"  src="<?php echo Admin::menusocle();?>table/js/webapp_liste_socle.js"></script>
+
     
 
-    <script>        
- 
+    <!-- BEGIN: Page JS-->
+    <script src="https://<?php echo $_SERVER['SERVER_NAME']?>/<?php echo $PARAM_url_non_doc_site?>/app-assets/js/scripts/ui/ui-feather.js"></script>
+    <!-- END: Page JS-->
+    
+    <script>
         $(window).on('load', function () {
             if (feather) {
                 feather.replace({
@@ -383,11 +381,10 @@ $PDO_query_equipe_unique->closeCursor();
                     height: 14
                 });
             }
-        });
-        
-    </script>    
-
+        })
+    </script>
     <script src="https://kit.fontawesome.com/7791373c6a.js" crossorigin="anonymous"></script>
-
 </body>
+<!-- END: Body-->
+
 </html>

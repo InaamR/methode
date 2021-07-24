@@ -45,7 +45,7 @@ if(empty($_SESSION['id'])){
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=0,minimal-ui">
-    <title>Liste des équipes - <?php echo $PARAM_nom_site?></title>
+    <title>Liste des socles - <?php echo $PARAM_nom_site?></title>
     <link rel="apple-touch-icon" href="https://<?php echo $_SERVER['SERVER_NAME']?>/<?php echo $PARAM_url_non_doc_site?>/app-assets/images/ico/apple-icon-120.png">
     <link rel="shortcut icon" type="image/x-icon" href="https://<?php echo $_SERVER['SERVER_NAME']?>/<?php echo $PARAM_url_non_doc_site?>/app-assets/images/ico/favicon-16x16.png">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500;1,600"
@@ -172,10 +172,11 @@ if(empty($_SESSION['id'])){
                 <div class="content-header-left col-md-9 col-12 mb-2">
                     <div class="row breadcrumbs-top">
                         <div class="col-12">
-                            <h2 class="content-header-title float-left mb-0">SERVICES</h2>
+                            <h2 class="content-header-title float-left mb-0">GESTION DES PLANNING</h2>
                             <div class="breadcrumb-wrapper">
                                 <ol class="breadcrumb">
-                                    <li class="breadcrumb-item">Equipes</li>
+                                    <li class="breadcrumb-item">Socles</li>
+                                    <li class="breadcrumb-item">Liste des socles</li>
                                 </ol>
                             </div>
                         </div>
@@ -183,7 +184,7 @@ if(empty($_SESSION['id'])){
                 </div>
                 <div class="content-header-right text-md-right col-md-3 col-12 d-md-block d-none">
                     <div class="form-group breadcrumb-right">
-                        <a class="btn btn-success" href="modif_equipe.php">Ajouter une équipe</a>
+                        <a class="btn-icon btn btn-primary btn-round btn-sm waves-effect waves-float waves-light" href="modif_socle.php">Ajouter un socle</a>
                     </div>
                 </div>
             </div>
@@ -207,8 +208,7 @@ if(empty($_SESSION['id'])){
                                                     <th></th>
                                                     <th>id</th>
                                                     <th>Nom et prénom</th>
-                                                    <th>Equipe</th>
-                                                    <th>Abr équipe</th>                                                  
+                                                    <th>Chapitre</th>
                                                     <th>Date d'insertion</th>
                                                     <th>Statut</th>
                                                     <th></th>
@@ -299,7 +299,7 @@ if(empty($_SESSION['id'])){
     <!-- END: Theme JS-->
 
     <!-- BEGIN: Page JS-->
-    <script charset="utf-8"  src="<?php echo Admin::menuequipe();?>table/js/webapp_liste_equipe.js"></script>
+    <script charset="utf-8"  src="<?php echo Admin::menusocle();?>table/js/webapp_liste_socle.js"></script>
 
     <script src="https://<?php echo $_SERVER['SERVER_NAME']?>/<?php echo $PARAM_url_non_doc_site?>/app-assets/vendors/js/extensions/sweetalert2.all.min.js"></script>
     <script src="https://<?php echo $_SERVER['SERVER_NAME']?>/<?php echo $PARAM_url_non_doc_site?>/app-assets/vendors/js/extensions/polyfill.min.js"></script>
