@@ -40,7 +40,7 @@ $st = '';
 if (isset($_GET['job'])) {
     $job = $_GET['job'];
 
-    if ($job == 'get_liste_socle' || $job == 'add_socle' || $job == 'edit_socle' || $job == 'del_socle') {
+    if ($job == 'get_liste_idv' || $job == 'add_socle' || $job == 'edit_socle' || $job == 'del_socle') {
 
         if (isset($_POST['id'])) {
             $id = $_POST['id'];
@@ -58,29 +58,29 @@ if (isset($_GET['job'])) {
 $mysql_data = [];
 
 if ($job != '') {
-    if ($job == 'get_liste_socle') {
+    if ($job == 'get_liste_idv') {
 
-        $PDO_query_socle = Bdd::connectBdd()->prepare("SELECT * FROM methode_socle ORDER BY methode_socle_id ASC");
-        $PDO_query_socle->execute();
+        $PDO_query_identite_vehicule = Bdd::connectBdd()->prepare("SELECT * FROM ident_vehicule ORDER BY ident_vehicule_id ASC");
+        $PDO_query_identite_vehicule->execute();
 
-        while ($socle = $PDO_query_socle->fetch()) {
+        while ($identite_vehicule = $PDO_query_identite_vehicule->fetch()) {
 
             $functions = '
-            <a href="modif_socle.php?id='.$socle['methode_socle_id'].'" class="btn btn-info btn-sm">Modifier</a>
-            <a href="#" id="delete-record" data-id="' .$socle['methode_socle_id'].'" data-name="' .$socle['methode_socle_nom'].'" class="btn btn-danger btn-sm">Supprimer</a>            
+            <a href="modif_socle.php?id='.$identite_vehicule['ident_vehicule_id'].'" class="btn btn-info btn-sm">Modifier</a>
+            <a href="#" id="delete-record" data-id="' .$identite_vehicule['ident_vehicule_id'].'" data-name="' .$identite_vehicule['ident_vehicule_CODGRPVER'].'" class="btn btn-danger btn-sm">Supprimer</a>            
             ';
 
 
-            $date = date_create($socle['methode_socle_date']);
+            $date = date_create($identite_vehicule['ident_vehicule_date']);
             $date_create = date_format($date, "d/m/Y");
-
-            $name_user = Membre::info($socle['methode_socle_user'], 'nom').' '.Membre::info($socle['methode_socle_user'], 'prenom');
-
-            $id_socle = $socle['methode_socle_id'];  
-            $socle_nom = $socle['methode_socle_nom'];      
+            $name_user = Membre::info($identite_vehicule['ident_vehicule_user'], 'nom').' '.Membre::info($identite_vehicule['ident_vehicule_user'], 'prenom');
 
 
-            switch($socle['methode_socle_statut'])
+            $id_idv = $identite_vehicule['ident_vehicule_id'];  
+
+
+
+            switch($identite_vehicule['ident_vehicule_statut'])
             {
                 case '1':
                     $statut = '<div class="badge badge-light-success">Actif</div>';
@@ -89,21 +89,90 @@ if ($job != '') {
                     $statut = '<div class="badge badge-light-danger">Inactif</div>';
             }
 
+
             $mysql_data[] = [
                 "responsive_id" => "",
-                "id" => $id_socle,
+                "id" => $id_idv,
                 "full_name" => $name_user,
-                "socle" => $socle_nom,                
+
+
+
+                "CGMOD_P" => $identite_vehicule['ident_vehicule_CGMOD_P'],
+                "CODGRPVER" => $identite_vehicule['ident_vehicule_CODGRPVER'],
+                "MARQUE" => $identite_vehicule['ident_vehicule_MARQUE'],
+                "GAMME" => $identite_vehicule['ident_vehicule_GAMME'],
+                "CODGRPMOD" => $identite_vehicule['ident_vehicule_CODGRPMOD'],
+                "DATDEB_GRPMOD" => $identite_vehicule['ident_vehicule_DATDEB_GRPMOD'],
+                "DATFIN_GRPMOD" => $identite_vehicule['ident_vehicule_DATFIN_GRPMOD'],
+                "GMOD_P" => $identite_vehicule['ident_vehicule_GMOD_P'],
+
+                "DATE_DEB_GMOD_P" => $identite_vehicule['ident_vehicule_DATE_DEB_GMOD_P'],
+                "DATE_FIN_GMOD_P" => $identite_vehicule['ident_vehicule_DATE_FIN_GMOD_P'],
+                "COMPLEMENTGAMME" => $identite_vehicule['ident_vehicule_COMPLEMENTGAMME'],
+                "NUMEROSERIE" => $identite_vehicule['ident_vehicule_NUMEROSERIE'],
+                "PHASE" => $identite_vehicule['ident_vehicule_PHASE'],
+                "MODELE" => $identite_vehicule['ident_vehicule_MODELE'],
+                "VARIANTEDATEDEBUT" => $identite_vehicule['ident_vehicule_VARIANTEDATEDEBUT'],
+                "VARIANTEDATEFIN" => $identite_vehicule['ident_vehicule_VARIANTEDATEFIN'],
+
+                "VERSIONSPECIFIQUE" => $identite_vehicule['ident_vehicule_VERSIONSPECIFIQUE'],
+                "NOMBREPORTES" => $identite_vehicule['ident_vehicule_NOMBREPORTES'],
+                "CFGPTE" => $identite_vehicule['ident_vehicule_CFGPTE'],
+                "FORMECARROSSERIE" => $identite_vehicule['ident_vehicule_FORMECARROSSERIE'],
+                "GENREVEHICULE" => $identite_vehicule['ident_vehicule_GENREVEHICULE'],
+                "CARROSSERIECOMMERCIALE" => $identite_vehicule['ident_vehicule_CARROSSERIECOMMERCIALE'],
+                "TYPEEMPATTEMENT" => $identite_vehicule['ident_vehicule_TYPEEMPATTEMENT'],
+                "HAUTEUR" => $identite_vehicule['ident_vehicule_HAUTEUR'],
+
+
+                "CHARGE" => $identite_vehicule['ident_vehicule_CHARGE'],
+                "TYPEMOTEUR" => $identite_vehicule['ident_vehicule_TYPEMOTEUR'],
+                "INDICEMOTEUR" => $identite_vehicule['ident_vehicule_INDICEMOTEUR'],
+                "CYLINDREELITRES" => $identite_vehicule['ident_vehicule_CYLINDREELITRES'],
+                "CYLINDREECC" => $identite_vehicule['ident_vehicule_CYLINDREECC'],
+                "ENERGIE" => $identite_vehicule['ident_vehicule_ENERGIE'],
+                "INJECTIONCOMMERCIALE" => $identite_vehicule['ident_vehicule_INJECTIONCOMMERCIALE'],
+                "SURALIMENTATION" => $identite_vehicule['ident_vehicule_SURALIMENTATION'],
+
+                "FILTREAPARTICULES" => $identite_vehicule['ident_vehicule_FILTREAPARTICULES'],
+                "AVECCATALYSEUR" => $identite_vehicule['ident_vehicule_AVECCATALYSEUR'],
+                "DEPOLLUTION" => $identite_vehicule['ident_vehicule_DEPOLLUTION'],
+                "CONFIGURATIONMOTEUR" => $identite_vehicule['ident_vehicule_CONFIGURATIONMOTEUR'],
+                "NOMBRECYLINDRES" => $identite_vehicule['ident_vehicule_NOMBRECYLINDRES'],
+                "NOMBRESOUPAPES" => $identite_vehicule['ident_vehicule_NOMBRESOUPAPES'],
+                "ARBREACAME" => $identite_vehicule['ident_vehicule_ARBREACAME'],
+                "PUISSANCE" => $identite_vehicule['ident_vehicule_PUISSANCE'],
+
+                "PUISSANCEFISCALE" => $identite_vehicule['ident_vehicule_PUISSANCEFISCALE'],
+                "TYPEDISTRIBUTION" => $identite_vehicule['ident_vehicule_TYPEDISTRIBUTION'],
+                "ENTRAINEMENTDISTRIBUTION" => $identite_vehicule['ident_vehicule_ENTRAINEMENTDISTRIBUTION'],
+                "CONSTMOT" => $identite_vehicule['ident_vehicule_CONSTMOT'],
+                "MOTEURCOMMERCIAL" => $identite_vehicule['ident_vehicule_MOTEURCOMMERCIAL'],
+                "GENREBOITE" => $identite_vehicule['ident_vehicule_GENREBOITE'],
+                "NOMBRERAPPORTS" => $identite_vehicule['ident_vehicule_NOMBRERAPPORTS'],
+                "TYPEBOITE" => $identite_vehicule['ident_vehicule_TYPEBOITE'],
+
+                "ESSIEUMOTEUR" => $identite_vehicule['ident_vehicule_ESSIEUMOTEUR'],
+                "TYPEFREINAVANT" => $identite_vehicule['ident_vehicule_TYPEFREINAVANT'],
+                "TYPEFREINARRIERE" => $identite_vehicule['ident_vehicule_TYPEFREINARRIERE'],
+                "TONNAGE" => $identite_vehicule['ident_vehicule_TONNAGE'],
+                "TYPSUSP" => $identite_vehicule['ident_vehicule_TYPSUSP'],
+                "COTECONDUCTEUR" => $identite_vehicule['ident_vehicule_COTECONDUCTEUR'],
+                "TYPEMINES" => $identite_vehicule['ident_vehicule_TYPEMINES'],
+                "TAPV" => $identite_vehicule['ident_vehicule_TAPV'],
+                
+                
+
                 "start_date" => $date_create,
                 "statut" => $statut,
-                "Actions" => $functions
+                "Actions" => ""
             ];
         }
 
-        $PDO_query_socle->closeCursor();
+        $PDO_query_identite_vehicule->closeCursor();
         $result = 'success';
         $message = 'Succès de requête';
-        $PDO_query_socle = null;
+        $PDO_query_identite_vehicule = null;
 
 
     } elseif ($job == 'add_socle') {
