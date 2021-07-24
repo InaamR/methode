@@ -187,9 +187,11 @@ $(function () {
         info: "Affichage page _PAGE_ jusqu'à _PAGES_",
         lengthMenu: "Affichage _MENU_ lignes par page",
         search: "Recherche :",
-        zeroRecords: "Aucunes données disponibles !",
+        zeroRecords: "Aucune donnée disponible !",
         infoEmpty: "Aucun enregistrement disponible",
-        infoFiltered: "(filtré depuis _MAX_ total des enregistrements)"
+        infoFiltered: "(filtré depuis _MAX_ total des enregistrements)",
+        processing: "Chargement des données...",
+        loadingRecords: "Chargement des niveaux en cours ..."
       }
     });
     $('div.head-label').html('<h6 class="mb-0">Liste des niveaux</h6>');
@@ -205,17 +207,21 @@ $(function () {
 
   // Verifier la supp
   $(document).on('click', '#delete-record', function (e) {
+    
+    var id      = $(this).data('id');
+    var name      = $(this).data('name');
 
     Swal.fire({
       title: 'Êtes-vous sûr ?',
-      text: "Vous ne pourrez pas annuler cela !",
+      text: "",
       type: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
       cancelButtonColor: '#d33',
-      confirmButtonText: 'Oui, supprimez-le !',
+      confirmButtonText: 'Supprimer !',
       confirmButtonClass: 'btn btn-primary',
       cancelButtonClass: 'btn btn-danger ml-1',
+      cancelButtonText: 'Annuler',
       buttonsStyling: false
 
     }).then(function (result) {
@@ -229,7 +235,7 @@ $(function () {
                 Swal.fire({
                   type: "success",
                   title: 'Supprimé !',
-                  text: "Équipe '" + name + "' supprimée avec succès.",
+                  text: "Niveau '" + name + "' supprimé avec succès.",
                   confirmButtonClass: 'btn btn-success',
                 });
                 //$(".dtr-bs-modal").removeClass("show");
@@ -256,11 +262,10 @@ $(function () {
                   
                   
               };
-              var $id      = $("#delete-record").data('id');
-              var name      = $("#delete-record").data('name');
+              
               var request = $.ajax({
-                url:          'table/php/data_liste_equipe.php?job=del_equipe',
-                data:         'id=' + $id,
+                url:          'table/php/data_liste_niveau.php?job=del_niveau',
+                data:         'id=' + id,
                 type:         'post',
                 async: false,
                 beforeSend: onBeforeSend,
@@ -273,8 +278,8 @@ $(function () {
       }
       else if (result.dismiss === Swal.DismissReason.cancel) {			  
         Swal.fire({
-          title: 'Annulée',
-          text: 'Votre produit est en sécurité !',
+          title: 'Opération annulée',
+          text: '',
           type: 'error',
           confirmButtonClass: 'btn btn-danger',
         });

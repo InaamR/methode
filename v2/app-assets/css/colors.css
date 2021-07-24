@@ -571,8 +571,8 @@ input:focus ~ .bg-light {
   background: rgba(115, 103, 240, 0.6); }
 
 .btn-primary {
-  border-color: #e64c53 !important;
-  background-color: #e64c53 !important;
+  border-color: #3742fa !important;
+  background-color: #3742fa !important;
   color: #fff !important; }
 
 .btn-primary:focus, .btn-primary:active, .btn-primary.active {
