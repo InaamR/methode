@@ -121,9 +121,9 @@ $(function () {
     jQuery.extend(jQuery.validator.messages, {
       required: "Ce champ est obligatoire",
       remote: "votre message",
-      email: "votre message",
+      email: "Veuillez entrer une adresse e-mail valide",
       url: "votre message",
-      date: "votre message",
+      date: "Veuillez entrer une date valide",
       dateISO: "votre message",
       number: "votre message",
       digits: "votre message",

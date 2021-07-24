@@ -248,7 +248,7 @@ $(function () {
                   console.log(textStatus);
                   console.log(errorThrown);
                   Swal.fire({
-                    title: 'Annulée',
+                    title: 'Annulé',
                     text: "Une erreur s'est produite lors de l'enregistrement " + textStatus,
                     type: 'error',
                     confirmButtonClass: 'btn btn-danger',
@@ -277,8 +277,8 @@ $(function () {
       }
       else if (result.dismiss === Swal.DismissReason.cancel) {			  
         Swal.fire({
-          title: 'Annulée',
-          text: 'Votre produit est en sécurité !',
+          title: 'Annulé',
+          text: '',
           type: 'error',
           confirmButtonClass: 'btn btn-danger',
         });
