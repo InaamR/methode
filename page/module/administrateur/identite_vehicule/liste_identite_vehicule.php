@@ -294,90 +294,90 @@ if (preg_match("/config/", $page)) {
     ?>
     
     <div class="modal fade" id="exampleModalScrollable" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
-                                            <div class="modal-dialog modal-dialog-scrollable" role="document">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <h5 class="modal-title" id="exampleModalScrollableTitle"></h5>
-                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                            <span aria-hidden="true">&times;</span>
-                                                        </button>
-                                                    </div>
-                                                    <div class="modal-body">
+        <div class="modal-dialog modal-dialog-scrollable" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalScrollableTitle"></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
 
-            <!-- Striped rows start -->
-                <div class="row" id="table-striped">
-                    <div class="col-12">
-                        <div class="card">
-                            <div class="card-content">
-                                <div class="table-responsive">
-                                    <table class="table table-striped mb-0">
-                                        <tbody>
-                                            <tr>
-                                                <th scope="row">1</th>
-                                                <td>CGMOD_P</td>
-                                                <td id="cgmod_p"></td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">2</th>
-                                                <td>CODGRPVER</td>
-                                                <td id="codgrpver"></td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">3</th>
-                                                <td>MARQUE</td>
-                                                <td id="marque"></td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">4</th>
-                                                <td>GAMME</td>
-                                                <td id="gamme"></td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">5</th>
-                                                <td>CODGRPMOD</td>
-                                                <td id="codgrpmod"></td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">6</th>
-                                                <td>DATDEB_GRPMOD</td>
-                                                <td id="datdeb_grpmod"></td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">7</th>
-                                                <td>DATFIN_GRPMOD</td>
-                                                <td id="datfin_grpmod"></td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">8</th>
-                                                <td>GMOD_P</td>
-                                                <td id="gmod_p"></td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">9</th>
-                                                <td>DATE_DEB_GMOD_P</td>
-                                                <td id="date_deb_gmod_p"></td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">10</th>
-                                                <td>DATE_FIN_GMOD_P</td>
-                                                <td id="date_fin_gmod_p"></td>
-                                            </tr>
+                    <!-- Striped rows start -->
+                        <div class="row" id="table-striped">
+                            <div class="col-12">
+                                <div class="card">
+                                    <div class="card-content">
+                                        <div class="table-responsive">
+                                            <table class="table table-striped mb-0">
+                                                <tbody>
+                                                    <tr>
+                                                        <th scope="row">1</th>
+                                                        <td>CGMOD_P</td>
+                                                        <td id="cgmod_p"></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th scope="row">2</th>
+                                                        <td>CODGRPVER</td>
+                                                        <td id="codgrpver"></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th scope="row">3</th>
+                                                        <td>MARQUE</td>
+                                                        <td id="marque"></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th scope="row">4</th>
+                                                        <td>GAMME</td>
+                                                        <td id="gamme"></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th scope="row">5</th>
+                                                        <td>CODGRPMOD</td>
+                                                        <td id="codgrpmod"></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th scope="row">6</th>
+                                                        <td>DATDEB_GRPMOD</td>
+                                                        <td id="datdeb_grpmod"></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th scope="row">7</th>
+                                                        <td>DATFIN_GRPMOD</td>
+                                                        <td id="datfin_grpmod"></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th scope="row">8</th>
+                                                        <td>GMOD_P</td>
+                                                        <td id="gmod_p"></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th scope="row">9</th>
+                                                        <td>DATE_DEB_GMOD_P</td>
+                                                        <td id="date_deb_gmod_p"></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th scope="row">10</th>
+                                                        <td>DATE_FIN_GMOD_P</td>
+                                                        <td id="date_fin_gmod_p"></td>
+                                                    </tr>
 
-                                        </tbody>
-                                    </table>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </div>
-            <!-- Striped rows end -->
+                    <!-- Striped rows end -->
 
-                                                    </div>
-                                                    <div class="modal-footer">
-                                                        <button type="button" class="btn btn-primary" data-dismiss="modal">Accept</button>
-                                                    </div>
-                                                </div>
-                                            </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">Accept</button>
+                </div>
+            </div>
+        </div>
     </div>
     <!-- END: Footer-->
 

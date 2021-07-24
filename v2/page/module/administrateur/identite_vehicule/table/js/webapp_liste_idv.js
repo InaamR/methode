@@ -18,13 +18,79 @@ $(function () {
   // --------------------------------------------------------------------
   if (dt_basic_table.length) {
     var dt_basic = dt_basic_table.DataTable({
-      ajax: 'table/php/data_liste_socle.php?job=get_liste_socle',
+      ajax: 'table/php/data_liste_idv.php?job=get_liste_idv',
+      stateSave: true,
+      scrollX: true,
       columns: [    
         { data: 'responsive_id' },
         { data: 'id' },
         { data: 'id' }, // used for sorting so will hide this column    
         { data: 'full_name' },
-        { data: 'socle' },
+        { data: "CGMOD_P"},
+		
+        { data: "CODGRPVER"},            
+        { data: "MARQUE"},        
+        { data: "GAMME"},        
+        { data: "CODGRPMOD"},        
+        { data: "DATDEB_GRPMOD"},	            
+        { data: "DATFIN_GRPMOD"},        
+        { data: "GMOD_P"},
+
+        { data: "DATE_DEB_GMOD_P"},
+        { data: "DATE_FIN_GMOD_P"},
+        { data: "COMPLEMENTGAMME"},
+        { data: "NUMEROSERIE"},
+        { data: "PHASE"},
+        { data: "MODELE"},
+        { data: "VARIANTEDATEDEBUT"},
+        { data: "VARIANTEDATEFIN"},
+
+        { data: "VERSIONSPECIFIQUE"},
+        { data: "NOMBREPORTES"},
+        { data: "CFGPTE"},
+        { data: "FORMECARROSSERIE"},
+        { data: "GENREVEHICULE"},
+        { data: "CARROSSERIECOMMERCIALE"},
+        { data: "TYPEEMPATTEMENT"},
+        { data: "HAUTEUR"},
+
+
+        { data: "CHARGE"},
+        { data: "TYPEMOTEUR"},
+        { data: "INDICEMOTEUR"},
+        { data: "CYLINDREELITRES"},
+        { data: "CYLINDREECC"},
+        { data: "ENERGIE"},
+        { data: "INJECTIONCOMMERCIALE"},
+        { data: "SURALIMENTATION"},
+
+        { data: "FILTREAPARTICULES"},
+        { data: "AVECCATALYSEUR"},
+        { data: "DEPOLLUTION"},
+        { data: "CONFIGURATIONMOTEUR"},
+        { data: "NOMBRECYLINDRES"},
+        { data: "NOMBRESOUPAPES"},
+        { data: "ARBREACAME"},
+        { data: "PUISSANCE"},
+
+        { data: "PUISSANCEFISCALE"},
+        { data: "TYPEDISTRIBUTION"},
+        { data: "ENTRAINEMENTDISTRIBUTION"},
+        { data: "CONSTMOT"},
+        { data: "MOTEURCOMMERCIAL"},
+        { data: "GENREBOITE"},
+        { data: "NOMBRERAPPORTS"},
+        { data: "TYPEBOITE"},
+
+        { data: "ESSIEUMOTEUR"},
+        { data: "TYPEFREINAVANT"},
+        { data: "TYPEFREINARRIERE"},
+        { data: "TONNAGE"},
+        { data: "TYPSUSP"},
+        { data: "COTECONDUCTEUR"},
+        { data: "TYPEMINES"},
+        { data: "TAPV"},
+
         { data: 'start_date' },
         { data: 'statut' },
         { data: 'Actions' }
@@ -34,7 +100,7 @@ $(function () {
           // For Responsive
           className: 'control',
           orderable: false,
-          responsivePriority: 2,
+          responsivePriority: 4,
           targets: 0
         },
         {
@@ -104,7 +170,7 @@ $(function () {
       dom:
         '<"card-header border-bottom p-1"<"head-label"><"dt-action-buttons text-right"B>><"d-flex justify-content-between align-items-center mx-0 row"<"col-sm-12 col-md-6"l><"col-sm-12 col-md-6"f>>t<"d-flex justify-content-between mx-0 row"<"col-sm-12 col-md-6"i><"col-sm-12 col-md-6"p>>',
       displayLength: 7,
-      lengthMenu: [7, 10, 25, 50, 75, 100],
+      lengthMenu: [7, 50, 100, 250, 500, 1000],
       buttons: [
         {
           extend: 'collection',
@@ -156,7 +222,7 @@ $(function () {
           display: $.fn.dataTable.Responsive.display.modal({
             header: function (row) {
               var data = row.data();
-              return 'Details of ' + data['full_name'];
+              return 'Détails de : ' + data['MARQUE'] +' '+ data['GAMME'];
             }
           }),
           type: 'column',
@@ -198,10 +264,10 @@ $(function () {
         zeroRecords: "Aucunes données disponibles !",
         infoEmpty: "Aucun enregistrement disponible",
         infoFiltered: "(filtré depuis _MAX_ total des enregistrements)",
-        loadingRecords: "Chargement des socles en cours ..."
+        loadingRecords: "Chargement des identitées véhicles en cours ..."
       }
     });
-    $('div.head-label').html('<h6 class="mb-0">Liste des socle</h6>');
+    $('div.head-label').html('<h6 class="mb-0">Liste des identitées véhicules</h6>');
   
   }
   // Flat Date picker

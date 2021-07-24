@@ -45,7 +45,7 @@ if(empty($_SESSION['id'])){
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=0,minimal-ui">
-    <title>Liste des socles - <?php echo $PARAM_nom_site?></title>
+    <title>Liste des identitées véhicules - <?php echo $PARAM_nom_site?></title>
     <link rel="apple-touch-icon" href="https://<?php echo $_SERVER['SERVER_NAME']?>/<?php echo $PARAM_url_non_doc_site?>/app-assets/images/ico/apple-icon-120.png">
     <link rel="shortcut icon" type="image/x-icon" href="https://<?php echo $_SERVER['SERVER_NAME']?>/<?php echo $PARAM_url_non_doc_site?>/app-assets/images/ico/favicon-16x16.png">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500;1,600"
@@ -175,8 +175,8 @@ if(empty($_SESSION['id'])){
                             <h2 class="content-header-title float-left mb-0">GESTION DES PLANNING</h2>
                             <div class="breadcrumb-wrapper">
                                 <ol class="breadcrumb">
-                                    <li class="breadcrumb-item">Socles</li>
-                                    <li class="breadcrumb-item">Liste des socles</li>
+                                    <li class="breadcrumb-item">Identitées véhicules</li>
+                                    <li class="breadcrumb-item">Liste des identitées véhicules</li>
                                 </ol>
                             </div>
                         </div>
@@ -184,7 +184,7 @@ if(empty($_SESSION['id'])){
                 </div>
                 <div class="content-header-right text-md-right col-md-3 col-12 d-md-block d-none">
                     <div class="form-group breadcrumb-right">
-                        <a class="btn-icon btn btn-primary btn-round btn-sm waves-effect waves-float waves-light" href="modif_socle.php">Ajouter un socle</a>
+                        <a class="btn-icon btn btn-primary btn-round btn-sm waves-effect waves-float waves-light" href="modif_idv.php">Ajouter une identité véhicule</a>
                     </div>
                 </div>
             </div>
@@ -208,7 +208,69 @@ if(empty($_SESSION['id'])){
                                                     <th></th>
                                                     <th>id</th>
                                                     <th>Nom et prénom</th>
-                                                    <th>Chapitre</th>
+
+                                                    <th>CGMOD_P</th>                                                     
+                                                    <th>CODGRPVER</th>
+                                                    <th>MARQUE</th>
+                                                    <th>GAMME</th>
+                                                    <th>CODGRPMOD</th>
+                                                    <th>DATDEB_GRPMOD</th>
+                                                    <th>DATFIN_GRPMOD</th>
+                                                    <th>GMOD_P</th>
+                                                    <th>DATE_DEB_GMOD_P</th>
+                                                    <th>DATE_FIN_GMOD_P</th>
+                                                    <th>COMPLEMENTGAMME</th>
+                                                    <th>NUMEROSERIE</th>
+                                                    <th>PHASE</th>
+                                                    <th>MODELE</th>
+                                                    <th>VARIANTEDATEDEBUT</th>
+                                                    <th>VARIANTEDATEFIN</th>
+
+                                                    <th>VERSIONSPECIFIQUE</th>
+                                                    <th>NOMBREPORTES</th>
+                                                    <th>CFGPTE</th>
+                                                    <th>FORMECARROSSERIE</th>
+                                                    <th>GENREVEHICULE</th>
+                                                    <th>CARROSSERIECOMMERCIALE</th>
+                                                    <th>TYPEEMPATTEMENT</th>
+                                                    <th>HAUTEUR</th>
+
+                                                    <th>CHARGE</th>
+                                                    <th>TYPEMOTEUR</th>
+                                                    <th>INDICEMOTEUR</th>
+                                                    <th>CYLINDREELITRES</th>
+                                                    <th>CYLINDREECC</th>
+                                                    <th>ENERGIE</th>
+                                                    <th>INJECTIONCOMMERCIALE</th>
+                                                    <th>SURALIMENTATION</th>
+
+                                                    <th>FILTREAPARTICULES</th>
+                                                    <th>AVECCATALYSEUR</th>
+                                                    <th>DEPOLLUTION</th>
+                                                    <th>CONFIGURATIONMOTEUR</th>
+                                                    <th>NOMBRECYLINDRES</th>
+                                                    <th>NOMBRESOUPAPES</th>
+                                                    <th>ARBREACAME</th>
+                                                    <th>PUISSANCE</th>
+
+                                                    <th>PUISSANCEFISCALE</th>
+                                                    <th>TYPEDISTRIBUTION</th>
+                                                    <th>ENTRAINEMENTDISTRIBUTION</th>
+                                                    <th>CONSTMOT</th>
+                                                    <th>MOTEURCOMMERCIAL</th>
+                                                    <th>GENREBOITE</th>
+                                                    <th>NOMBRERAPPORTS</th>
+                                                    <th>TYPEBOITE</th>
+
+                                                    <th>ESSIEUMOTEUR</th>
+                                                    <th>TYPEFREINAVANT</th>
+                                                    <th>TYPEFREINARRIERE</th>
+                                                    <th>TONNAGE</th>
+                                                    <th>TYPSUSP</th>
+                                                    <th>COTECONDUCTEUR</th>
+                                                    <th>TYPEMINES</th>
+                                                    <th>TAPV</th>
+
                                                     <th>Date d'insertion</th>
                                                     <th>Statut</th>
                                                     <th></th>
@@ -299,7 +361,7 @@ if(empty($_SESSION['id'])){
     <!-- END: Theme JS-->
 
     <!-- BEGIN: Page JS-->
-    <script charset="utf-8"  src="<?php echo Admin::menusocle();?>table/js/webapp_liste_socle.js"></script>
+    <script charset="utf-8"  src="<?php echo Admin::menuidv();?>table/js/webapp_liste_idv.js"></script>
 
     <script src="https://<?php echo $_SERVER['SERVER_NAME']?>/<?php echo $PARAM_url_non_doc_site?>/app-assets/vendors/js/extensions/sweetalert2.all.min.js"></script>
     <script src="https://<?php echo $_SERVER['SERVER_NAME']?>/<?php echo $PARAM_url_non_doc_site?>/app-assets/vendors/js/extensions/polyfill.min.js"></script>
