@@ -70,7 +70,7 @@ if ($job != '') {
             <a href="#" id="delete-record" data-id="' .$chapitre['methode_chapitre_id'].'" data-name="' .$chapitre['methode_chapitre_nom'].'" class="btn btn-danger btn-sm">Supprimer</a>            
             ';
 
-            $query = Bdd::connectBdd()->prepare("SELECT methode_socle_nom FROM methode_socle WHERE methode_socle_id = :methode_socle_id");
+            $query = Bdd::connectBdd()->prepare("SELECT * FROM methode_socle WHERE methode_socle_id = :methode_socle_id");
             $query->bindParam(":methode_socle_id", $chapitre['methode_socle_id'], PDO::PARAM_INT);
             $query->execute();	
             $query_socle = $query->fetch();
@@ -82,10 +82,10 @@ if ($job != '') {
 
             $name_user = Membre::info($chapitre['methode_chapitre_user'], 'nom').' '.Membre::info($chapitre['methode_chapitre_user'], 'prenom');
 
-            $chapitre = $chapitre['methode_chapitre_nom'];
+            $chapitre_bread = $chapitre['methode_chapitre_nom'];
             $socle = $query_socle['methode_socle_nom'];
 
-            $chemin = '<b>'.$socle.'</b> > '.$socle;
+            $chemin = '<b>'.$socle.'</b> > '.$chapitre_bread;
 
 
             $id_chapitre = $chapitre['methode_chapitre_id'];       
@@ -104,7 +104,8 @@ if ($job != '') {
                 "responsive_id" => "",
                 "id" => $id_chapitre,
                 "full_name" => $name_user,
-                "titre" => $chemin,
+                "chapitre" => $chapitre_bread,                
+                "post" => $chemin,
                 "start_date" => $date_create,
                 "statut" => $statut,
                 "Actions" => $functions

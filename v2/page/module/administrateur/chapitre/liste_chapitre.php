@@ -93,72 +93,72 @@ if(empty($_SESSION['id'])){
 
     <!-- BEGIN: Header-->
     <?php
-	$page = '';
-	if (empty($page)) {
-	 $page = "top";
-	 // On limite l'inclusion aux fichiers.php en ajoutant dynamiquement l'extension
-	 // On supprime également d'éventuels espaces
-	 $page = trim($page.".php");
-	
-	}
-	
-	// On évite les caractères qui permettent de naviguer dans les répertoires
-	$page = str_replace("../","protect",$page);
-	$page = str_replace(";","protect",$page);
-	$page = str_replace("%","protect",$page);
-	
-	// On interdit l'inclusion de dossiers protégés par htaccess
-	if (preg_match("/include/",$page)) {
-	 echo "Vous n'avez pas accès à ce répertoire";
-	 }
-	
-	else {
-	
-		// On vérifie que la page est bien sur le serveur
-		if (file_exists("../../../include/".$page) && $page != 'index.php') {
-		   include("../../../include/".$page); 
-		}
-	
-		else {
-			echo "Page inexistante !";
-		}
-	}
+        $page = '';
+        if (empty($page)) {
+        $page = "top";
+        // On limite l'inclusion aux fichiers.php en ajoutant dynamiquement l'extension
+        // On supprime également d'éventuels espaces
+        $page = trim($page.".php");
+        
+        }
+        
+        // On évite les caractères qui permettent de naviguer dans les répertoires
+        $page = str_replace("../","protect",$page);
+        $page = str_replace(";","protect",$page);
+        $page = str_replace("%","protect",$page);
+        
+        // On interdit l'inclusion de dossiers protégés par htaccess
+        if (preg_match("/include/",$page)) {
+        echo "Vous n'avez pas accès à ce répertoire";
+        }
+        
+        else {
+        
+            // On vérifie que la page est bien sur le serveur
+            if (file_exists("../../../include/".$page) && $page != 'index.php') {
+            include("../../../include/".$page); 
+            }
+        
+            else {
+                echo "Page inexistante !";
+            }
+        }
 	
 	?>
     <!-- END: Header-->
 
     <!-- BEGIN: Main Menu-->
     <?php
-	$page = '';
-	if (empty($page)) {
-	 $page = "menu";
-	 // On limite l'inclusion aux fichiers.php en ajoutant dynamiquement l'extension
-	 // On supprime également d'éventuels espaces
-	 $page = trim($page.".php");
-	
-	}
-	
-	// On évite les caractères qui permettent de naviguer dans les répertoires
-	$page = str_replace("../","protect",$page);
-	$page = str_replace(";","protect",$page);
-	$page = str_replace("%","protect",$page);
-	
-	// On interdit l'inclusion de dossiers protégés par htaccess
-	if (preg_match("/include/",$page)) {
-	 echo "Vous n'avez pas accès à ce répertoire";
-	 }
-	
-	else {
-	
-		// On vérifie que la page est bien sur le serveur
-		if (file_exists("../../../include/".$page) && $page != 'index.php') {
-		   include("../../../include/".$page); 
-		}
-	
-		else {
-			echo "Page inexistante !";
-		}
-	}
+        $page = '';
+        if (empty($page)) {
+        $page = "menu";
+        // On limite l'inclusion aux fichiers.php en ajoutant dynamiquement l'extension
+        // On supprime également d'éventuels espaces
+        $page = trim($page.".php");
+        
+        }
+        
+        // On évite les caractères qui permettent de naviguer dans les répertoires
+        $page = str_replace("../","protect",$page);
+        $page = str_replace(";","protect",$page);
+        $page = str_replace("%","protect",$page);
+        
+        // On interdit l'inclusion de dossiers protégés par htaccess
+        if (preg_match("/include/",$page)) {
+        echo "Vous n'avez pas accès à ce répertoire";
+        }
+        
+        else {
+        
+            // On vérifie que la page est bien sur le serveur
+            if (file_exists("../../../include/".$page) && $page != 'index.php') {
+            include("../../../include/".$page); 
+            }
+        
+            else {
+                echo "Page inexistante !";
+            }
+        }
 	
 	?>
     <!-- END: Main Menu-->
@@ -172,7 +172,7 @@ if(empty($_SESSION['id'])){
                 <div class="content-header-left col-md-9 col-12 mb-2">
                     <div class="row breadcrumbs-top">
                         <div class="col-12">
-                            <h2 class="content-header-title float-left mb-0">SERVICE</h2>
+                            <h2 class="content-header-title float-left mb-0">GESTION DES PLANNING</h2>
                             <div class="breadcrumb-wrapper">
                                 <ol class="breadcrumb">
                                     <li class="breadcrumb-item">Chapitres</li>
