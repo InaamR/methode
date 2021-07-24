@@ -79,6 +79,16 @@
             
             <li class=" nav-item"><a class="d-flex align-items-center" href="#"><i class="far fa-handshake" aria-hidden="true"></i><span class="menu-title text-truncate" data-i18n="Options planning">Options planning</span></a>
                 <ul class="menu-content">
+                <?php                        
+                        if($file == 'liste_socle.php'){                            
+                            echo'<li class="active">';
+                        }else{
+                            echo'<li class="">';
+                        }
+                    ?>
+                    
+                        <a class="d-flex align-items-center" href="http://<?php echo $_SERVER['SERVER_NAME']?>/<?php echo $PARAM_url_non_doc_site; ?>/page/module/administrateur/socle/liste_socle.php"><i data-feather="circle"></i><span class="menu-item text-truncate" data-i18n="">Socles</span></a>
+                    </li>
                     <?php                        
                         if($file == 'liste_chapitre.php'){                            
                             echo'<li class="active">';
@@ -107,7 +117,7 @@
                         }
                     ?>
                     
-                        <a class="d-flex align-items-center" href="http://<?php echo $_SERVER['SERVER_NAME']?>/<?php echo $PARAM_url_non_doc_site; ?>/page/module/administrateur/identite_vehicule/liste_idv.php"><i data-feather="circle"></i><span class="menu-item text-truncate" data-i18n="">Identitées véhicules</span></a>
+                        <a class="d-flex align-items-center" href="http://<?php echo $_SERVER['SERVER_NAME']?>/<?php echo $PARAM_url_non_doc_site; ?>/page/module/administrateur/identite_vehicule/liste_idv.php"><i data-feather="circle"></i><span class="menu-item text-truncate" data-i18n="">Identités véhicules</span></a>
                     </li>
                 </ul>
             </li>

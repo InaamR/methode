@@ -16,9 +16,7 @@ $(function () {
         { data: 'id' },
         { data: 'id' }, // used for sorting so will hide this column    
         { data: 'full_name' },
-        { data: 'titre' },
         { data: 'sous_chapitre' },
-        { data: 'chapitre' },
         { data: 'start_date' },
         { data: 'status' },
         { data: 'Actions' }
@@ -56,7 +54,8 @@ $(function () {
           responsivePriority: 4,
           render: function (data, type, full, meta) {
             var $user_img = full['avatar'],
-              $name = full['full_name'];
+              $name = full['full_name'],
+              $post = full['post'];
             if ($user_img) {
               // For Avatar image
               var $output =
@@ -75,7 +74,7 @@ $(function () {
             var colorClass = $user_img === '' ? ' bg-light-' + $state + ' ' : '';
             // Creates full output for row
             var $row_output =
-              '<div class="d-flex justify-content-center align-items-center">' +'<div class="avatar ' +
+              '<div class="d-flex justify-content-left align-items-center">' +'<div class="avatar ' +
               colorClass +
               ' mr-1">' +
               $output +
@@ -84,6 +83,9 @@ $(function () {
               '<span class="emp_name text-truncate font-weight-bold">' +
               $name +
               '</span>' +
+              '<small class="emp_post text-truncate text-muted">' +
+              $post +
+              '</small>' +
               '</div>' +
               '</div>';
             return $row_output;

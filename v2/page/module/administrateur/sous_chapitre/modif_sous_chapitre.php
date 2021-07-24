@@ -37,9 +37,8 @@ if(empty($_SESSION['id'])){
 if(!empty($_GET["id"])){$id_sous_chapitre = $_GET["id"];}else{$id_sous_chapitre = "";}
 
 
-$PDO_query_sous_chapitre_unique = Bdd::connectBdd()->prepare("SELECT * FROM methode_sous_chapitre WHERE methode_sous_chapitre_id = :id AND methode_chapitre_id = :methode_chapitre_id ORDER BY methode_sous_chapitre_id ASC");
-$PDO_query_sous_chapitre_unique->bindParam(":methode_chapitre_id", $chapitre['methode_chapitre_id']);
-$PDO_query_sous_chapitre_unique->bindParam(":id", $sous_chapitre, PDO::PARAM_INT);
+$PDO_query_sous_chapitre_unique = Bdd::connectBdd()->prepare("SELECT * FROM methode_sous_chapitre WHERE methode_sous_chapitre_id = :id ORDER BY methode_sous_chapitre_id ASC");
+$PDO_query_sous_chapitre_unique->bindParam(":id", $id_sous_chapitre, PDO::PARAM_INT);
 $PDO_query_sous_chapitre_unique->execute();
 $sous_chapitre = $PDO_query_sous_chapitre_unique->fetch();
 $PDO_query_sous_chapitre_unique->closeCursor();
@@ -178,12 +177,13 @@ $PDO_query_sous_chapitre_unique->closeCursor();
                 <div class="content-header-left col-md-8 col-8 mb-2">
                     <div class="row breadcrumbs-top">
                         <div class="col-12">
-                            <h2 class="content-header-title float-left mb-0">SERVICES</h2>
+                            <h2 class="content-header-title float-left mb-0">GESTION DES PLANNING</h2>
                             <div class="breadcrumb-wrapper">
                                 <ol class="breadcrumb d-md-flex d-none">
                                     <li class="breadcrumb-item">
                                         <a href="liste_sous_chapitre.php">Sous chapitres</a>
                                     </li>
+                                    <li class="breadcrumb-item"><a href="liste_sous_chapitre.php">Liste des sous chapitres</a></li>
                                     <li class="breadcrumb-item active">Gestion des sous chapitres</li>
                                 </ol>
                             </div>
@@ -217,14 +217,14 @@ $PDO_query_sous_chapitre_unique->closeCursor();
                                     <!-- Form -->
                                     <form method="post" id="jquery-val-form" class="<?php if(empty($id_sous_chapitre)){echo 'add';}else{echo 'edit';} ?>" data-id="<?php echo $id_sous_chapitre; ?>">
                                                             
-                                        <input name="user" type="hidden" value="<?php echo Membre::info($_SESSION['id'], 'nom').' '.Membre::info($_SESSION['id'], 'prenom');?>">
-                                        <input name="id" type="hidden" value="<?php echo $id_sous_chapitre;?>">
+                                        <input name="user" type="hidden" value="<?php echo Membre::info($_SESSION['id'], 'id');?>">
+                                        <input name="id_sous_chapitre" type="hidden" value="<?php echo $id_sous_chapitre;?>">
 
                                         <div class="row">
 
                                             <div class="col-md-12 col-12">
                                                 <div class="form-group mb-2">
-                                                    <label for="basic-default-nom">Nom du sou chapitre *:</label>
+                                                    <label for="basic-default-nom">Nom du sous chapitre *:</label>
                                                     <input
                                                     type="text"
                                                     class="form-control"
@@ -232,7 +232,7 @@ $PDO_query_sous_chapitre_unique->closeCursor();
                                                     name="nom"
                                                     placeholder="..."
                                                     maxlength="255"
-                                                    value="<?php if(!empty($id_sous_chapitre)){echo $id_sous_chapitre['methode_sous_chapitre_nom'];}?>"
+                                                    value="<?php if(!empty($id_sous_chapitre)){echo $sous_chapitre['methode_sous_chapitre_nom'];}?>"
                                                     required
                                                     />                                                 
                                                 </div>
@@ -241,12 +241,30 @@ $PDO_query_sous_chapitre_unique->closeCursor();
 
                                             <div class="col-md-6 col-12">
                                                 <div class="form-group mb-2">
-                                                    <label for="basic-default-abr">Nom du chapitre *:</label>
-                                                    <input type="text" id="basic-default-abr" class="form-control" name="abr" value="<?php
-                                                            if(!empty($id_chapitre))
-                                                            {echo $chapitre['methode_chapitre_nom'];}                                                           
-                                                            ?>" placeholder="..." required/>
-                                                    
+                                                    <label for="blog-edit-chapitre">Chapitre *:</label>
+                                                    <select class="select2 form-control" id="blog-edit-chapitre" name="chapitre" required>
+
+                                                        <?php 
+                                                                                                                           
+                                                                
+                                                        $PDO_query_chapitre_liste_select = Bdd::connectBdd()->prepare("SELECT * FROM methode_chapitre");
+                                                        $PDO_query_chapitre_liste_select->execute();
+                                                        while($chapitre_liste = $PDO_query_chapitre_liste_select->fetch()){
+
+                                                            if(isset($chapitre['methode_chapitre_id']) && $chapitre['methode_chapitre_id'] == $chapitre_liste['methode_chapitre_id']){
+                                                                echo '<option value="'.$chapitre_liste['methode_chapitre_id'].'" selected>'.$chapitre_liste['methode_chapitre_nom'].'</option>';
+                                                                
+                                                            }else{
+                                                                echo '<option value="'.$chapitre_liste['methode_chapitre_id'].'" >'.$chapitre_liste['methode_chapitre_nom'].'</option>';
+
+                                                            }
+                                                        }
+                                                        if(isset($_GET["id"])){echo '';}else{echo '<option value="" selected>Selectionnez un chapitre</option>';}
+                                                        $PDO_query_chapitre_liste_select->closeCursor();  
+                                                           
+                                                                                                                       
+                                                        ?>
+                                                    </select>
                                                 </div>
                                             </div>
 
