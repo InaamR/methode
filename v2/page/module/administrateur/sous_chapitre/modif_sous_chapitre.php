@@ -38,7 +38,7 @@ if(!empty($_GET["id"])){$id_sous_chapitre = $_GET["id"];}else{$id_sous_chapitre 
 
 
 $PDO_query_sous_chapitre_unique = Bdd::connectBdd()->prepare("SELECT * FROM methode_sous_chapitre WHERE methode_sous_chapitre_id = :id ORDER BY methode_sous_chapitre_id ASC");
-$PDO_query_sous_chapitre_unique->bindParam(":id", $sous_chapitre, PDO::PARAM_INT);
+$PDO_query_sous_chapitre_unique->bindParam(":id", $id_sous_chapitre, PDO::PARAM_INT);
 $PDO_query_sous_chapitre_unique->execute();
 $sous_chapitre = $PDO_query_sous_chapitre_unique->fetch();
 $PDO_query_sous_chapitre_unique->closeCursor();

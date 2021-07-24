@@ -264,10 +264,10 @@ $(function () {
         zeroRecords: "Aucunes données disponibles !",
         infoEmpty: "Aucun enregistrement disponible",
         infoFiltered: "(filtré depuis _MAX_ total des enregistrements)",
-        loadingRecords: "Chargement des identitées véhicles en cours ..."
+        loadingRecords: "Chargement des identités véhicules en cours ..."
       }
     });
-    $('div.head-label').html('<h6 class="mb-0">Liste des identitées véhicules</h6>');
+    $('div.head-label').html('<h6 class="mb-0">Liste des identités véhicules</h6>');
   
   }
   // Flat Date picker
