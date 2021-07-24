@@ -1410,6 +1410,11 @@ class Admin {
 		$lien = URLSITE.'/administrateur/chapitre/';
 		return $lien;
 	}
+
+	public static function menusocle() {
+		$lien = URLSITE.'/administrateur/socle/';
+		return $lien;
+	}
 	
 		
 } // Fin de la classe administrateur
