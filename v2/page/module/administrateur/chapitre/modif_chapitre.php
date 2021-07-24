@@ -268,31 +268,39 @@ $PDO_query_chapitre_unique->closeCursor();
                                                     <select class="select2 form-control" id="blog-edit-statut" name="statut" required>
 
                                                         <?php 
+                                                            if(!empty($id_chapitre)){
                                                                 switch($chapitre['methode_chapitre_statut'])
                                                                 {
                                                                     
                                                                     case '1':
-                                                                        if($chapitre['methode_chapitre_statut'] == 1){ 
+
                                                                             echo '
                                                                             <option value="1" selected>Actif</option>
                                                                             <option value="0">Non-actif</option>
                                                                             ';
-                                                                        }else{ 
-                                                                            echo '
-                                                                            <option value="1">Actif</option>
-                                                                            <option value="0" selected>Non-actif</option>
-                                                                            ';
-                                                                        }
+                                                                           
+                                                                        
                                                                     break;
                                                                     
                                                                     
                                                                     
-                                                                    default;
+                                                                    case '0':
+
                                                                             echo '
-                                                                            <option value="1" selected>Actif</option>
-                                                                            <option value="0">Non-actif</option>
+                                                                            <option value="1">Actif</option>
+                                                                            <option value="0" selected>Non-actif</option>
                                                                             ';
+                                                                        
+                                                                    break;
                                                                 }
+                                                            }else{
+
+                                                                echo '
+                                                                    <option value="1" selected>Actif</option>
+                                                                    <option value="0" >Non-actif</option>
+                                                                    ';
+
+                                                            }
                                                         ?>
                                                     </select>
                                                 </div>
