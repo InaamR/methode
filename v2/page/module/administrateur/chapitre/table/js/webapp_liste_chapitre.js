@@ -201,10 +201,11 @@ $(function () {
         search: "Recherche :",
         zeroRecords: "Aucunes données disponibles !",
         infoEmpty: "Aucun enregistrement disponible",
-        infoFiltered: "(filtré depuis _MAX_ total des enregistrements)"
+        infoFiltered: "(filtré depuis _MAX_ total des enregistrements)",
+        loadingRecords: "Chargement des chapitres en cours ..."
       }
     });
-    $('div.head-label').html('<h6 class="mb-0">Liste des communications générales ETAI / COL</h6>');
+    $('div.head-label').html('<h6 class="mb-0">Liste des chapitres</h6>');
   
   }
   // Flat Date picker
@@ -215,99 +216,90 @@ $(function () {
     });
   }
 
-  // Add New record
-  // ? Remove/Update this code as per your requirements ?
-  var count = 101;
-  $('.data-submit').on('click', function () {
-    var $new_name = $('.add-new-record .dt-full-name').val(),
-      $new_post = $('.add-new-record .dt-post').val(),
-      $new_email = $('.add-new-record .dt-email').val(),
-      $new_date = $('.add-new-record .dt-date').val(),
-      $new_salary = $('.add-new-record .dt-salary').val();
+   
 
-    if ($new_name != '') {
-      dt_basic.row
-        .add({
-          responsive_id: null,
-          id: count,
-          full_name: $new_name,
-          post: $new_post,
-          email: $new_email,
-          start_date: $new_date,
-          salary: '$' + $new_salary,
-          status: 5
-        })
-        .draw();
-      count++;
-      $('.modal').modal('hide');
-    }
-  });
-
-  // Delete Record
-  $(document).on('click', '#delete-record', function (e) {
+   // Verifier la supp
+   $(document).on('click', '#delete-record', function (e) {
+    var id      = $(this).data('id');
+    var name      = $(this).data('name');
     Swal.fire({
-		  title: 'Êtes-vous sûr ?',
-		  text: "Vous ne pourrez pas annuler cela !",
-		  type: 'warning',
-		  showCancelButton: true,
-		  confirmButtonColor: '#3085d6',
-		  cancelButtonColor: '#d33',
-		  confirmButtonText: 'Oui, supprimez-le !',
-		  confirmButtonClass: 'btn btn-primary',
-		  cancelButtonClass: 'btn btn-danger ml-1',
-		  buttonsStyling: false,
-		}).then(function (result) {
-		  if (result.value) {
-							e.preventDefault();
-							var id      = $("#delete-record").data('id');
-							var name      = $("#delete-record").data('name');
-							var request = $.ajax({
-							url:          'table/php/data_liste_comm.php?job=del_com&id=' + id,
-							cache:        false,
-							dataType:     'json',
-							contentType:  'application/json; charset=utf-8',
-							type:         'get'
-							});
-							
-							request.done(function(output){
-								if (output.result == 'success'){
-									  Swal.fire({
-										  type: "success",
-										  title: 'Supprimée!',
-										  text: "Niveau '" + name + "' effacé avec succès.",
-										  confirmButtonClass: 'btn btn-success',
-										});
-                    dt_basic.ajax.reload();
-								} else {
-									Swal.fire({
-									  title: 'Annulée',
-									  text: "Une erreur s'est produite lors de l'enregistrement " + textStatus,
-									  type: 'error',
-									  confirmButtonClass: 'btn btn-success',
-									})
-								}
-							});
-							request.fail(function(jqXHR, textStatus){
-								Swal.fire({
-								  title: 'Annulée',
-								  text: "Une erreur s'est produite lors de l'enregistrement " + textStatus,
-								  type: 'error',
-								  confirmButtonClass: 'btn btn-success',
-								})
-							})
-			
-		  }
-		  else if (result.dismiss === Swal.DismissReason.cancel) {
-			  
-			Swal.fire({
-			  title: 'Annulée',
-			  text: 'Votre fichier est en sécurité',
-			  type: 'error',
-			  confirmButtonClass: 'btn btn-success',
-			})
-		  }
-		})
-  }); 
+      title: 'Êtes-vous sûr ?',
+      text: "",
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Supprimer',
+      confirmButtonClass: 'btn btn-primary',
+      cancelButtonClass: 'btn btn-danger ml-1',
+      cancelButtonText: 'Annuler',
+      buttonsStyling: false
+
+    }).then(function (result) {
+
+      if (result.value) {
+
+              e.preventDefault();
+              var onSuccess = function (data) {
+                console.log('Success');
+                
+                Swal.fire({
+                  type: "success",
+                  title: 'Supprimé !',
+                  text: "Chapitre '" + name + "' supprimée avec succès.",
+                  confirmButtonClass: 'btn btn-success',
+                });
+                //$(".dtr-bs-modal").removeClass("show");
+                //$(".modal-backdrop").removeClass("show");
+                dt_basic.ajax.reload();
+            
+              };
+      
+              var onError = function (jqXHR, textStatus, errorThrown) {
+                  console.log(jqXHR);
+                  console.log(textStatus);
+                  console.log(errorThrown);
+                  Swal.fire({
+                    title: 'Annulée',
+                    text: "Une erreur s'est produite lors de l'enregistrement " + textStatus,
+                    type: 'error',
+                    confirmButtonClass: 'btn btn-danger',
+                  })
+              
+              };
+              
+              var onBeforeSend = function () {
+                  console.log("Loading");          
+                  
+                  
+              };
+
+              var request = $.ajax({
+                url:          'table/php/data_liste_chapitre.php?job=del_chapitre',
+                data:         'id=' + id,
+                type:         'post',
+                async: false,
+                beforeSend: onBeforeSend,
+                error: onError,
+                success: onSuccess
+              });
+              
+              
+      
+      }
+      else if (result.dismiss === Swal.DismissReason.cancel) {			  
+        Swal.fire({
+          title: 'Annulée',
+          text: 'Votre produit est en sécurité !',
+          type: 'error',
+          confirmButtonClass: 'btn btn-danger',
+        });
+        $(".dtr-bs-modal").removeClass("show");
+        $(".modal-backdrop").removeClass("show");
+      }
+    })
+    
+  });  
 
   $(document).on('submit', '.add', function(e){
 	  			
@@ -317,7 +309,7 @@ $(function () {
 
       var onSuccess = function (data) {
         console.log('Success');
-        window.location.assign("liste_comm.php");
+        window.location.assign("liste_chapitre.php");
     
       };
       var onError = function (jqXHR, textStatus, errorThrown) {
@@ -330,22 +322,25 @@ $(function () {
       
       var onBeforeSend = function () {
           console.log("Loading");
-          $.blockUI({
-            message: '<div class="spinner-border text-white" role="status"></div>',
+          $('#submit').text('Envoi en cours'); // Onchange la valeur pour avoir un retour visuel
+          $('#submit').attr("disabled", true); // On s'assure du fait que le bouton ne sera plus cliquable, tu peut meme rajouter une classe ?!?!
+          $('.add').block({
+            message: '<div class="spinner-border text-primary" role="status"></div>',
             timeout: 1000,
             css: {
               backgroundColor: 'transparent',
               border: '0'
             },
             overlayCSS: {
-              opacity: 0.5
+              backgroundColor: '#fff',
+              opacity: 0.8
             }
           });
           
       };
 	  
       var request   = $.ajax({
-        url:          'table/php/data_liste_comm.php?job=add_comm',
+        url:          'table/php/data_liste_chapitre.php?job=add_chapitre',
         data:         form_data,
         type:         'post',
         async: false,
@@ -360,12 +355,11 @@ $(function () {
 
 		e.preventDefault();
 
-      var id        = $('#jquery-val-form').attr('data-id');
       var form_data = $('#jquery-val-form').serialize();
 
       var onSuccess = function (data) {
         console.log('Success');
-        window.location.assign("liste_comm.php");
+        window.location.assign("liste_chapitre.php");
     
       };
       var onError = function (jqXHR, textStatus, errorThrown) {
@@ -378,20 +372,23 @@ $(function () {
       
       var onBeforeSend = function () {
           console.log("Loading");          
-          $.blockUI({
-            message: '<div class="spinner-border text-white" role="status"></div>',
+          $('#submit').text('Envoi en cours'); // Onchange la valeur pour avoir un retour visuel
+          $('#submit').attr("disabled", true); // On s'assure du fait que le bouton ne sera plus cliquable, tu peut meme rajouter une classe ?!?!
+          $('.add').block({
+            message: '<div class="spinner-border text-primary" role="status"></div>',
             timeout: 1000,
             css: {
               backgroundColor: 'transparent',
               border: '0'
             },
             overlayCSS: {
-              opacity: 0.5
+              backgroundColor: '#fff',
+              opacity: 0.8
             }
           });
       };
 		  var request   = $.ajax({
-        url:          'table/php/data_liste_comm.php?job=comm_edit&id=' + id,
+        url:          'table/php/data_liste_chapitre.php?job=edit_chapitre',
         data:         form_data,
         type:         'post',
         async: false,
