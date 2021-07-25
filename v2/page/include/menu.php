@@ -139,7 +139,7 @@
                             }
                         ?>
                     
-                        <a class="d-flex align-items-center" href="http://<?php echo $_SERVER['SERVER_NAME']?>/<?php echo $PARAM_url_non_doc_site; ?>/page/module/administrateur/planning/liste_planning.php"><i data-feather="circle"></i><span class="menu-item text-truncate" data-i18n="Etudes">Etudes</span></a>
+                        <a class="d-flex align-items-center" href="http://<?php echo $_SERVER['SERVER_NAME']?>/<?php echo $PARAM_url_non_doc_site; ?>/page/module/administrateur/etude/liste_planning.php"><i data-feather="circle"></i><span class="menu-item text-truncate" data-i18n="Etudes">Etudes</span></a>
                     </li>
 
                     <?php                        
