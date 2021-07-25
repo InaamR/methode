@@ -181,7 +181,7 @@ $PDO_query_sous_chapitre_unique->closeCursor();
                             <div class="breadcrumb-wrapper">
                                 <ol class="breadcrumb d-md-flex d-none">
                                     <li class="breadcrumb-item">
-                                        <a href="liste_sous_chapitre.php">Sous chapitres</a>
+                                    Sous chapitres
                                     </li>
                                     <li class="breadcrumb-item"><a href="liste_sous_chapitre.php">Liste des sous chapitres</a></li>
                                     <li class="breadcrumb-item active">Gestion des sous chapitres</li>
