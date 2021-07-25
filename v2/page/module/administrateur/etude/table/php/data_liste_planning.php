@@ -77,7 +77,7 @@ if ($job != '') {
             ';
 
             $PDO_query_verif_avancement = Bdd::connectBdd()->prepare("SELECT * FROM avancement_technicien WHERE planning_prod_id  = :planning_prod_id");
-            $PDO_query_verif_avancement->bindParam(":planning_prod_id", $scetudeat['planning_prod_id'], PDO::PARAM_INT);
+            $PDO_query_verif_avancement->bindParam(":planning_prod_id", $etude['planning_prod_id'], PDO::PARAM_INT);
             $PDO_query_verif_avancement->execute();
             $avancement_existe = $PDO_query_verif_avancement->rowCount();
             $PDO_query_verif_avancement->closeCursor();
