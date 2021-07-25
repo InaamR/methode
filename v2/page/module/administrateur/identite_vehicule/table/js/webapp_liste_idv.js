@@ -26,8 +26,7 @@ $(function () {
         { data: 'id' },
         { data: 'id' }, // used for sorting so will hide this column    
         { data: 'full_name' },
-        { data: "CGMOD_P"},
-		
+        { data: "CGMOD_P"},		
         { data: "CODGRPVER"},            
         { data: "MARQUE"},        
         { data: "GAMME"},        
@@ -35,7 +34,6 @@ $(function () {
         { data: "DATDEB_GRPMOD"},	            
         { data: "DATFIN_GRPMOD"},        
         { data: "GMOD_P"},
-
         { data: "DATE_DEB_GMOD_P"},
         { data: "DATE_FIN_GMOD_P"},
         { data: "COMPLEMENTGAMME"},
@@ -44,7 +42,6 @@ $(function () {
         { data: "MODELE"},
         { data: "VARIANTEDATEDEBUT"},
         { data: "VARIANTEDATEFIN"},
-
         { data: "VERSIONSPECIFIQUE"},
         { data: "NOMBREPORTES"},
         { data: "CFGPTE"},
@@ -53,8 +50,6 @@ $(function () {
         { data: "CARROSSERIECOMMERCIALE"},
         { data: "TYPEEMPATTEMENT"},
         { data: "HAUTEUR"},
-
-
         { data: "CHARGE"},
         { data: "TYPEMOTEUR"},
         { data: "INDICEMOTEUR"},
@@ -63,7 +58,6 @@ $(function () {
         { data: "ENERGIE"},
         { data: "INJECTIONCOMMERCIALE"},
         { data: "SURALIMENTATION"},
-
         { data: "FILTREAPARTICULES"},
         { data: "AVECCATALYSEUR"},
         { data: "DEPOLLUTION"},
@@ -72,7 +66,6 @@ $(function () {
         { data: "NOMBRESOUPAPES"},
         { data: "ARBREACAME"},
         { data: "PUISSANCE"},
-
         { data: "PUISSANCEFISCALE"},
         { data: "TYPEDISTRIBUTION"},
         { data: "ENTRAINEMENTDISTRIBUTION"},
@@ -81,7 +74,6 @@ $(function () {
         { data: "GENREBOITE"},
         { data: "NOMBRERAPPORTS"},
         { data: "TYPEBOITE"},
-
         { data: "ESSIEUMOTEUR"},
         { data: "TYPEFREINAVANT"},
         { data: "TYPEFREINARRIERE"},
@@ -90,11 +82,11 @@ $(function () {
         { data: "COTECONDUCTEUR"},
         { data: "TYPEMINES"},
         { data: "TAPV"},
-
         { data: 'start_date' },
         { data: 'statut' },
         { data: 'Actions' }
       ],
+      responsive: true,
       columnDefs: [
         {
           // For Responsive
@@ -102,21 +94,6 @@ $(function () {
           orderable: false,
           responsivePriority: 2,
           targets: 0
-        },
-        {
-          // For Checkboxes
-          targets: 1,
-          orderable: false,
-          responsivePriority: 3,
-          render: function (data, type, full, meta) {
-            return (
-              '<div class="custom-control custom-checkbox"> <input class="custom-control-input dt-checkboxes" type="checkbox" value="" id="checkbox' + data + '" /><label class="custom-control-label" for="checkbox' + data +'"></label></div>'
-            );
-          },
-          checkboxes: {
-            selectAllRender:
-              '<div class="custom-control custom-checkbox"> <input class="custom-control-input" type="checkbox" value="" id="checkboxSelectAll" /><label class="custom-control-label" for="checkboxSelectAll"></label></div>'
-          }
         },
         {
           targets: 2,
@@ -230,9 +207,7 @@ $(function () {
             var data = $.map(columns, function (col, i) {
               console.log(columns);
               return col.title !== '' // ? Do not show row in modal popup if title is blank (for check box)
-                ? '<tr data-dt-row="' +
-                    col.rowIndex +
-                    '" data-dt-column="' +
+                ? '<tr data-dt-row="66" data-dt-column="' +
                     col.columnIndex +
                     '">' +
                     '<td>' +
