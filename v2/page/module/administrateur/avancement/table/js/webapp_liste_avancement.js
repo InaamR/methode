@@ -241,7 +241,7 @@ $(function () {
                 Swal.fire({
                   type: "success",
                   title: 'Supprimé !',
-                  text: "Équipe '" + name + "' supprimée avec succès.",
+                  text: "Affectation '" + name + "' supprimée avec succès.",
                   confirmButtonClass: 'btn btn-success',
                 });
                 //$(".dtr-bs-modal").removeClass("show");
@@ -270,7 +270,7 @@ $(function () {
               };
 
               var request = $.ajax({
-                url:          'table/php/data_liste_equipe.php?job=del_equipe',
+                url:          'table/php/data_liste_avancement.php?job=del_avancement',
                 data:         'id=' + id,
                 type:         'post',
                 async: false,
@@ -304,7 +304,7 @@ $(function () {
 
       var onSuccess = function (data) {
         console.log('Success');
-        window.location.assign("liste_equipe.php");
+        window.location.assign("liste_avancement.php");
     
       };
       var onError = function (jqXHR, textStatus, errorThrown) {
@@ -332,7 +332,7 @@ $(function () {
       };
 	  
       var request   = $.ajax({
-        url:          'table/php/data_liste_equipe.php?job=add_equipe',
+        url:          'table/php/data_liste_avancement.php?job=add_avancement',
         data:         form_data,
         type:         'post',
         async: false,
