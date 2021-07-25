@@ -1415,8 +1415,16 @@ class Admin {
 		$lien = URLSITE.'/administrateur/socle/';
 		return $lien;
 	}
+
+	public static function menuavancement() {
+		$lien = URLSITE.'/administrateur/avancement/';
+		return $lien;
+	}
 	
-		
+	public static function menuetude() {
+		$lien = URLSITE.'/administrateur/etude/';
+		return $lien;
+	}
 } // Fin de la classe administrateur
 ?>
 
