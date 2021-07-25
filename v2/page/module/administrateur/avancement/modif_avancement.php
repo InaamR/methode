@@ -57,11 +57,14 @@ $PDO_query_avancement_unique->closeCursor();
     <link rel="shortcut icon" type="image/x-icon" href="https://<?php echo $_SERVER['SERVER_NAME']?>/<?php echo $PARAM_url_non_doc_site?>/app-assets/images/ico/favicon-16x16.png">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500;1,600"
         rel="stylesheet">
+    
 
     <!-- BEGIN: Vendor CSS-->
     <link rel="stylesheet" type="text/css" href="https://<?php echo $_SERVER['SERVER_NAME']?>/<?php echo $PARAM_url_non_doc_site?>/app-assets/vendors/css/vendors.min.css">
     <link rel="stylesheet" type="text/css" href="https://<?php echo $_SERVER['SERVER_NAME']?>/<?php echo $PARAM_url_non_doc_site?>/app-assets/vendors/css/forms/select/select2.min.css">
     <link rel="stylesheet" type="text/css" href="https://<?php echo $_SERVER['SERVER_NAME']?>/<?php echo $PARAM_url_non_doc_site?>/app-assets/vendors/css/extensions/sweetalert2.min.css">
+    <link rel="stylesheet" type="text/css" href="https://<?php echo $_SERVER['SERVER_NAME']?>/<?php echo $PARAM_url_non_doc_site?>/app-assets/vendors/css/pickers/pickadate/pickadate.css">
+    <link rel="stylesheet" type="text/css" href="https://<?php echo $_SERVER['SERVER_NAME']?>/<?php echo $PARAM_url_non_doc_site?>/app-assets/vendors/css/pickers/flatpickr/flatpickr.min.css">
     <!-- END: Vendor CSS-->
 
     <!-- BEGIN: Theme CSS-->
@@ -83,6 +86,7 @@ $PDO_query_avancement_unique->closeCursor();
     <link rel="stylesheet" type="text/css" href="https://<?php echo $_SERVER['SERVER_NAME']?>/<?php echo $PARAM_url_non_doc_site?>/app-assets/css/plugins/forms/pickers/form-flat-pickr.css">
     <link rel="stylesheet" type="text/css" href="https://<?php echo $_SERVER['SERVER_NAME']?>/<?php echo $PARAM_url_non_doc_site?>/app-assets/css/plugins/extensions/ext-component-sweet-alerts.css">
     <link rel="stylesheet" type="text/css" href="//code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css">    
+    <link rel="stylesheet" type="text/css" href="https://<?php echo $_SERVER['SERVER_NAME']?>/<?php echo $PARAM_url_non_doc_site?>/app-assets/css/plugins/forms/pickers/form-pickadate.css">
     <!-- END: Page CSS-->
 
     <!-- BEGIN: Custom CSS-->
@@ -214,89 +218,168 @@ $PDO_query_avancement_unique->closeCursor();
                                     </div>
                                     
                                     <!-- Form -->
-                                    <form method="post" id="jquery-val-form" class="<?php if(empty($avancement_technicien_id)){echo 'add';}else{echo 'edit';} ?>" data-id="<?php echo $avancement_technicien_id; ?>">
+                                    <form method="post" id="jquery-val-form" class="<?php if(empty($id_avancement)){echo 'add';}else{echo 'edit';} ?>" data-id="<?php echo $id_avancement; ?>">
                                                             
-                                        <input name="user" type="hidden" value="<?php echo Membre::info($_SESSION['id'], 'nom').' '.Membre::info($_SESSION['id'], 'prenom');?>">
-                                        <input name="avancement_technicien_id" type="hidden" value="<?php echo $avancement_technicien_id;?>">
+                                        <input name="user" type="hidden" value="<?php echo Membre::info($_SESSION['id'], 'id');?>">
+                                        <input name="id_avancement" type="hidden" value="<?php echo $id_avancement;?>">
 
                                         <div class="row">
 
+
+                                            <!-- Technicien -->
                                             <div class="col-md-6 col-12">
                                                 <div class="form-group mb-2">
-                                                    <label for="basic-default-nom">Estimation moyenne par jour *:</label>
+                                                    <label for="blog-edit-technicien">Technicien *:</label>
+
+                                                    <select class="select2 form-control" id="blog-edit-technicien" placeholder="" name="technicien" required>
+
+                                                        <?php 
+                                                                
+                                                            $PDO_query_technicien_liste_select = Bdd::connectBdd()->prepare("SELECT * FROM methode_membres");
+                                                            $PDO_query_technicien_liste_select->execute();
+                                                            while($technicien_liste = $PDO_query_technicien_liste_select->fetch()){
+                                                            $fullname = $technicien_liste['nom'].' '.$technicien_liste['prenom'].' | '.$technicien_liste['pseudo'];
+                                                            if(isset($avancement['technicien_id']) && $avancement['technicien_id'] == $technicien_liste['id']){
+                                                                    echo '<option value="'.$technicien_liste['id'].'" selected>'.$fullname.'</option>';
+                                                                    
+                                                                }else{
+                                                                    echo '<option value="'.$technicien_liste['id'].'" >'.$fullname.'</option>';
+
+                                                                }
+                                                            }
+                                                            if(isset($_GET["id"])){echo '';}else{echo '<option value="" selected>Séléctionnez un technicien</option>';}
+                                                            $PDO_query_technicien_liste_select->closeCursor();  
+                                                           
+                                                        ?>
+                                                    </select>
+
+                                                </div>
+                                            </div>
+
+
+                                            <!-- Etude -->
+                                            <div class="col-md-6 col-12">
+                                                <div class="form-group mb-2">
+                                                    <label for="blog-edit-etude">Etude *:</label>
+
+                                                    <select class="select2 form-control" id="blog-edit-etude" placeholder="" name="etude" required>
+
+                                                        <?php 
+                                                                
+                                                            $PDO_query_etude_liste_select = Bdd::connectBdd()->prepare("SELECT * FROM planning_prod");
+                                                            $PDO_query_etude_liste_select->execute();
+
+                                                            while($etude_liste = $PDO_query_etude_liste_select->fetch()){
+                                                
+                                                            $query = Bdd::connectBdd()->prepare("SELECT * FROM ident_vehicule WHERE ident_vehicule_CODGRPVER = :ident_vehicule_CODGRPVER");
+                                                            $query->bindParam(":ident_vehicule_CODGRPVER", $etude_liste['planning_prod_Code_GMOD_P'], PDO::PARAM_INT);
+                                                            $query->execute();	
+                                                            $query_idv = $query->fetch();
+                                                            $query->closeCursor();
+
+                                                            $etude_nom = $query_idv['ident_vehicule_MARQUE'].' '.$query_idv['ident_vehicule_GMOD_P'].' ('.$query_idv['ident_vehicule_CODGRPVER'].')';
+                                                            
+                                                            if(isset($avancement['planning_prod_id']) && $avancement['planning_prod_id'] == $etude_liste['planning_prod_id']){
+                                                                    echo '<option value="'.$etude_liste['planning_prod_id'].'" selected>'.$etude_nom.'</option>';
+                                                                    
+                                                                }else{
+                                                                    echo '<option value="'.$etude_liste['planning_prod_id'].'" >'.$etude_nom.'</option>';
+
+                                                                }
+                                                            }
+                                                            if(isset($_GET["id"])){echo '';}else{echo '<option value="" selected>Séléctionnez une étude</option>';}
+                                                            $PDO_query_etude_liste_select->closeCursor();  
+                                                           
+                                                        ?>
+                                                    </select>
+
+                                                </div>
+                                            </div>
+
+
+                                            <!-- Socle -->
+                                            <div class="col-md-3 col-12">
+                                                <div class="form-group mb-2">
+                                                    <label for="blog-edit-socle">Socle *:</label>
+                                                    <select class="select2 form-control" id="blog-edit-socle" name="socle" required>
+
+                                                        <?php 
+                                                                                                                           
+                                                                
+                                                        $PDO_query_socle_liste_select = Bdd::connectBdd()->prepare("SELECT * FROM methode_socle");
+                                                        $PDO_query_socle_liste_select->execute();
+                                                        while($socle_liste = $PDO_query_socle_liste_select->fetch()){
+
+                                                            if(isset($avancement['methode_socle_id']) && $avancement['methode_socle_id'] == $socle_liste['methode_socle_id']){
+                                                                echo '<option value="'.$socle_liste['methode_socle_id'].'" selected>'.$socle_liste['methode_socle_nom'].'</option>';
+                                                                
+                                                            }else{
+                                                                echo '<option value="'.$socle_liste['methode_socle_id'].'" >'.$socle_liste['methode_socle_nom'].'</option>';
+
+                                                            }
+                                                        }
+                                                        if(isset($_GET["id"])){echo '';}else{echo '<option value="" selected>Selectionnez un socle</option>';}
+                                                        $PDO_query_socle_liste_select->closeCursor();  
+                                                           
+                                                                                                                       
+                                                        ?>
+                                                    </select>
+                                                </div>
+                                            </div>
+
+                                            <!-- Estimation de charge -->
+                                            <div class="col-md-3 col-12">
+                                                <div class="form-group mb-2">
+                                                    <label for="basic-default-charge">Estimation de charge *:</label>
                                                     <input
-                                                    type="text"
+                                                    type="number"
                                                     class="form-control"
-                                                    id="basic-default-nom"
-                                                    name="nom"
+                                                    id="basic-default-charge"
+                                                    name="estimation_charge"
                                                     placeholder="..."
                                                     maxlength="255"
-                                                    value="<?php if(!empty($avancement_technicien_id)){echo $avancement['avancement_technicien_estimation_moyenne_jrs   '];}?>"
+                                                    value="<?php if(!empty($id_avancement)){echo $avancement['avancement_technicien_estimation_charge'];}?>"
                                                     required
                                                     />                                                 
                                                 </div>
                                             </div>
 
 
-                                            <!-- <div class="col-md-6 col-12">
-                                                <div class="form-group mb-2">
-                                                    <label for="basic-default-abr">Date de fin *:</label>
-                                                    <input type="date" id="basic-default-abr" class="form-control" name="date_fin" value="<?php
-                                                            if(!empty($avancement_technicien_id))
-                                                            {echo $avancement['avancement_technicien_date_fin'];}                                                           
-                                                            ?>" placeholder="..." required/>
-                                                    
-                                                </div>
-                                            </div> -->
-
-                                            <div class="col-md-6 col-12">
-                                                <div class="form-group mb-2">
-                                                    <label for="basic-default-abr">Nombre de jours réels *:</label>
-                                                    <input type="text" id="basic-default-abr" class="form-control" name="nbr_j_reels" value="<?php
-                                                            if(!empty($avancement_technicien_id))
-                                                            {echo $avancement['avancement_technicien_nbre_jours_reels'];}                                                           
-                                                            ?>" placeholder="..." required/>
-                                                    
-                                                </div>
-                                            </div>
-
-
-                                            <div class="col-md-6 col-12">
-                                                <div class="form-group mb-2">
-                                                    <label for="blog-edit-statut">Statut de l'étude *:</label>
-                                                    <select class="select2 form-control" id="blog-edit-statut" name="statut" required>
-
-                                                        <?php 
-                                                                switch($avancement['avancement_technicien_statut'])
+                                            <!-- Date de début -->
+                                            <div class="col-md-3 col-12">
+                                                    <div class="form-group mb-2">
+                                                        <label for="basic-default-date_debut">Date de début *:</label>
+                                                        <input type="text" id="basic-default-date_debut" class="form-control flatpickr-basic" name="date_debut" value="<?php
+                                                                if(!empty($id_avancement))
                                                                 {
-                                                                    
-                                                                    case '1':
-                                                                            echo '
-                                                                            <option value="1" selected>Active</option>
-                                                                            <option value="0">Inactive</option>
-                                                                            ';
-                                                                        
-                                                                    break;
-                                                                    
-                                                                    case '0':
-                                                                            echo '
-                                                                            <option value="1">Active</option>
-                                                                            <option value="0" selected>Inactive</option>
-                                                                            ';
-                                                                        
-                                                                    break;
-
-                                                                    default:
-                                                                        echo '
-                                                                        <option value="1" selected>Active</option>
-                                                                        <option value="0">Inactive</option>
-                                                                        ';
-                                                                    
-                                                                }
-                                                        ?>
-                                                    </select>
-                                                </div>
+                                                                    $date_debut = date_create($avancement['avancement_technicien_date_debut']);
+                                                                    $date_debut_create = date_format($date_debut, "d/m/Y");
+                                                                    echo $avancement['avancement_technicien_date_debut'];}                                                           
+                                                                ?>" required/>
+                                                        
+                                                    </div>
                                             </div>
+
+                                            <!-- Date de fin -->
+                                            <div class="col-md-3 col-12">
+                                                    <div class="form-group mb-2">
+                                                        <label for="basic-default-date_fin">Date de fin *:</label>
+                                                        <input type="text" id="basic-default-date_fin" class="form-control flatpickr-basic" name="date_fin" value="<?php
+                                                                if(!empty($id_avancement))
+                                                                {
+                                                                    $date_fin = date_create($avancement['avancement_technicien_date_fin']);
+                                                                    $date_fin_create = date_format($date_fin, "d/m/Y");
+                                                                    echo $avancement['avancement_technicien_date_fin'];}                                                           
+                                                                ?>" required/>
+                                                        
+                                                    </div>
+                                            </div>
+
+
+                                            
+
+
+
                                             <div class="col-12 mt-50">
                                                 <button type="submit" class="btn btn-primary mr-1">Enregistrement</button>
                                                 <button type="reset" class="btn btn-outline-secondary">Vider les champs</button>
@@ -380,6 +463,11 @@ $PDO_query_avancement_unique->closeCursor();
     <script src="https://<?php echo $_SERVER['SERVER_NAME']?>/<?php echo $PARAM_url_non_doc_site?>/app-assets/js/scripts/extensions/ext-component-sweet-alerts.js"></script>
     <script src="https://<?php echo $_SERVER['SERVER_NAME']?>/<?php echo $PARAM_url_non_doc_site?>/app-assets/js/scripts/extensions/ext-component-blockui.js"></script>
     <script src="https://<?php echo $_SERVER['SERVER_NAME']?>/<?php echo $PARAM_url_non_doc_site?>/app-assets/vendors/js/forms/validation/jquery.validate.min.js"></script>
+    <script src="https://<?php echo $_SERVER['SERVER_NAME']?>/<?php echo $PARAM_url_non_doc_site?>/app-assets/vendors/js/pickers/pickadate/picker.js"></script>
+    <script src="https://<?php echo $_SERVER['SERVER_NAME']?>/<?php echo $PARAM_url_non_doc_site?>/app-assets/vendors/js/pickers/pickadate/picker.date.js"></script>
+    <script src="https://<?php echo $_SERVER['SERVER_NAME']?>/<?php echo $PARAM_url_non_doc_site?>/app-assets/vendors/js/pickers/pickadate/picker.time.js"></script>
+    <script src="https://<?php echo $_SERVER['SERVER_NAME']?>/<?php echo $PARAM_url_non_doc_site?>/app-assets/vendors/js/pickers/pickadate/legacy.js"></script>
+    <script src="https://<?php echo $_SERVER['SERVER_NAME']?>/<?php echo $PARAM_url_non_doc_site?>/app-assets/js/scripts/forms/pickers/form-pickers.js"></script>
     <!-- END: Page JS-->
 
     <script charset="utf-8"  src="<?php echo Admin::menuavancement();?>table/js/webapp_liste_avancement.js"></script>
