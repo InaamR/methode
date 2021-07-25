@@ -40,7 +40,7 @@ $st = '';
 if (isset($_GET['job'])) {
     $job = $_GET['job'];
 
-    if ($job == 'get_liste_socle' || $job == 'add_socle' || $job == 'edit_socle' || $job == 'del_socle') {
+    if ($job == 'get_liste_planning' || $job == 'add_socle' || $job == 'edit_socle' || $job == 'del_socle') {
 
         if (isset($_POST['id'])) {
             $id = $_POST['id'];
@@ -58,32 +58,80 @@ if (isset($_GET['job'])) {
 $mysql_data = [];
 
 if ($job != '') {
-    if ($job == 'get_liste_socle') {
+    if ($job == 'get_liste_planning') {
 
-        $PDO_query_socle = Bdd::connectBdd()->prepare("SELECT * FROM methode_socle ORDER BY methode_socle_id ASC");
-        $PDO_query_socle->execute();
+        $PDO_query_etude = Bdd::connectBdd()->prepare("SELECT * FROM planning_prod ORDER BY planning_prod_id ASC");
+        $PDO_query_etude->execute();
 
-        while ($socle = $PDO_query_socle->fetch()) {
+        while ($etude = $PDO_query_etude->fetch()) {
+
+            $query = Bdd::connectBdd()->prepare("SELECT * FROM ident_vehicule WHERE ident_vehicule_CODGRPVER = :ident_vehicule_CODGRPVER");
+            $query->bindParam(":ident_vehicule_CODGRPVER", $etude['planning_prod_Code_GMOD_P'], PDO::PARAM_INT);
+            $query->execute();	
+            $query_idv = $query->fetch();
+            $query->closeCursor();
+
 
             $functions = '
-            <a href="modif_socle.php?id='.$socle['methode_socle_id'].'" class="btn btn-info btn-sm">Modifier</a>
-            <a href="#" id="delete-record" data-id="' .$socle['methode_socle_id'].'" data-name="' .$socle['methode_socle_nom'].'" class="btn btn-danger btn-sm">Supprimer</a>            
+            <a href="modif_planning.php?id='.$etude['planning_prod_id'].'" style="font-size: 0.9rem !important;" class="btn btn-info btn-sm waves-effect waves-float waves-light mr-25 mb-25"><i class="bi bi-pen"></i></a>
+                    
             ';
 
+            $PDO_query_verif_avancement = Bdd::connectBdd()->prepare("SELECT * FROM avancement_technicien WHERE planning_prod_id  = :planning_prod_id");
+            $PDO_query_verif_avancement->bindParam(":planning_prod_id", $scetudeat['planning_prod_id'], PDO::PARAM_INT);
+            $PDO_query_verif_avancement->execute();
+            $avancement_existe = $PDO_query_verif_avancement->rowCount();
+            $PDO_query_verif_avancement->closeCursor();
 
-            $date = date_create($socle['methode_socle_date']);
-            $date_create = date_format($date, "d/m/Y");
+            if($avancement_existe == 0){
 
-            $name_user = Membre::info($socle['methode_socle_user'], 'nom').' '.Membre::info($socle['methode_socle_user'], 'prenom');
+                $functions .= '
+                            <a href="#" id="delete-record" data-id="' .$etude['planning_prod_id'].'" data-name="' .$query_idv['ident_vehicule_MARQUE'].' '.$query_idv['ident_vehicule_GMOD_P'].'" style="font-size: 0.9rem !important;" class="btn btn-danger btn-sm waves-effect waves-float waves-light pr-1 mb-25"><i class="bi bi-trash"></i></a>           
+                            ';
 
-            $id_socle = $socle['methode_socle_id'];  
-            $socle_nom = $socle['methode_socle_nom'];      
+            }else{
+
+                $functions .= '
+                            <a style="font-size: 0.9rem !important;" class="btn btn-secondary btn-sm waves-effect waves-float waves-light mb-25"><i class="bi bi-trash"></i></a>          
+                            ';
+
+            }
 
 
-            switch($socle['methode_socle_statut'])
+            $date_insertion = date_create($etude['planning_prod_date']);
+            $date_insertion_create = date_format($date_insertion, "d/m/Y");
+
+
+            $name_user = Membre::info($etude['planning_prod_user'], 'nom').' '.Membre::info($etude['planning_prod_user'], 'prenom');
+
+            $date_livrable = date_create($etude['planning_prod_Livrable']);
+            $date_livrable_create = date_format($date_livrable, "d/m/Y");
+
+            setlocale (LC_TIME, 'fr_FR.utf8','fra'); 
+            $livrable = strftime("%B %Y", strtotime($date_livrable_create)); 
+            
+            
+
+            $etude_id = $etude['planning_prod_id'];  
+            $etude_nom = $query_idv['ident_vehicule_MARQUE'].' '.$query_idv['ident_vehicule_GMOD_P']; 
+
+            $Code_GMOD_P = $etude['planning_prod_Code_GMOD_P']; 
+            $MARQUE = $query_idv['ident_vehicule_MARQUE'];
+            $GMOD_P = $query_idv['ident_vehicule_GMOD_P'];
+            $md = $etude['planning_prod_prestation_md'];
+            $pe = $etude['planning_prod_prestation_pe'];
+            $ident = $etude['planning_prod_var_ident'];
+            $se = $etude['planning_prod_var_se'];
+                 
+
+
+            switch($etude['planning_prod_statut'])
             {
                 case '1':
-                    $statut = '<div class="badge badge-light-success">Actif</div>';
+                    $statut = '<div class="badge badge-light-info">En cours</div>';
+                break;
+                case '4':
+                    $statut = '<div class="badge badge-light-dark">Terminée</div>';
                 break;                          
                 default:
                     $statut = '<div class="badge badge-light-danger">Inactif</div>';
@@ -91,19 +139,28 @@ if ($job != '') {
 
             $mysql_data[] = [
                 "responsive_id" => "",
-                "id" => $id_socle,
+                "id" => $etude_id,
                 "full_name" => $name_user,
-                "socle" => $socle_nom,                
-                "start_date" => $date_create,
+                "livrable" => $livrable,
+
+                "Code_GMOD_P" => $Code_GMOD_P,  
+                "MARQUE" => $MARQUE, 
+                "GMOD_P" => $GMOD_P, 
+                "md" => $md, 
+                "pe" => $pe, 
+                "ident" => $ident, 
+                "se" => $se,
+
+                "start_date" => $date_insertion_create,
                 "statut" => $statut,
                 "Actions" => $functions
             ];
         }
 
-        $PDO_query_socle->closeCursor();
+        $PDO_query_etude->closeCursor();
         $result = 'success';
         $message = 'Succès de requête';
-        $PDO_query_socle = null;
+        $PDO_query_etude = null;
 
 
     } elseif ($job == 'add_socle') {

@@ -27,10 +27,13 @@ $(function () {
         { data: 'livrable' },
 
         { data: 'Code_GMOD_P' },
-        { data: 'livrable' },
-        { data: 'livrable' },
-        { data: 'livrable' },
-        { data: 'livrable' },
+        { data: 'MARQUE' },
+        { data: 'GMOD_P' },
+        { data: 'md' },
+        { data: 'pe' },
+
+        { data: 'ident' },
+        { data: 'se' },
 
 
         { data: 'start_date' },
@@ -44,21 +47,6 @@ $(function () {
           orderable: false,
           responsivePriority: 2,
           targets: 0
-        },
-        {
-          // For Checkboxes
-          targets: 1,
-          orderable: false,
-          responsivePriority: 3,
-          render: function (data, type, full, meta) {
-            return (
-              '<div class="custom-control custom-checkbox"> <input class="custom-control-input dt-checkboxes" type="checkbox" value="" id="checkbox' + data + '" /><label class="custom-control-label" for="checkbox' + data +'"></label></div>'
-            );
-          },
-          checkboxes: {
-            selectAllRender:
-              '<div class="custom-control custom-checkbox"> <input class="custom-control-input" type="checkbox" value="" id="checkboxSelectAll" /><label class="custom-control-label" for="checkboxSelectAll"></label></div>'
-          }
         },
         {
           targets: 2,

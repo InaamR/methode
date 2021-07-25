@@ -207,16 +207,16 @@ if(empty($_SESSION['id'])){
                                                     <th></th>
                                                     <th></th>
                                                     <th>id</th>
-                                                    <th>Nom et prénom</th>
+                                                    <th>Chef d'équipe</th>
                                                     <th>Livrable</th> 
                                                     <th>Code_GMOD_P</th>
                                                     <th>MARQUE</th>
                                                     <th>GMOD_P</th>
-                                                    <th>Préstation MD</th>
-                                                    <th>Préstation PE</th>
+                                                    <th>Présta MD</th>
+                                                    <th>Présta PE</th>
                                                     <th>VAR IDENT</th>
                                                     <th>VAR SE</th>                                                                                                       
-                                                    <th>Date d'insertion</th>
+                                                    <th>Date d'insert</th>
                                                     <th>Statut</th>
                                                     <th></th>
                                                 </tr>
@@ -306,7 +306,7 @@ if(empty($_SESSION['id'])){
     <!-- END: Theme JS-->
 
     <!-- BEGIN: Page JS-->
-    <script charset="utf-8"  src="<?php echo Admin::menuetude();?>table/js/webapp_liste_socle.js"></script>
+    <script charset="utf-8"  src="<?php echo Admin::menuetude();?>table/js/webapp_liste_planning.js"></script>
 
     <script src="https://<?php echo $_SERVER['SERVER_NAME']?>/<?php echo $PARAM_url_non_doc_site?>/app-assets/vendors/js/extensions/sweetalert2.all.min.js"></script>
     <script src="https://<?php echo $_SERVER['SERVER_NAME']?>/<?php echo $PARAM_url_non_doc_site?>/app-assets/vendors/js/extensions/polyfill.min.js"></script>
