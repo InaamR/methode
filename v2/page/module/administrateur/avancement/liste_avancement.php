@@ -76,7 +76,7 @@ if(empty($_SESSION['id'])){
     <link rel="stylesheet" type="text/css" href="https://<?php echo $_SERVER['SERVER_NAME']?>/<?php echo $PARAM_url_non_doc_site?>/app-assets/css/core/menu/menu-types/vertical-menu.css">
     <link rel="stylesheet" type="text/css" href="https://<?php echo $_SERVER['SERVER_NAME']?>/<?php echo $PARAM_url_non_doc_site?>/app-assets/css/themes/bordered-layout.css">
     <link rel="stylesheet" type="text/css" href="https://<?php echo $_SERVER['SERVER_NAME']?>/<?php echo $PARAM_url_non_doc_site?>/app-assets/css/plugins/extensions/ext-component-sweet-alerts.css">
-    
+    <link rel="stylesheet" type="text/css" href="https://<?php echo $_SERVER['SERVER_NAME']?>/<?php echo $PARAM_url_non_doc_site?>/app-assets/css/plugins/extensions/ext-component-tree.min.css">
     <!-- END: Page CSS-->
 
     <!-- BEGIN: Custom CSS-->
@@ -215,6 +215,7 @@ if(empty($_SESSION['id'])){
                                                     <th>Date début</th>
                                                     <th>Date fin</th>
                                                     <th>N° j. réels</th>
+                                                    <th>Progression</th>
                                                     <th>Date d'insertion</th>
                                                     <th>Statut</th>
                                                     <th>Action</th>
@@ -238,7 +239,34 @@ if(empty($_SESSION['id'])){
         </div>
     </div>
     <!-- END: Content-->
-
+<!-- Modal -->
+<!-- Modal -->
+<div
+                class="modal fade"
+                id="exampleModalScrollable"
+                tabindex="-1"
+                role="dialog"
+                aria-labelledby="exampleModalScrollableTitle"
+                aria-hidden="true"
+              >
+                <div class="modal-dialog modal-dialog-scrollable" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalScrollableTitle">Modal title</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                    
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-primary" data-dismiss="modal">Accept</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div id="jstree-ajax"></div>
     <div class="sidenav-overlay"></div>
     <div class="drag-target"></div>
 
@@ -314,6 +342,7 @@ if(empty($_SESSION['id'])){
     <!-- BEGIN: Page JS-->
     <script src="https://<?php echo $_SERVER['SERVER_NAME']?>/<?php echo $PARAM_url_non_doc_site?>/app-assets/js/scripts/ui/ui-feather.js"></script>
     <script src="https://<?php echo $_SERVER['SERVER_NAME']?>/<?php echo $PARAM_url_non_doc_site?>/app-assets/js/scripts/extensions/ext-component-sweet-alerts.js"></script>
+    <script src="https://<?php echo $_SERVER['SERVER_NAME']?>/<?php echo $PARAM_url_non_doc_site?>/app-assets/js/scripts/components/components-modals.min.js"></script>
     <!-- END: Page JS-->
     
     <script>
@@ -325,6 +354,7 @@ if(empty($_SESSION['id'])){
                 });
             }
         })
+    });
     </script>
     <script src="https://kit.fontawesome.com/7791373c6a.js" crossorigin="anonymous"></script>
 </body>
