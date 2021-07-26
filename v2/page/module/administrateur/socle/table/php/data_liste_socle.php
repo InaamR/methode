@@ -86,7 +86,7 @@ if ($job != '') {
                     $statut = '<div class="badge badge-light-success">Actif</div>';
                 break;                          
                 default:
-                    $statut = '<div class="badge badge-light-danger">Inactif</div>';
+                    $statut = '<div class="badge badge-light-danger">Non-actif</div>';
             }
 
             $mysql_data[] = [

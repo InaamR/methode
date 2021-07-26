@@ -208,7 +208,7 @@ if(empty($_SESSION['id'])){
                                                     <th></th>
                                                     <th>id</th>
                                                     <th>Nom et prénom</th>
-                                                    <th>Chapitre</th>
+                                                    <th>Socle</th>
                                                     <th>Date d'insertion</th>
                                                     <th>Statut</th>
                                                     <th></th>

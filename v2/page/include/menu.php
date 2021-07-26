@@ -150,7 +150,7 @@
                             }
                         ?>
                     
-                        <a class="d-flex align-items-center" href="http://<?php echo $_SERVER['SERVER_NAME']?>/<?php echo $PARAM_url_non_doc_site; ?>/page/module/administrateur/avancement/liste_avancement.php"><i data-feather="circle"></i><span class="menu-item text-truncate" data-i18n="Avancements">Afféctation</span></a>
+                        <a class="d-flex align-items-center" href="http://<?php echo $_SERVER['SERVER_NAME']?>/<?php echo $PARAM_url_non_doc_site; ?>/page/module/administrateur/avancement/liste_avancement.php"><i data-feather="circle"></i><span class="menu-item text-truncate" data-i18n="Avancements">Affectation</span></a>
                     </li>
                     
                 </ul>
@@ -161,7 +161,7 @@
             <li class=" nav-item">
                 <a class="d-flex align-items-center" href="#">
                     <i class="fas fa-laptop"></i>
-                    <span class="menu-title text-truncate" data-i18n="Pages" id="Dir. des Systèmes d'information">Calcule rapport</span>
+                    <span class="menu-title text-truncate" data-i18n="Pages" id="Dir. des Systèmes d'information">Calcul rapport</span>
                 </a>
                 <ul class="menu-content">
                     <li>
@@ -171,14 +171,8 @@
                         </a>
                     </li>                   
                 </ul>
-            </li>  
-            <li class=" navigation-header"><span data-i18n="Ressources Humaines">RH</span><i data-feather="more-horizontal"></i></li>          
-            <li class=" nav-item"><a class="d-flex align-items-center" href="#"><i class="fas fa-users" aria-hidden="true"></i><span class="menu-title text-truncate" data-i18n="Res. Humaines">Primes (Soon)</span></a>
-                <ul class="menu-content">
-                    <li><a class="d-flex align-items-center" href="#"><i data-feather="circle"></i><span class="menu-item text-truncate" data-i18n="">Calcule primes</span></a>
-                    </li>
-                </ul>
-            </li> 
+            </li>
+            
             <li class=" navigation-header"><span data-i18n="">Administration</span><i data-feather="more-horizontal"></i></li>
             <li class=" nav-item"><a class="d-flex align-items-center" href="#"><i class="fas fa-user-cog" aria-hidden="true"></i><span class="menu-title text-truncate" data-i18n="Admin">Admin</span></a>
                 <ul class="menu-content">

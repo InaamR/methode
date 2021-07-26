@@ -250,7 +250,7 @@ $PDO_query_niveau_unique->closeCursor();
                                                                     case '1':
                                                                             echo '
                                                                             <option value="1" selected>Actif</option>
-                                                                            <option value="0">Inactif</option>
+                                                                            <option value="0">Non-actif</option>
                                                                             ';
                                                                         
                                                                     break;
@@ -258,7 +258,7 @@ $PDO_query_niveau_unique->closeCursor();
                                                                     case '0':
                                                                             echo '
                                                                             <option value="1">Actif</option>
-                                                                            <option value="0" selected>Inactif</option>
+                                                                            <option value="0" selected>Non-actif</option>
                                                                             ';
                                                                         
                                                                     break;
@@ -266,7 +266,7 @@ $PDO_query_niveau_unique->closeCursor();
                                                                     default:
                                                                         echo '
                                                                         <option value="1" selected>Actif</option>
-                                                                        <option value="0">Inactif</option>
+                                                                        <option value="0">Non-actif</option>
                                                                         ';
                                                                     
                                                                 }
@@ -275,7 +275,7 @@ $PDO_query_niveau_unique->closeCursor();
                                                 </div>
                                             </div>
                                             <div class="col-12 mt-50">
-                                                <button type="submit" class="btn btn-primary mr-1">Enregistrement</button>
+                                                <button type="submit" class="btn btn-success mr-1">Enregistrement</button>
                                                 <button type="reset" class="btn btn-outline-secondary">Vider les champs</button>
                                             </div>
                                         </div>

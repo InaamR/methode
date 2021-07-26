@@ -392,7 +392,7 @@ $PDO_query_avancement_unique->closeCursor();
 
 
                                             <div class="col-12 mt-50">
-                                                <button type="submit" class="btn btn-primary mr-1">Enregistrement</button>
+                                                <button type="submit" class="btn btn-success mr-1">Enregistrement</button>
                                                 <button type="reset" class="btn btn-outline-secondary">Vider les champs</button>
                                             </div>
                                         </div>

@@ -83,10 +83,10 @@ if ($job != '') {
             switch($identite_vehicule['ident_vehicule_statut'])
             {
                 case '1':
-                    $statut = '<div class="badge badge-light-success">Actif</div>';
+                    $statut = '<div class="badge badge-light-success">Active</div>';
                 break;                          
                 default:
-                    $statut = '<div class="badge badge-light-danger">Inactif</div>';
+                    $statut = '<div class="badge badge-light-danger">Non-active</div>';
             }
 
 

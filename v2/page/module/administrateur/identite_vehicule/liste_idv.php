@@ -184,8 +184,10 @@ if(empty($_SESSION['id'])){
                 </div>
                 <div class="content-header-right text-md-right col-md-3 col-12 d-md-block d-none">
                     <div class="form-group breadcrumb-right">
+                    <a class="btn btn-success" href="#">Importer fichier Excel</a>
                     </div>
                 </div>
+                
             </div>
 
             <!-- Begin : main content -->
