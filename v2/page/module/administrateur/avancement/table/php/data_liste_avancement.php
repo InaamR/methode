@@ -43,7 +43,7 @@ $id = '';
 if (isset($_GET['job'])) {
     $job = $_GET['job'];
 
-    if ($job == 'get_liste_avancement' || $job == 'add_avancement' || $job == 'edit_avancement' || $job == 'del_avancement') {
+    if ($job == 'get_liste_avancement' || $job == 'add_avancement' || $job == 'edit_avancement' || $job == 'del_avancement' || $job == 'get_liste_progress') {
 
         if (isset($_POST['id'])) {
             $id = $_POST['id'];
@@ -243,6 +243,24 @@ if ($job != '') {
             $result = 'success';
             $message = 'Affectation ajoutée avec succés';
         
+    } elseif ($job == 'get_liste_progress') {
+
+        
+        $PDO_query_avancement_progress = Bdd::connectBdd()->prepare("SELECT * FROM methode_chapitre WHERE  methode_socle_id = :methode_socle_id ORDER BY methode_chapitre_id ASC");
+        $PDO_query_avancement_progress->bindParam(":methode_socle_id", $id, PDO::PARAM_INT);
+        $PDO_query_avancement_progress->execute();
+
+        while ($progress = $PDO_query_avancement_progress->fetch()) {
+
+            $messages = '<li data-jstree=\'{"icon" : "fab fa-html5"}\'>ss</li>';
+
+            
+        }
+        
+        $PDO_query_avancement_progress->closeCursor();
+        $result = 'success';
+        $message = $messages;
+
     }
     
 }

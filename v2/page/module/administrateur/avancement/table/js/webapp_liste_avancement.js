@@ -219,8 +219,54 @@ $(function () {
   } 
   // Verifier la supp
   $(document).on('click', '#exampleModalScrollable', function (e) {
-    var id      = $(this).data('id');
+    /*var id      = $(this).data('id');
     var name      = $(this).data('name');
+    e.preventDefault();
+    
+
+
+      var onSuccess = function (data) {
+        console.log('Success');
+          if (data.result == 'success'){
+            $('ul#cible').text(data.message);
+          } 
+    
+      };
+      var onError = function (jqXHR, textStatus, errorThrown) {
+          console.log(jqXHR);
+          console.log(textStatus);
+          console.log(errorThrown);
+          alert("Probléme de mise à jour de la base de donnée");
+      
+      };
+      
+      var onBeforeSend = function () {
+          console.log("Loading");
+          $.blockUI({
+            message: '<div class="spinner-border text-white" role="status"></div>',
+            timeout: 1000,
+            css: {
+              backgroundColor: 'transparent',
+              border: '0'
+            },
+            overlayCSS: {
+              opacity: 0.5
+            }
+          });
+          
+      };
+	  
+      var request   = $.ajax({
+        url:          'table/php/data_liste_avancement.php?job=get_liste_progress',
+        data:         'id=' + id,
+        type:         'post',
+        async: true,
+        dataType: 'json',
+        beforeSend: onBeforeSend,
+        error: onError,
+        success: onSuccess
+      });*/
+    	  
     
   }); 
   
