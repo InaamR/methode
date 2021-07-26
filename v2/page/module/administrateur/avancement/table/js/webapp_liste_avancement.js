@@ -204,10 +204,10 @@ $(function () {
         infoEmpty: "Aucun enregistrement disponible",
         infoFiltered: "(filtré depuis _MAX_ total des enregistrements)",
         processing: "Chargement des données...",
-        loadingRecords: "Chargement des Afféctation en cours ..."
+        loadingRecords: "Chargement des Affectation en cours ..."
       }
     });
-    $('div.head-label').html('<h6 class="mb-0">Liste des Afféctation</h6>');
+    $('div.head-label').html('<h6 class="mb-0">Liste des Affectation</h6>');
   
   }
 

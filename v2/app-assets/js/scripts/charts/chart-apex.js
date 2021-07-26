@@ -727,7 +727,7 @@ $(function () {
             total: {
               show: true,
               fontSize: '1rem',
-              label: 'Comments',
+              label: 'Total',
               formatter: function (w) {
                 return '80%';
               }
@@ -749,7 +749,7 @@ $(function () {
         lineCap: 'round'
       },
       series: [80, 50, 35],
-      labels: ['Comments', 'Replies', 'Shares']
+      labels: ['CREA', 'NL', 'UPGR']
     };
   if (typeof radialBarChartEl !== undefined && radialBarChartEl !== null) {
     var radialChart = new ApexCharts(radialBarChartEl, radialBarChartConfig);

@@ -248,8 +248,8 @@ $PDO_query_socle_unique->closeCursor();
                                                                     case '1':
 
                                                                             echo '
-                                                                            <option value="1" selected>Actif</option>
-                                                                            <option value="0">Non-actif</option>
+                                                                            <option value="1" selected>Active</option>
+                                                                            <option value="0">Non-active</option>
                                                                             ';
                                                                            
                                                                         
@@ -260,8 +260,8 @@ $PDO_query_socle_unique->closeCursor();
                                                                     case '0':
 
                                                                             echo '
-                                                                            <option value="1">Actif</option>
-                                                                            <option value="0" selected>Non-actif</option>
+                                                                            <option value="1">Active</option>
+                                                                            <option value="0" selected>Non-active</option>
                                                                             ';
                                                                         
                                                                     break;
@@ -269,8 +269,8 @@ $PDO_query_socle_unique->closeCursor();
                                                             }else{
 
                                                                 echo '
-                                                                    <option value="1" selected>Actif</option>
-                                                                    <option value="0" >Non-actif</option>
+                                                                    <option value="1" selected>Active</option>
+                                                                    <option value="0" >Non-active</option>
                                                                     ';
 
                                                             }

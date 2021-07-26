@@ -201,7 +201,7 @@ $(function () {
         loadingRecords: "Chargement des socles en cours ..."
       }
     });
-    $('div.head-label').html('<h6 class="mb-0">Liste des socle</h6>');
+    $('div.head-label').html('<h6 class="mb-0">Liste des socles</h6>');
   
   }
   // Flat Date picker

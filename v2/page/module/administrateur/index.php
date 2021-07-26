@@ -185,7 +185,7 @@ if(empty($_SESSION['id'])){
                                 <div
                                 class="card-header d-flex flex-sm-row flex-column justify-content-md-between align-items-start justify-content-start"
                                 >
-                                <h4 class="card-title mb-sm-0 mb-1">Statistics</h4>
+                                <h4 class="card-title mb-sm-0 mb-1">Statuts des études</h4>
                                 </div>
                                 <div class="card-body">
                                 <div id="radialbar-chart"></div>
@@ -196,19 +196,19 @@ if(empty($_SESSION['id'])){
                         <div class="col-lg-6">
                             <div class="card">
                                 <div class="card-header d-flex justify-content-between align-items-center">
-                                <h4 class="card-title">Goal Overview</h4>
+                                <h4 class="card-title">Progression des études</h4>
                                 <i data-feather="help-circle" class="font-medium-3 text-muted cursor-pointer"></i>
                                 </div>
                                 <div class="card-body p-0">
                                 <div id="goal-overview-radial-bar-chart" class="my-2"></div>
                                 <div class="row border-top text-center mx-0">
                                     <div class="col-6 border-right py-1">
-                                    <p class="card-text text-muted mb-0">Completed</p>
-                                    <h3 class="font-weight-bolder mb-0">786,617</h3>
+                                    <p class="card-text text-muted mb-0">N° des études terminées</p>
+                                    <h3 class="font-weight-bolder mb-0">0</h3>
                                     </div>
                                     <div class="col-6 py-1">
-                                    <p class="card-text text-muted mb-0">In Progress</p>
-                                    <h3 class="font-weight-bolder mb-0">13,561</h3>
+                                    <p class="card-text text-muted mb-0">N° des études en cours</p>
+                                    <h3 class="font-weight-bolder mb-0">2</h3>
                                     </div>
                                 </div>
                                 </div>
@@ -227,277 +227,39 @@ if(empty($_SESSION['id'])){
             <table class="table">
               <thead>
                 <tr>
-                  <th>Company</th>
-                  <th>Category</th>
-                  <th>Views</th>
-                  <th>Revenue</th>
-                  <th>Sales</th>
+                  <th>Technicien</th>
+                  <th>Etude</th>
+                  <th>Socle</th>
+                  <th>N° par jour</th>
+                  <th>Avancement</th>
                 </tr>
               </thead>
               <tbody>
                 <tr>
                   <td>
                     <div class="d-flex align-items-center">
-                      <div class="avatar rounded">
-                        <div class="avatar-content">
-                          <img src="../../../app-assets/images/icons/toolbox.svg" alt="Toolbar svg" />
-                        </div>
-                      </div>
                       <div>
-                        <div class="font-weight-bolder">Dixons</div>
-                        <div class="font-small-2 text-muted">meguc@ruj.io</div>
+                        <div class="font-weight-bolder">RADDAOUI Aymen</div>
+                        <div class="font-small-2 text-muted">Chef d'équipe</div>
                       </div>
                     </div>
                   </td>
                   <td>
                     <div class="d-flex align-items-center">
-                      <div class="avatar bg-light-primary mr-1">
-                        <div class="avatar-content">
-                          <i data-feather="monitor" class="font-medium-3"></i>
-                        </div>
-                      </div>
-                      <span>Technology</span>
+                      <span>AUDI A3 IV 2020-03-> (462524)</span>
                     </div>
                   </td>
                   <td class="text-nowrap">
                     <div class="d-flex flex-column">
-                      <span class="font-weight-bolder mb-25">23.4k</span>
-                      <span class="font-small-2 text-muted">in 24 hours</span>
+                      <span class="font-weight-bolder mb-25">Socle_Entretien_A_N1</span>
+                      <span class="font-small-2 text-muted">60%</span>
                     </div>
                   </td>
-                  <td>$891.2</td>
+                  <td>2</td>
                   <td>
                     <div class="d-flex align-items-center">
-                      <span class="font-weight-bolder mr-1">68%</span>
+                      <span class="font-weight-bolder mr-1">80%</span>
                       <i data-feather="trending-down" class="text-danger font-medium-1"></i>
-                    </div>
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <div class="d-flex align-items-center">
-                      <div class="avatar rounded">
-                        <div class="avatar-content">
-                          <img src="../../../app-assets/images/icons/parachute.svg" alt="Parachute svg" />
-                        </div>
-                      </div>
-                      <div>
-                        <div class="font-weight-bolder">Motels</div>
-                        <div class="font-small-2 text-muted">vecav@hodzi.co.uk</div>
-                      </div>
-                    </div>
-                  </td>
-                  <td>
-                    <div class="d-flex align-items-center">
-                      <div class="avatar bg-light-success mr-1">
-                        <div class="avatar-content">
-                          <i data-feather="coffee" class="font-medium-3"></i>
-                        </div>
-                      </div>
-                      <span>Grocery</span>
-                    </div>
-                  </td>
-                  <td class="text-nowrap">
-                    <div class="d-flex flex-column">
-                      <span class="font-weight-bolder mb-25">78k</span>
-                      <span class="font-small-2 text-muted">in 2 days</span>
-                    </div>
-                  </td>
-                  <td>$668.51</td>
-                  <td>
-                    <div class="d-flex align-items-center">
-                      <span class="font-weight-bolder mr-1">97%</span>
-                      <i data-feather="trending-up" class="text-success font-medium-1"></i>
-                    </div>
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <div class="d-flex align-items-center">
-                      <div class="avatar rounded">
-                        <div class="avatar-content">
-                          <img src="../../../app-assets/images/icons/brush.svg" alt="Brush svg" />
-                        </div>
-                      </div>
-                      <div>
-                        <div class="font-weight-bolder">Zipcar</div>
-                        <div class="font-small-2 text-muted">davcilse@is.gov</div>
-                      </div>
-                    </div>
-                  </td>
-                  <td>
-                    <div class="d-flex align-items-center">
-                      <div class="avatar bg-light-warning mr-1">
-                        <div class="avatar-content">
-                          <i data-feather="watch" class="font-medium-3"></i>
-                        </div>
-                      </div>
-                      <span>Fashion</span>
-                    </div>
-                  </td>
-                  <td class="text-nowrap">
-                    <div class="d-flex flex-column">
-                      <span class="font-weight-bolder mb-25">162</span>
-                      <span class="font-small-2 text-muted">in 5 days</span>
-                    </div>
-                  </td>
-                  <td>$522.29</td>
-                  <td>
-                    <div class="d-flex align-items-center">
-                      <span class="font-weight-bolder mr-1">62%</span>
-                      <i data-feather="trending-up" class="text-success font-medium-1"></i>
-                    </div>
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <div class="d-flex align-items-center">
-                      <div class="avatar rounded">
-                        <div class="avatar-content">
-                          <img src="../../../app-assets/images/icons/star.svg" alt="Star svg" />
-                        </div>
-                      </div>
-                      <div>
-                        <div class="font-weight-bolder">Owning</div>
-                        <div class="font-small-2 text-muted">us@cuhil.gov</div>
-                      </div>
-                    </div>
-                  </td>
-                  <td>
-                    <div class="d-flex align-items-center">
-                      <div class="avatar bg-light-primary mr-1">
-                        <div class="avatar-content">
-                          <i data-feather="monitor" class="font-medium-3"></i>
-                        </div>
-                      </div>
-                      <span>Technology</span>
-                    </div>
-                  </td>
-                  <td class="text-nowrap">
-                    <div class="d-flex flex-column">
-                      <span class="font-weight-bolder mb-25">214</span>
-                      <span class="font-small-2 text-muted">in 24 hours</span>
-                    </div>
-                  </td>
-                  <td>$291.01</td>
-                  <td>
-                    <div class="d-flex align-items-center">
-                      <span class="font-weight-bolder mr-1">88%</span>
-                      <i data-feather="trending-up" class="text-success font-medium-1"></i>
-                    </div>
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <div class="d-flex align-items-center">
-                      <div class="avatar rounded">
-                        <div class="avatar-content">
-                          <img src="../../../app-assets/images/icons/book.svg" alt="Book svg" />
-                        </div>
-                      </div>
-                      <div>
-                        <div class="font-weight-bolder">Cafés</div>
-                        <div class="font-small-2 text-muted">pudais@jife.com</div>
-                      </div>
-                    </div>
-                  </td>
-                  <td>
-                    <div class="d-flex align-items-center">
-                      <div class="avatar bg-light-success mr-1">
-                        <div class="avatar-content">
-                          <i data-feather="coffee" class="font-medium-3"></i>
-                        </div>
-                      </div>
-                      <span>Grocery</span>
-                    </div>
-                  </td>
-                  <td class="text-nowrap">
-                    <div class="d-flex flex-column">
-                      <span class="font-weight-bolder mb-25">208</span>
-                      <span class="font-small-2 text-muted">in 1 week</span>
-                    </div>
-                  </td>
-                  <td>$783.93</td>
-                  <td>
-                    <div class="d-flex align-items-center">
-                      <span class="font-weight-bolder mr-1">16%</span>
-                      <i data-feather="trending-down" class="text-danger font-medium-1"></i>
-                    </div>
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <div class="d-flex align-items-center">
-                      <div class="avatar rounded">
-                        <div class="avatar-content">
-                          <img src="../../../app-assets/images/icons/rocket.svg" alt="Rocket svg" />
-                        </div>
-                      </div>
-                      <div>
-                        <div class="font-weight-bolder">Kmart</div>
-                        <div class="font-small-2 text-muted">bipri@cawiw.com</div>
-                      </div>
-                    </div>
-                  </td>
-                  <td>
-                    <div class="d-flex align-items-center">
-                      <div class="avatar bg-light-warning mr-1">
-                        <div class="avatar-content">
-                          <i data-feather="watch" class="font-medium-3"></i>
-                        </div>
-                      </div>
-                      <span>Fashion</span>
-                    </div>
-                  </td>
-                  <td class="text-nowrap">
-                    <div class="d-flex flex-column">
-                      <span class="font-weight-bolder mb-25">990</span>
-                      <span class="font-small-2 text-muted">in 1 month</span>
-                    </div>
-                  </td>
-                  <td>$780.05</td>
-                  <td>
-                    <div class="d-flex align-items-center">
-                      <span class="font-weight-bolder mr-1">78%</span>
-                      <i data-feather="trending-up" class="text-success font-medium-1"></i>
-                    </div>
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <div class="d-flex align-items-center">
-                      <div class="avatar rounded">
-                        <div class="avatar-content">
-                          <img src="../../../app-assets/images/icons/speaker.svg" alt="Speaker svg" />
-                        </div>
-                      </div>
-                      <div>
-                        <div class="font-weight-bolder">Payers</div>
-                        <div class="font-small-2 text-muted">luk@izug.io</div>
-                      </div>
-                    </div>
-                  </td>
-                  <td>
-                    <div class="d-flex align-items-center">
-                      <div class="avatar bg-light-warning mr-1">
-                        <div class="avatar-content">
-                          <i data-feather="watch" class="font-medium-3"></i>
-                        </div>
-                      </div>
-                      <span>Fashion</span>
-                    </div>
-                  </td>
-                  <td class="text-nowrap">
-                    <div class="d-flex flex-column">
-                      <span class="font-weight-bolder mb-25">12.9k</span>
-                      <span class="font-small-2 text-muted">in 12 hours</span>
-                    </div>
-                  </td>
-                  <td>$531.49</td>
-                  <td>
-                    <div class="d-flex align-items-center">
-                      <span class="font-weight-bolder mr-1">42%</span>
-                      <i data-feather="trending-up" class="text-success font-medium-1"></i>
                     </div>
                   </td>
                 </tr>
@@ -566,9 +328,9 @@ if(empty($_SESSION['id'])){
     <script src="https://<?php echo $_SERVER['SERVER_NAME']?>/<?php echo $PARAM_url_non_doc_site; ?>/app-assets/vendors/js/charts/apexcharts.min.js"></script>
     <script src="https://<?php echo $_SERVER['SERVER_NAME']?>/<?php echo $PARAM_url_non_doc_site; ?>/app-assets/js/core/app-menu.js"></script>
     <script src="https://<?php echo $_SERVER['SERVER_NAME']?>/<?php echo $PARAM_url_non_doc_site; ?>/app-assets/js/core/app.js"></script>
-    <script src="https://<?php echo $_SERVER['SERVER_NAME']?>/<?php echo $PARAM_url_non_doc_site; ?>/app-assets/js/scripts/charts/chart-apex.min.js"></script>
+    <script src="https://<?php echo $_SERVER['SERVER_NAME']?>/<?php echo $PARAM_url_non_doc_site; ?>/app-assets/js/scripts/charts/chart-apex.js"></script>
+    <script src="https://<?php echo $_SERVER['SERVER_NAME']?>/<?php echo $PARAM_url_non_doc_site; ?>/app-assets/js/scripts/pages/dashboard-ecommerce.js"></script>
     <script src="https://<?php echo $_SERVER['SERVER_NAME']?>/<?php echo $PARAM_url_non_doc_site; ?>/app-assets/js/scripts/ui/ui-feather.js"></script>
-    <script src="https://<?php echo $_SERVER['SERVER_NAME']?>/<?php echo $PARAM_url_non_doc_site; ?>/app-assets/js/scripts/pages/dashboard-ecommerce.min.js"></script>
     <!-- END: Theme JS-->
 
     <!-- BEGIN: Page JS-->
