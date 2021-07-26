@@ -25,9 +25,8 @@ $(function () {
         { data: 'id' }, // used for sorting so will hide this column    
         { data: 'full_name' },
         { data: 'livrable' },
-
-        { data: 'Code_GMOD_P' },
         { data: 'MARQUE' },
+        { data: 'Code_GMOD_P' },        
         { data: 'GMOD_P' },
         { data: 'md' },
         { data: 'pe' },

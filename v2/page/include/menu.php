@@ -150,7 +150,7 @@
                             }
                         ?>
                     
-                        <a class="d-flex align-items-center" href="http://<?php echo $_SERVER['SERVER_NAME']?>/<?php echo $PARAM_url_non_doc_site; ?>/page/module/administrateur/avancement/liste_avancement.php"><i data-feather="circle"></i><span class="menu-item text-truncate" data-i18n="Avancements">Avancements</span></a>
+                        <a class="d-flex align-items-center" href="http://<?php echo $_SERVER['SERVER_NAME']?>/<?php echo $PARAM_url_non_doc_site; ?>/page/module/administrateur/avancement/liste_avancement.php"><i data-feather="circle"></i><span class="menu-item text-truncate" data-i18n="Avancements">Afféctation</span></a>
                     </li>
                     
                 </ul>
