@@ -135,7 +135,7 @@ if (preg_match("/config/", $page)) {
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <button class="btn btn-primary btn-block" tabindex="4"  value="Connexion" name="connect" type="submit">S\'identifier</button>
+                                                    <button class="btn btn-success btn-block" tabindex="4"  value="Connexion" name="connect" type="submit">S\'identifier</button>
                                                 </form>
                                                 <div class="divider">
                                                     <div class="divider-text">Aide</div>
@@ -194,7 +194,7 @@ if (preg_match("/config/", $page)) {
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <button class="btn btn-primary btn-block" tabindex="4"  value="Connexion" name="connect" type="submit">S\'identifier</button>
+                                                    <button class="btn btn-success btn-block" tabindex="4"  value="Connexion" name="connect" type="submit">S\'identifier</button>
                                                 </form>
                                                 <div class="divider">
                                                     <div class="divider-text">Aide</div>
