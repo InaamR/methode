@@ -113,10 +113,11 @@ if ($job != '') {
             $Code_GMOD_P = $etude['planning_prod_Code_GMOD_P']; 
             $MARQUE = $query_idv['ident_vehicule_MARQUE'];
             $GMOD_P = $query_idv['ident_vehicule_GMOD_P'];
-            $md = $etude['planning_prod_prestation_md'];
-            $pe = $etude['planning_prod_prestation_pe'];
+
             $ident = $etude['planning_prod_var_ident'];
             $se = $etude['planning_prod_var_se'];
+
+
 
             switch($etude['planning_prod_statut'])
             {
@@ -129,6 +130,42 @@ if ($job != '') {
                 default:
                     $statut = '<div class="badge badge-light-danger">Inactif</div>';
             }
+
+
+            switch($etude['planning_prod_prestation_md'])
+            {
+                case '1':
+                    $md = '<div class="badge badge-light-success">CREA</div>';
+                break;
+                case '2':
+                    $md = '<div class="badge badge-light-info">UPGR</div>';
+                break;                          
+                case '3':
+                    $md = '<div class="badge badge-light-warning">NL</div>';
+                break; 
+                default:
+                    $md = '<div class="badge badge-light-danger">A verifier</div>';
+            }
+
+
+            switch($etude['planning_prod_prestation_pe'])
+            {
+                case '1':
+                    $pe = '<div class="badge badge-light-success">CREA_PE</div>';
+                break;
+                case '2':
+                    $pe = '<div class="badge badge-light-info">MAJ_PE</div>';
+                break;                          
+                case '3':
+                    $pe = '<div class="badge badge-light-warning">NL</div>';
+                break; 
+                case '4':
+                    $pe = '<div class="badge badge-light-success">OK</div>';
+                break; 
+                default:
+                    $pe = '<div class="badge badge-light-danger">A verifier</div>';
+            }
+
 
             $mysql_data[] = [
                 "responsive_id" => "",

@@ -207,10 +207,10 @@ if(empty($_SESSION['id'])){
                                                     <th></th>
                                                     <th></th>
                                                     <th>id</th>
-                                                    <th>Chef d'équipe</th>
+                                                    <th>Planificateur</th>
                                                     <th>Livrable</th> 
-                                                    <th>Code_GMOD_P</th>
                                                     <th>MARQUE</th>
+                                                    <th>Code_GMOD_P</th>                                                    
                                                     <th>GMOD_P</th>
                                                     <th>Présta MD</th>
                                                     <th>Présta PE</th>

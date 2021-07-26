@@ -190,6 +190,17 @@ $PDO_query_avancement_unique->closeCursor();
                                     <li class="breadcrumb-item active">Gestion d'avancement</li>
                                 </ol>
                             </div>
+
+                            <h2 class="content-header-title float-left mb-0">GESTION DES PLANNINGS</h2>
+                            <div class="breadcrumb-wrapper">
+                                <ol class="breadcrumb">
+                                    <li class="breadcrumb-item">Planning</li>
+                                    <li class="breadcrumb-item"><a href="liste_avancement.php">Afféctation</a></li>
+                                    <li class="breadcrumb-item active">Gestion des avancements</li>
+                                </ol>
+                            </div>
+
+
                         </div>
                     </div>
                 </div>
