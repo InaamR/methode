@@ -73,8 +73,7 @@ if ($job != '') {
 
 
             $functions = '
-            <a href="modif_planning.php?id='.$etude['planning_prod_id'].'" style="font-size: 0.9rem !important;" class="btn btn-info btn-sm waves-effect waves-float waves-light mr-25 mb-25"><i class="bi bi-pen"></i></a>
-                    
+            <a href="modif_planning.php?id='.$etude['planning_prod_id'].'" style="font-size: 0.9rem !important;" class="btn btn-info btn-sm waves-effect waves-float waves-light mr-25 mb-25"><i class="bi bi-pen"></i></a>                    
             ';
 
             $PDO_query_verif_avancement = Bdd::connectBdd()->prepare("SELECT * FROM avancement_technicien WHERE planning_prod_id  = :planning_prod_id");
@@ -97,10 +96,8 @@ if ($job != '') {
 
             }
 
-
             $date_insertion = date_create($etude['planning_prod_date']);
             $date_insertion_create = date_format($date_insertion, "d/m/Y");
-
 
             $name_user = Membre::info($etude['planning_prod_user'], 'nom').' '.Membre::info($etude['planning_prod_user'], 'prenom');
 
@@ -108,9 +105,7 @@ if ($job != '') {
             $date_livrable_create = date_format($date_livrable, "d/m/Y");
 
             setlocale (LC_TIME, 'fr_FR.utf8','fra'); 
-            $livrable = strftime("%B %Y", strtotime($date_livrable_create)); 
-            
-            
+            $livrable = strftime("%B %Y", strtotime($date_livrable_create));           
 
             $etude_id = $etude['planning_prod_id'];  
             $etude_nom = $query_idv['ident_vehicule_MARQUE'].' '.$query_idv['ident_vehicule_GMOD_P']; 
@@ -122,8 +117,6 @@ if ($job != '') {
             $pe = $etude['planning_prod_prestation_pe'];
             $ident = $etude['planning_prod_var_ident'];
             $se = $etude['planning_prod_var_se'];
-                 
-
 
             switch($etude['planning_prod_statut'])
             {
@@ -142,7 +135,6 @@ if ($job != '') {
                 "id" => $etude_id,
                 "full_name" => $name_user,
                 "livrable" => $livrable,
-
                 "Code_GMOD_P" => $Code_GMOD_P,  
                 "MARQUE" => $MARQUE, 
                 "GMOD_P" => $GMOD_P, 
@@ -150,7 +142,6 @@ if ($job != '') {
                 "pe" => $pe, 
                 "ident" => $ident, 
                 "se" => $se,
-
                 "start_date" => $date_insertion_create,
                 "statut" => $statut,
                 "Actions" => $functions

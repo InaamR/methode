@@ -62,7 +62,8 @@ $(function () {
           responsivePriority: 4,
           render: function (data, type, full, meta) {
             var $user_img = full['avatar'],
-              $name = full['full_name'];
+              $name = full['full_name'],
+              $post = full['post'];
             if ($user_img) {
               // For Avatar image
               var $output =
@@ -90,6 +91,9 @@ $(function () {
               '<span class="emp_name text-truncate font-weight-bold">' +
               $name +
               '</span>' +
+              '<small class="emp_post text-truncate text-muted">' +
+              $post +
+              '</small>' +
               '</div>' +
               '</div>';
             return $row_output;
@@ -299,12 +303,41 @@ $(function () {
   $(document).on('submit', '.add', function(e){
 	  			
     e.preventDefault();
+    var date_debut = $("#basic-default-date_debut").val();
+    var date_fin = $("#basic-default-date_fin").val();
+    var date1 = new Date(date_debut);
+    var date2 = new Date(date_fin);
+    if(date1 > date2){
+      Swal.fire({
+        title: 'Erreur',
+        text: 'Verifiez les dates !',
+        icon: 'error',
+        customClass: {
+          confirmButton: 'btn btn-primary'
+        },
+        buttonsStyling: false
+      });
+    }
+    else{
 
       var form_data = $('#jquery-val-form').serialize();
 
       var onSuccess = function (data) {
         console.log('Success');
-        window.location.assign("liste_avancement.php");
+          if (data.result == 'success'){
+              window.location.assign("liste_avancement.php");
+          } else {
+            Swal.fire({
+              title: 'Erreur',
+              text: 'Technicien déja sur le projet ',
+              icon: 'error',
+              customClass: {
+              confirmButton: 'btn btn-primary'
+              },
+              buttonsStyling: false
+            });
+          }
+        
     
       };
       var onError = function (jqXHR, textStatus, errorThrown) {
@@ -335,11 +368,13 @@ $(function () {
         url:          'table/php/data_liste_avancement.php?job=add_avancement',
         data:         form_data,
         type:         'post',
-        async: false,
+        async: true,
+        dataType: 'json',
         beforeSend: onBeforeSend,
         error: onError,
         success: onSuccess
-      });	  
+      });
+    }	  
       
   });
 

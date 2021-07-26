@@ -156,36 +156,26 @@
                 </ul>
             </li>
 
-            <li class=" navigation-header"><span data-i18n="DSI">DSI</span><i data-feather="more-horizontal"></i></li>
+            <li class=" navigation-header"><span data-i18n="DSI">Statistiques</span><i data-feather="more-horizontal"></i></li>
 
             <li class=" nav-item">
                 <a class="d-flex align-items-center" href="#">
                     <i class="fas fa-laptop"></i>
-                    <span class="menu-title text-truncate" data-i18n="Pages" id="Dir. des Systèmes d'information">Dir. Systèmes info</span>
+                    <span class="menu-title text-truncate" data-i18n="Pages" id="Dir. des Systèmes d'information">Calcule rapport</span>
                 </a>
                 <ul class="menu-content">
                     <li>
                         <a class="d-flex align-items-center" href="#">
                             <i data-feather="plus"></i>
-                            <span class="menu-item text-truncate" data-i18n="">Gestion ...</span>
+                            <span class="menu-item text-truncate" data-i18n="">Excel</span>
                         </a>
-                    </li> 
-                    <li>
-                        <a class="d-flex align-items-center" href="#">
-                            <i data-feather="plus"></i>
-                            <span class="menu-item text-truncate" data-i18n="">Gestion ...</span>
-                        </a>
-                    </li>                    
+                    </li>                   
                 </ul>
             </li>  
             <li class=" navigation-header"><span data-i18n="Ressources Humaines">RH</span><i data-feather="more-horizontal"></i></li>          
-            <li class=" nav-item"><a class="d-flex align-items-center" href="#"><i class="fas fa-users" aria-hidden="true"></i><span class="menu-title text-truncate" data-i18n="Res. Humaines">Res. Humaines</span></a>
+            <li class=" nav-item"><a class="d-flex align-items-center" href="#"><i class="fas fa-users" aria-hidden="true"></i><span class="menu-title text-truncate" data-i18n="Res. Humaines">Primes (Soon)</span></a>
                 <ul class="menu-content">
-                    <li><a class="d-flex align-items-center" href="#"><i data-feather="circle"></i><span class="menu-item text-truncate" data-i18n="">Services et Employés</span></a>
-                    </li>
-                    <li><a class="d-flex align-items-center" href="#"><i data-feather="circle"></i><span class="menu-item text-truncate" data-i18n="">Organigramme</span></a>
-                    </li>
-                    <li><a class="d-flex align-items-center" href="#"><i data-feather="circle"></i><span class="menu-item text-truncate" data-i18n="">Map interne</span></a>
+                    <li><a class="d-flex align-items-center" href="#"><i data-feather="circle"></i><span class="menu-item text-truncate" data-i18n="">Calcule primes</span></a>
                     </li>
                 </ul>
             </li> 
