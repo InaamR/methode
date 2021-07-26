@@ -252,21 +252,54 @@ if(empty($_SESSION['id'])){
                 <div class="modal-dialog modal-dialog-scrollable" role="document">
                   <div class="modal-content">
                     <div class="modal-header">
-                      <h5 class="modal-title" id="exampleModalScrollableTitle">Modal title</h5>
+                      <h5 class="modal-title" id="exampleModalScrollableTitle">AUDI A3 IV 2020-03-> (462524) : Socle_Entretien_A_N1</h5>
                       <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                       </button>
                     </div>
                     <div class="modal-body">
-                    
+                        <div id="jstree-basic">
+                            <ul>
+                            <li data-jstree='{"icon" : "far fa-folder"}'  class="text-info">
+                            Transmissions_(DT)
+                                <ul>
+                                <li data-jstree='{"icon" : "fab fa-css3-alt"}' class="text-success">Préconisation liquide d'embrayage</li>
+                                <li data-jstree='{"icon" : "fab fa-css3-alt"}' class="text-danger">Préconisation huile différentiel de BDV</li>
+                                <li data-jstree='{"icon" : "fab fa-css3-alt"}' class="text-success">Préconisation huile de pont</li>
+                                <li data-jstree='{"icon" : "fab fa-css3-alt"}' class="text-success">Préconisation huile de boîte de vitesses BVM</li>
+                                <li data-jstree='{"icon" : "fab fa-css3-alt"}' class="text-success">Préconisation huile de boîte de vitesses BVA</li>
+                                <li data-jstree='{"icon" : "fab fa-css3-alt"}' class="text-success">Préconisation huile de boîte de transfert</li>
+                                <li data-jstree='{"icon" : "fab fa-css3-alt"}' class="text-success">Préconisation huile d'actuateur BVR</li>
+                                <li data-jstree='{"icon" : "fab fa-css3-alt"}' class="text-success mb-1">Mécanisme d'embrayage_Couples de serrage</li>
+                                </ul>
+                            </li>
+                            <li class="jstree-open text-danger" data-jstree='{"icon" : "far fa-folder"}' >
+                            Suspensions-Direction_(DT)
+                                <ul data-jstree='{"icon" : "far fa-folder"}'>
+                                <li data-jstree='{"icon" : "far fa-file-image"}' class="text-danger">Préconisation liquide hydraulique Citroën</li>
+                                <li data-jstree='{"icon" : "far fa-file-image"}' class="text-danger">Préconisation huile de direction assistée</li>
+                                <li data-jstree='{"icon" : "far fa-file-image"}' class="text-danger mb-1">Capacité liquide hydraulique Citroën</li>
+                                </ul>
+                            </li>
+                            <li class="jstree-open text-info" data-jstree='{"icon" : "far fa-folder"}'>
+                            Entretien refroidissement_(DT)
+                                <ul>
+                                <li data-jstree='{"icon" : "fab fa-node-js"}' class="text-info">Préconisation liquide de refroidissement</li>
+                                <li data-jstree='{"icon" : "fab fa-node-js"}' class="text-info mb-1">Capacité liquide de refroidissement</li>
+                                </ul>
+                            </li>
+                            <li data-jstree='{"icon" : "fab fa-html5"}' class="text-info mb-1">Climatisation_(DT)</li>
+                            <li data-jstree='{"icon" : "fab fa-html5"}' class="text-info mb-1">Prise diagnostic_(DT)</li>
+                            <li data-jstree='{"icon" : "fab fa-html5"}' class="text-info mb-1">Liaisons au sol_(MR)</li>
+                            </ul>
+                        </div>
                     </div>
                     <div class="modal-footer">
-                      <button type="button" class="btn btn-primary" data-dismiss="modal">Accept</button>
+                      <button type="button" class="btn btn-primary" data-dismiss="modal">Terminer</button>
                     </div>
                   </div>
                 </div>
               </div>
-              <div id="jstree-ajax"></div>
     <div class="sidenav-overlay"></div>
     <div class="drag-target"></div>
 
@@ -343,6 +376,7 @@ if(empty($_SESSION['id'])){
     <script src="https://<?php echo $_SERVER['SERVER_NAME']?>/<?php echo $PARAM_url_non_doc_site?>/app-assets/js/scripts/ui/ui-feather.js"></script>
     <script src="https://<?php echo $_SERVER['SERVER_NAME']?>/<?php echo $PARAM_url_non_doc_site?>/app-assets/js/scripts/extensions/ext-component-sweet-alerts.js"></script>
     <script src="https://<?php echo $_SERVER['SERVER_NAME']?>/<?php echo $PARAM_url_non_doc_site?>/app-assets/js/scripts/components/components-modals.min.js"></script>
+    <script src="https://<?php echo $_SERVER['SERVER_NAME']?>/<?php echo $PARAM_url_non_doc_site?>/app-assets/js/scripts/extensions/ext-component-tree.js"></script>
     <!-- END: Page JS-->
     
     <script>
