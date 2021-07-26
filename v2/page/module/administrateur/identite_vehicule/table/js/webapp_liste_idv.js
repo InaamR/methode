@@ -86,7 +86,6 @@ $(function () {
         { data: 'statut' },
         { data: 'Actions' }
       ],
-      responsive: true,
       columnDefs: [
         {
           // For Responsive

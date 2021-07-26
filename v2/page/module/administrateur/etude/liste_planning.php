@@ -218,7 +218,7 @@ if(empty($_SESSION['id'])){
                                                     <th>VAR SE</th>                                                                                                       
                                                     <th>Date d'insert</th>
                                                     <th>Statut</th>
-                                                    <th></th>
+                                                    <th>Action</th>
                                                 </tr>
                                             </thead>
                                         </table>

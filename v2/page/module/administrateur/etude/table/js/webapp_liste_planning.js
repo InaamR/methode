@@ -62,7 +62,7 @@ $(function () {
             if ($user_img) {
               // For Avatar image
               var $output =
-                '<img src="' + assetPath + 'images/avatars/' + $user_img + '" alt="Avatar" width="32" height="32">';
+                '<img src="/../../../app-assets/images/portrait/small/man.png" alt="Avatar" width="32" height="32">';
             } else {
               // For Avatar badge
               var stateNum = full['status'];

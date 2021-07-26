@@ -216,7 +216,7 @@ if(empty($_SESSION['id'])){
                                                     <th>N° j. réels</th>
                                                     <th>Date d'insertion</th>
                                                     <th>Statut</th>
-                                                    <th></th>
+                                                    <th>Action</th>
                                                 </tr>
                                             </thead>
                                         </table>
