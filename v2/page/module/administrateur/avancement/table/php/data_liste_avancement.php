@@ -108,7 +108,7 @@ if ($job != '') {
             id="progress"
             class="btn btn-success"
             data-toggle="modal"
-            data-target="#exampleModalScrollable" data-id="'.$avancement['methode_socle_id'].'" data-name="'.$etude_nom.'">Suivi</button>
+            data-target="#exampleModalScrollable" data-id="'.$avancement['methode_socle_id'].'" data-name="'.$etude_nom.'">Suivi (60%)</button>
             '; 
             $date1 = new DateTime($avancement['avancement_technicien_date_debut']);
             $date2 = new DateTime($avancement['avancement_technicien_date_fin']);

@@ -184,7 +184,7 @@ if(empty($_SESSION['id'])){
                 </div>
                 <div class="content-header-right text-md-right col-md-3 col-12 d-md-block d-none">
                     <div class="form-group breadcrumb-right">
-                        <a class="btn-icon btn btn-primary btn-round btn-sm waves-effect waves-float waves-light" href="modif_avancement.php">Affecter un technicien</a>
+                        <a class="btn-icon btn btn-success" href="modif_avancement.php">Affecter un technicien</a>
                     </div>
                 </div>
             </div>
@@ -260,11 +260,11 @@ if(empty($_SESSION['id'])){
                     <div class="modal-body">
                         <div id="jstree-basic">
                             <ul>
-                            <li data-jstree='{"icon" : "far fa-folder"}'  class="text-info">
+                            <li data-jstree='{"icon" : "far fa-folder"}'  class="text-warning">
                             Transmissions_(DT)
                                 <ul>
                                 <li data-jstree='{"icon" : "fab fa-css3-alt"}' class="text-success">Préconisation liquide d'embrayage</li>
-                                <li data-jstree='{"icon" : "fab fa-css3-alt"}' class="text-danger">Préconisation huile différentiel de BDV</li>
+                                <li data-jstree='{"icon" : "fab fa-css3-alt"}' class="text-warning">Préconisation huile différentiel de BDV</li>
                                 <li data-jstree='{"icon" : "fab fa-css3-alt"}' class="text-success">Préconisation huile de pont</li>
                                 <li data-jstree='{"icon" : "fab fa-css3-alt"}' class="text-success">Préconisation huile de boîte de vitesses BVM</li>
                                 <li data-jstree='{"icon" : "fab fa-css3-alt"}' class="text-success">Préconisation huile de boîte de vitesses BVA</li>
@@ -273,29 +273,29 @@ if(empty($_SESSION['id'])){
                                 <li data-jstree='{"icon" : "fab fa-css3-alt"}' class="text-success mb-1">Mécanisme d'embrayage_Couples de serrage</li>
                                 </ul>
                             </li>
-                            <li class="jstree-open text-danger" data-jstree='{"icon" : "far fa-folder"}' >
+                            <li class="jstree-open text-warning" data-jstree='{"icon" : "far fa-folder"}' >
                             Suspensions-Direction_(DT)
                                 <ul data-jstree='{"icon" : "far fa-folder"}'>
-                                <li data-jstree='{"icon" : "far fa-file-image"}' class="text-danger">Préconisation liquide hydraulique Citroën</li>
-                                <li data-jstree='{"icon" : "far fa-file-image"}' class="text-danger">Préconisation huile de direction assistée</li>
-                                <li data-jstree='{"icon" : "far fa-file-image"}' class="text-danger mb-1">Capacité liquide hydraulique Citroën</li>
+                                <li data-jstree='{"icon" : "far fa-file-image"}' class="text-warning">Préconisation liquide hydraulique Citroën</li>
+                                <li data-jstree='{"icon" : "far fa-file-image"}' class="text-warning">Préconisation huile de direction assistée</li>
+                                <li data-jstree='{"icon" : "far fa-file-image"}' class="text-warning mb-1">Capacité liquide hydraulique Citroën</li>
                                 </ul>
                             </li>
-                            <li class="jstree-open text-info" data-jstree='{"icon" : "far fa-folder"}'>
+                            <li class="jstree-open text-dark" data-jstree='{"icon" : "far fa-folder"}'>
                             Entretien refroidissement_(DT)
                                 <ul>
-                                <li data-jstree='{"icon" : "fab fa-node-js"}' class="text-info">Préconisation liquide de refroidissement</li>
-                                <li data-jstree='{"icon" : "fab fa-node-js"}' class="text-info mb-1">Capacité liquide de refroidissement</li>
+                                <li data-jstree='{"icon" : "fab fa-node-js"}' class="text-dark">Préconisation liquide de refroidissement</li>
+                                <li data-jstree='{"icon" : "fab fa-node-js"}' class="text-dark mb-1">Capacité liquide de refroidissement</li>
                                 </ul>
                             </li>
-                            <li data-jstree='{"icon" : "fab fa-html5"}' class="text-info mb-1">Climatisation_(DT)</li>
-                            <li data-jstree='{"icon" : "fab fa-html5"}' class="text-info mb-1">Prise diagnostic_(DT)</li>
-                            <li data-jstree='{"icon" : "fab fa-html5"}' class="text-info mb-1">Liaisons au sol_(MR)</li>
+                            <li data-jstree='{"icon" : "fab fa-html5"}' class="text-dark mb-1">Climatisation_(DT)</li>
+                            <li data-jstree='{"icon" : "fab fa-html5"}' class="text-dark mb-1">Prise diagnostic_(DT)</li>
+                            <li data-jstree='{"icon" : "fab fa-html5"}' class="text-dark mb-1">Liaisons au sol_(MR)</li>
                             </ul>
                         </div>
                     </div>
                     <div class="modal-footer">
-                      <button type="button" class="btn btn-primary" data-dismiss="modal">Terminer</button>
+                      <button type="button" class="btn btn-success" data-dismiss="modal">Terminer</button>
                     </div>
                   </div>
                 </div>
