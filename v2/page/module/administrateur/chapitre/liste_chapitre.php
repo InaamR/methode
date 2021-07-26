@@ -184,7 +184,7 @@ if(empty($_SESSION['id'])){
                 </div>
                 <div class="content-header-right text-md-right col-md-3 col-12 d-md-block d-none">
                     <div class="form-group breadcrumb-right">
-                        <a class="btn-icon btn btn-primary btn-round btn-sm waves-effect waves-float waves-light" href="modif_chapitre.php">Ajouter un chapitre</a>
+                        <a class="btn btn-success" href="modif_chapitre.php">Ajouter un chapitre</a>
                     </div>
                 </div>
             </div>

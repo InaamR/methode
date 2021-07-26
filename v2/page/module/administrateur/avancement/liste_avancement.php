@@ -176,7 +176,7 @@ if(empty($_SESSION['id'])){
                             <div class="breadcrumb-wrapper">
                                 <ol class="breadcrumb">
                                     <li class="breadcrumb-item">Planning</li>
-                                    <li class="breadcrumb-item">Afféctation</li>
+                                    <li class="breadcrumb-item">Affectation</li>
                                 </ol>
                             </div>
                         </div>

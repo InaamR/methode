@@ -187,7 +187,7 @@ $PDO_query_socle_unique->closeCursor();
                 </div>
                 <div class="content-header-right text-md-right col-md-3 col-4">
                 <div class="form-group breadcrumb-right">
-                        <a class="btn-icon btn btn-primary btn-round btn-sm waves-effect waves-float waves-light" href="liste_socle.php">Retour à la liste</a>
+                        <a class="btn btn-success" href="liste_socle.php">Retour à la liste</a>
                         </div>
                 </div>
             </div>
@@ -279,7 +279,7 @@ $PDO_query_socle_unique->closeCursor();
                                                 </div>
                                             </div>
                                             <div class="col-12 mt-50">
-                                                <button type="submit" class="btn btn-primary mr-1" id="submit">Enregistrement</button>
+                                                <button type="submit" class="btn btn-success mr-1" id="submit">Enregistrement</button>
                                                 <button type="reset" class="btn btn-outline-secondary">Vider les champs</button>
                                             </div>
                                         </div>

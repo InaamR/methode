@@ -185,7 +185,7 @@ if(empty($_SESSION['id'])){
                                 <div
                                 class="card-header d-flex flex-sm-row flex-column justify-content-md-between align-items-start justify-content-start"
                                 >
-                                <h4 class="card-title mb-sm-0 mb-1">Statistics</h4>
+                                <h4 class="card-title mb-sm-0 mb-1">Statuts des études</h4>
                                 </div>
                                 <div class="card-body">
                                 <div id="radialbar-chart"></div>
@@ -196,18 +196,18 @@ if(empty($_SESSION['id'])){
                         <div class="col-lg-6">
                             <div class="card">
                                 <div class="card-header d-flex justify-content-between align-items-center">
-                                <h4 class="card-title">Goal Overview</h4>
+                                <h4 class="card-title">Progression des études</h4>
                                 <i data-feather="help-circle" class="font-medium-3 text-muted cursor-pointer"></i>
                                 </div>
                                 <div class="card-body p-0">
                                 <div id="goal-overview-radial-bar-chart" class="my-2"></div>
                                 <div class="row border-top text-center mx-0">
                                     <div class="col-6 border-right py-1">
-                                    <p class="card-text text-muted mb-0">Completed</p>
+                                    <p class="card-text text-muted mb-0">N° des études terminées</p>
                                     <h3 class="font-weight-bolder mb-0">786,617</h3>
                                     </div>
                                     <div class="col-6 py-1">
-                                    <p class="card-text text-muted mb-0">In Progress</p>
+                                    <p class="card-text text-muted mb-0">N° des études en cours</p>
                                     <h3 class="font-weight-bolder mb-0">13,561</h3>
                                     </div>
                                 </div>
@@ -227,11 +227,11 @@ if(empty($_SESSION['id'])){
             <table class="table">
               <thead>
                 <tr>
-                  <th>Company</th>
-                  <th>Category</th>
-                  <th>Views</th>
-                  <th>Revenue</th>
-                  <th>Sales</th>
+                  <th>Technicien</th>
+                  <th>Etude</th>
+                  <th>Socle</th>
+                  <th>N° par jour</th>
+                  <th>Avancement</th>
                 </tr>
               </thead>
               <tbody>
@@ -566,9 +566,9 @@ if(empty($_SESSION['id'])){
     <script src="https://<?php echo $_SERVER['SERVER_NAME']?>/<?php echo $PARAM_url_non_doc_site; ?>/app-assets/vendors/js/charts/apexcharts.min.js"></script>
     <script src="https://<?php echo $_SERVER['SERVER_NAME']?>/<?php echo $PARAM_url_non_doc_site; ?>/app-assets/js/core/app-menu.js"></script>
     <script src="https://<?php echo $_SERVER['SERVER_NAME']?>/<?php echo $PARAM_url_non_doc_site; ?>/app-assets/js/core/app.js"></script>
-    <script src="https://<?php echo $_SERVER['SERVER_NAME']?>/<?php echo $PARAM_url_non_doc_site; ?>/app-assets/js/scripts/charts/chart-apex.min.js"></script>
+    <script src="https://<?php echo $_SERVER['SERVER_NAME']?>/<?php echo $PARAM_url_non_doc_site; ?>/app-assets/js/scripts/charts/chart-apex.js"></script>
+    <script src="https://<?php echo $_SERVER['SERVER_NAME']?>/<?php echo $PARAM_url_non_doc_site; ?>/app-assets/js/scripts/pages/dashboard-ecommerce.js"></script>
     <script src="https://<?php echo $_SERVER['SERVER_NAME']?>/<?php echo $PARAM_url_non_doc_site; ?>/app-assets/js/scripts/ui/ui-feather.js"></script>
-    <script src="https://<?php echo $_SERVER['SERVER_NAME']?>/<?php echo $PARAM_url_non_doc_site; ?>/app-assets/js/scripts/pages/dashboard-ecommerce.min.js"></script>
     <!-- END: Theme JS-->
 
     <!-- BEGIN: Page JS-->
