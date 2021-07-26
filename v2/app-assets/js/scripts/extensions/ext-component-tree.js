@@ -386,11 +386,10 @@ $(function () {
   }
 
   // Ajax Example
-  if (ajaxTree.length) {
     ajaxTree.jstree({
       core: {
         data: {
-          url: assetPath + 'data/jstree-data.json',
+          url: 'http://localhost/methode/v2/app-assets/data/jstree-data.json',
           dataType: 'json',
           data: function (node) {
             return {
@@ -418,5 +417,4 @@ $(function () {
         }
       }
     });
-  }
 });

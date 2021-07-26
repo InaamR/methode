@@ -103,6 +103,13 @@ if ($job != '') {
             <a href="modif_avancement.php?id='.$avancement['avancement_technicien_id'].'" style="font-size: 0.9rem !important;" class="btn btn-info btn-sm waves-effect waves-float waves-light mr-25 mb-25"><i class="bi bi-pen"></i></a>
             <a id="delete-record" data-id="'.$avancement['avancement_technicien_id'].'" data-name="'.$etude_nom.'" style="font-size: 0.9rem !important;"  class="btn btn-danger btn-sm waves-effect waves-float waves-light pr-1 mb-25"><i class="bi bi-trash"></i></a> 
             ';
+            $progress = '<button
+            type="button"
+            id="progress"
+            class="btn btn-success"
+            data-toggle="modal"
+            data-target="#exampleModalScrollable" data-id="'.$avancement['methode_socle_id'].'" data-name="'.$etude_nom.'">Suivi</button>
+            '; 
             $date1 = new DateTime($avancement['avancement_technicien_date_debut']);
             $date2 = new DateTime($avancement['avancement_technicien_date_fin']);
             $nbr_jours_reels =  $date2->diff($date1)->format("%a");           
@@ -138,7 +145,7 @@ if ($job != '') {
             {
                 $statut = '<div class="badge badge-light-danger">A vérifier</div>';
             }
-
+            
             $mysql_data[] = [
                 "responsive_id" => "",
                 "id" => $id,
@@ -150,6 +157,7 @@ if ($job != '') {
                 "date_debut" => date_format($date_debut, "d/m/Y"),
                 "date_fin" => date_format($date_fin, "d/m/Y"),
                 "nbr_j_reels" => $nbr_jours_reels,
+                "progress" => $progress,
                 "start_date" => date_format($date_insertion, "d/m/Y"),
                 "status" => $statut,
                 "post" => $post,

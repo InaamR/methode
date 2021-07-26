@@ -25,6 +25,7 @@ $(function () {
         { data: 'date_debut' },
         { data: 'date_fin' },
         { data: 'nbr_j_reels' },
+        { data: 'progress' },
         { data: 'start_date' },
         { data: 'status' },
         { data: 'Actions' }
@@ -216,7 +217,14 @@ $(function () {
       dateFormat: 'm/d/Y'
     });
   } 
-
+  // Verifier la supp
+  $(document).on('click', '#exampleModalScrollable', function (e) {
+    var id      = $(this).data('id');
+    var name      = $(this).data('name');
+    
+  }); 
+  
+  
   // Verifier la supp
   $(document).on('click', '#delete-record', function (e) {
     var id      = $(this).data('id');
