@@ -69,8 +69,8 @@ if ($job != '') {
         while ($niveau = $PDO_query_niveau->fetch()) {
 
             $functions = '
-            <a href="modif_niveau.php?id='.$niveau['niveau_id'].'" class="btn btn-info btn-sm">Modifier</a>
-            <a id="delete-record" data-id="'.$niveau['niveau_id'].'" data-name="' .$niveau['niveau_name'].'" class="btn btn-danger btn-sm">Supprimer</a>
+            <a href="modif_niveau.php?id='.$niveau['niveau_id'].'" style="font-size:25px"><i class="bi bi-pencil-square"></i></a>
+            <a href="#" id="delete-record" data-id="'.$niveau['niveau_id'].'" data-name="' .$niveau['niveau_name'].'" style="font-size:25px"><i class="bi bi-trash"></i></a>
             ';
 
 

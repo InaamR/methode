@@ -187,7 +187,7 @@ $PDO_query_socle_unique->closeCursor();
                 </div>
                 <div class="content-header-right text-md-right col-md-3 col-4">
                 <div class="form-group breadcrumb-right">
-                        <a class="btn btn-success" href="liste_socle.php">Retour à la liste</a>
+                        <a class="btn btn-success" href="liste_socle.php"><i data-feather='rewind'></i> Retour à la liste</a>
                         </div>
                 </div>
             </div>

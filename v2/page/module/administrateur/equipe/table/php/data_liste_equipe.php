@@ -69,8 +69,8 @@ if ($job != '') {
         while ($equipe = $PDO_query_equipe->fetch()) {
 
             $functions = '
-            <a href="modif_equipe.php?id='.$equipe['equipe_id'].'" class="btn btn-info btn-sm">Modifier</a>
-            <a id="delete-record" data-id="' .$equipe['equipe_id'].'" data-name="' .$equipe['equipe_name'].'" class="btn btn-danger btn-sm">Supprimer</a>
+            <a href="modif_equipe.php?id='.$equipe['equipe_id'].'" style="font-size:25px"><i class="bi bi-pencil-square"></i></a>
+            <a href="#" id="delete-record" data-id="' .$equipe['equipe_id'].'" data-name="' .$equipe['equipe_name'].'" style="font-size:25px"><i class="bi bi-trash"></i></a>
             ';
 
 

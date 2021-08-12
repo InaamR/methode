@@ -100,8 +100,8 @@ if ($job != '') {
             $nbr_j_reels = $avancement['avancement_technicien_nbre_jours_reels'];
 
             $functions = '
-            <a href="modif_avancement.php?id='.$avancement['avancement_technicien_id'].'" style="font-size: 0.9rem !important;" class="btn btn-info btn-sm waves-effect waves-float waves-light mr-25 mb-25"><i class="bi bi-pen"></i></a>
-            <a id="delete-record" data-id="'.$avancement['avancement_technicien_id'].'" data-name="'.$etude_nom.'" style="font-size: 0.9rem !important;"  class="btn btn-danger btn-sm waves-effect waves-float waves-light pr-1 mb-25"><i class="bi bi-trash"></i></a> 
+            <a href="modif_avancement.php?id='.$avancement['avancement_technicien_id'].'" style="font-size:25px"><i class="bi bi-pencil-square"></i></a>
+            <a href="#" id="delete-record" data-id="'.$avancement['avancement_technicien_id'].'" data-name="'.$etude_nom.'" style="font-size:25px"><i class="bi bi-trash"></i></a> 
             ';
             $progress = '<button
             type="button"

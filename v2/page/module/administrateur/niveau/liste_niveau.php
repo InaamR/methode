@@ -210,7 +210,7 @@ if(empty($_SESSION['id'])){
                                                     <th>Niveau</th>
                                                     <th>Date d'insertion</th>
                                                     <th>Statut</th>
-                                                    <th></th>
+                                                    <th>Action</th>
                                                 </tr>
                                             </thead>
                                         </table>

@@ -69,8 +69,8 @@ if ($job != '') {
         while ($sous_chapitre = $PDO_query_sous_chapitre->fetch()) {
 
             $functions = '
-            <a href="modif_sous_chapitre.php?id='.$sous_chapitre['methode_sous_chapitre_id'].'" class="btn btn-info btn-sm">Modifier</a>
-            <a id="delete-record" data-id="' .$sous_chapitre['methode_sous_chapitre_id'].'" data-name="' .$sous_chapitre['methode_sous_chapitre_nom'].'" class="btn btn-danger btn-sm">Supprimer</a>
+            <a href="modif_sous_chapitre.php?id='.$sous_chapitre['methode_sous_chapitre_id'].'" style="font-size:25px"><i class="bi bi-pencil-square"></i></a>
+            <a href="#" id="delete-record" data-id="' .$sous_chapitre['methode_sous_chapitre_id'].'" data-name="' .$sous_chapitre['methode_sous_chapitre_nom'].'" style="font-size:25px"><i class="bi bi-trash"></i></a>
             ';
 
             $query = Bdd::connectBdd()->prepare("SELECT * FROM methode_chapitre WHERE methode_chapitre_id = :methode_chapitre_id");

@@ -73,7 +73,7 @@ if ($job != '') {
 
 
             $functions = '
-            <a href="modif_planning.php?id='.$etude['planning_prod_id'].'" style="font-size: 0.9rem !important;" class="btn btn-info btn-sm waves-effect waves-float waves-light mr-25 mb-25"><i class="bi bi-pen"></i></a>                    
+            <a href="modif_planning.php?id='.$etude['planning_prod_id'].'" style="font-size:25px"><i class="bi bi-pencil-square"></i></a>                    
             ';
 
             $PDO_query_verif_avancement = Bdd::connectBdd()->prepare("SELECT * FROM avancement_technicien WHERE planning_prod_id  = :planning_prod_id");
@@ -85,13 +85,13 @@ if ($job != '') {
             if($avancement_existe == 0){
 
                 $functions .= '
-                            <a href="#" id="delete-record" data-id="' .$etude['planning_prod_id'].'" data-name="' .$query_idv['ident_vehicule_MARQUE'].' '.$query_idv['ident_vehicule_GMOD_P'].'" style="font-size: 0.9rem !important;" class="btn btn-danger btn-sm waves-effect waves-float waves-light pr-1 mb-25"><i class="bi bi-trash"></i></a>           
+                            <a href="#" id="delete-record" data-id="' .$etude['planning_prod_id'].'" data-name="' .$query_idv['ident_vehicule_MARQUE'].' '.$query_idv['ident_vehicule_GMOD_P'].'" style="font-size:25px"><i class="bi bi-trash"></i></a>           
                             ';
 
             }else{
 
                 $functions .= '
-                            <a style="font-size: 0.9rem !important;" class="btn btn-secondary btn-sm waves-effect waves-float waves-light mb-25"><i class="bi bi-trash"></i></a>          
+                            <a style="font-size:25px"><i class="bi bi-trash"></i></a>          
                             ';
 
             }

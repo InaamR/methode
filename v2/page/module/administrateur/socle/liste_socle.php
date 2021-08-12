@@ -172,7 +172,7 @@ if(empty($_SESSION['id'])){
                 <div class="content-header-left col-md-9 col-12 mb-2">
                     <div class="row breadcrumbs-top">
                         <div class="col-12">
-                            <h2 class="content-header-title float-left mb-0">GESTION DES PLANNING</h2>
+                            <h2 class="content-header-title float-left mb-0">GESTION DES NIVEAUX</h2>
                             <div class="breadcrumb-wrapper">
                                 <ol class="breadcrumb">
                                     <li class="breadcrumb-item">Socles</li>
@@ -184,7 +184,7 @@ if(empty($_SESSION['id'])){
                 </div>
                 <div class="content-header-right text-md-right col-md-3 col-12 d-md-block d-none">
                     <div class="form-group breadcrumb-right">
-                        <a class="btn btn-success" href="modif_socle.php">Ajouter un socle</a>
+                        <a class="btn btn-success" href="modif_socle.php"><i data-feather='plus'></i> un socle</a>
                     </div>
                 </div>
             </div>
@@ -211,7 +211,7 @@ if(empty($_SESSION['id'])){
                                                     <th>Socle</th>
                                                     <th>Date d'insertion</th>
                                                     <th>Statut</th>
-                                                    <th></th>
+                                                    <th>Action</th>
                                                 </tr>
                                             </thead>
                                         </table>
