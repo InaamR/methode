@@ -66,8 +66,8 @@ if ($job != '') {
         while ($socle = $PDO_query_socle->fetch()) {
 
             $functions = '
-            <a href="modif_socle.php?id='.$socle['methode_socle_id'].'" class="btn btn-info btn-sm">Modifier</a>
-            <a href="#" id="delete-record" data-id="' .$socle['methode_socle_id'].'" data-name="' .$socle['methode_socle_nom'].'" class="btn btn-danger btn-sm">Supprimer</a>            
+            <a href="modif_socle.php?id='.$socle['methode_socle_id'].'" style="font-size:25px"><i class="bi bi-pencil-square"></i></a>
+            <a href="#" id="delete-record" data-id="' .$socle['methode_socle_id'].'" data-name="' .$socle['methode_socle_nom'].'" style="font-size:25px"><i class="bi bi-trash"></i></a>            
             ';
 
 
