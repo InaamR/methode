@@ -1,6 +1,14 @@
 (function (window, undefined) {
   'use strict';
-
+    var logoMini = document.getElementById('brand-logo');
+    var logoBig = document.getElementById('brand-logo-big');
+    
+    function toggleLogo(){
+      var elem = document.getElementById('navbar-header').className;
+      if(elem.classList.contains("expanded")){
+        console.log(true);
+      }
+    }
   /*
   NOTE:
   ------

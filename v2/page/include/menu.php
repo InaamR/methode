@@ -1,13 +1,13 @@
 <div class="main-menu menu-fixed menu-light menu-accordion menu-shadow" data-scroll-to-active="true">
     
-    <div class="navbar-header">
+    <div class="navbar-header" id="navbar-header">
         <ul class="nav navbar-nav flex-row">
             <li class="nav-item mr-auto">
                 <a class="navbar-brand" href="http://<?php echo $_SERVER['SERVER_NAME']?>/<?php echo $PARAM_url_non_doc_site; ?>/page/module/administrateur/index.php">
-                    <span class="brand-logo">
+                    <span class="brand-logo" id="brand-logo">
                         <img src="http://<?php echo $_SERVER['SERVER_NAME']?>/<?php echo $PARAM_url_non_doc_site; ?>/app-assets/images/logo/favicon-48x48.png" alt="petit-logo" class="">
                     </span>
-                    <span class="brand-logo-big">
+                    <span class="brand-logo-big" id="brand-logo-big">
                         <img src="http://<?php echo $_SERVER['SERVER_NAME']?>/<?php echo $PARAM_url_non_doc_site; ?>/app-assets/images/logo/logo_cube.png" alt="">
                     </span>
                 </a>
