@@ -295,6 +295,7 @@ if (preg_match("/config/", $page)) {
     <script src="app-assets/js/core/app-menu.js"></script>
     <script src="app-assets/js/core/app.js"></script>
     <script src="app-assets/js/scripts/components.js"></script>
+    <script src="assets/js/scripts.js"></script>
     <!-- END: Theme JS-->
 
     <!-- BEGIN: Page JS-->

@@ -319,9 +319,6 @@ if(empty($_SESSION['id'])){
 
     <!-- BEGIN: Vendor JS-->
     <script src="https://<?php echo $_SERVER['SERVER_NAME']?>/<?php echo $PARAM_url_non_doc_site; ?>/app-assets/vendors/js/vendors.min.js"></script>
-    <!-- BEGIN Vendor JS-->
-
-    <!-- BEGIN: Page Vendor JS-->
     <!-- END: Page Vendor JS-->
 
     <!-- BEGIN: Theme JS-->
@@ -334,6 +331,7 @@ if(empty($_SESSION['id'])){
     <!-- END: Theme JS-->
 
     <!-- BEGIN: Page JS-->
+    <script src="https://<?php echo $_SERVER['SERVER_NAME']?>/<?php echo $PARAM_url_non_doc_site; ?>/assets/js/scripts.js"></script>
     <!-- END: Page JS-->
 
     <script>
