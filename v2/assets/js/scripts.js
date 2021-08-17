@@ -4,9 +4,14 @@
     var logoBig = document.getElementById('brand-logo-big');
     
     function toggleLogo(){
-      var elem = document.getElementById('navbar-header').className;
-      if(elem.classList.contains("expanded")){
-        console.log(true);
+      var elem = document.getElementById('navbar-header');
+      if(elem.classList.contains('expanded')){
+        // console.log('ok');
+        logoMini.style.display = "none";
+        logoBig.style.display = "block";
+      }else{
+        logoMini.style.display = "block";
+        logoBig.style.display = "none";
       }
     }
   /*
