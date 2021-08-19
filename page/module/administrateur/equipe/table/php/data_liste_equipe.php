@@ -1,4 +1,7 @@
 <?php
+
+session_start();
+
 $page = "";
 if (empty($page)) {
     $page = "function";
@@ -24,170 +27,149 @@ if (preg_match("/config/", $page)) {
     }
 }
 
+if(empty($_SESSION['id'])){
 
-/*page_protect();
-if (!checkAdmin()) {
-    die("Secured");
-    exit();
-}*/
+    ProtectEspace::administrateur("", "", "");
+
+}else{
+
+    ProtectEspace::administrateur($_SESSION['id'], $_SESSION['jeton'], $_SESSION['niveau']);
+
+}
 
 $job = '';
 $id = '';
-$st = '';
 
 if (isset($_GET['job'])) {
     $job = $_GET['job'];
 
-    if ($job == 'get_liste_equipee' || $job == 'add_equipe' || $job == 'del_equipe' || $job == 'get_equipe_edit' || $job == 'edit_equipe') {
-        if (isset($_GET['id'])) {
-            $id = $_GET['id'];
+    if ($job == 'get_liste_equipe' || $job == 'add_equipe' || $job == 'edit_equipe' || $job == 'del_equipe') {
+
+        if (isset($_POST['id'])) {
+            $id = $_POST['id'];
             if (!is_numeric($id)) {
                 $id = '';
             }
         }
+
     } else {
         $job = '';
     }
+
 }
 
 $mysql_data = [];
 
 if ($job != '') {
-    if ($job == 'get_liste_equipee') {
+    if ($job == 'get_liste_equipe') {
 
-        $PDO_query_equipe_pdo = Bdd::connectBdd()->prepare("SELECT * FROM user_equipe_methode ORDER BY equipe_id DESC");
-        $PDO_query_equipe_pdo->execute();
+        $PDO_query_equipe = Bdd::connectBdd()->prepare("SELECT * FROM methode_equipe ORDER BY equipe_name ASC");
+        $PDO_query_equipe->execute();
 
-        while ($equipe = $PDO_query_equipe_pdo->fetch()) {
-            $functions =
-                ' 
-                    <td class="product-action">
+        while ($equipe = $PDO_query_equipe->fetch()) {
 
-                    <center>
-                    <button type="button" class="btn btn-icon btn-success" id="function_edit_equipe" data-id="' .
-                    $equipe['equipe_id'] .
-                    '" data-name="' .
-                    $equipe['equipe_name'] .
-                    '"><i class="feather icon-check-square"></i></button>
-                    <button type="button" class="btn btn-icon btn-danger rounded-circle" id="confirm-color" data-id="' .
-                    $equipe['equipe_id'] .
-                    '" data-name="' .
-                    $equipe['equipe_name'] .
-                    '"><i class="feather icon-x-square"></i></button>
-                    </center>
+            $functions = '
+            <a href="modif_equipe.php?id='.$equipe['equipe_id'].'" style="font-size:25px"><i class="bi bi-pencil-square"></i></a>
+            <a href="#" id="delete-record" data-id="' .$equipe['equipe_id'].'" data-name="' .$equipe['equipe_name'].'" style="font-size:25px"><i class="bi bi-trash"></i></a>
+            ';
 
-                    </td>
-		
-		        ';
 
             $date = date_create($equipe['equipe_date']);
+            $name_user = Membre::info($_SESSION['id'], 'nom').' '.Membre::info($_SESSION['id'], 'prenom');
+            $titre = $equipe['equipe_name'];
+            $id = $equipe['equipe_id'];
+            $abr_equipe = $equipe['equipe_abr'];
 
-            $abr_strong = '<b>' . $equipe['equipe_abr'] . '</b>';
 
-            $mysql_data[] = array(
-                "Equipe" => $equipe['equipe_name'],
-                "Equipe_Abr" => $abr_strong,
-                "Date_insertion" => date_format($date, "d/m/Y"),
-                "bouton" => $functions
-            );
-            
+            switch($equipe['equipe_statut'])
+            {
+                case '1':
+                    $statut = '<div class="badge badge-light-success">Active</div>';
+                break;                         
+                default:
+                    $statut = '<div class="badge badge-light-danger">Non-active</div>';
+            }
+
+            $mysql_data[] = [
+                "responsive_id" => "",
+                "id" => $id,
+                "full_name" => $name_user,
+                "titre" => $titre,
+                "abr_equipe" => $abr_equipe,
+                "start_date" => date_format($date, "d/m/Y"),
+                "status" => $statut,
+                "Actions" => $functions
+            ];
         }
-        $PDO_query_equipe_pdo->closeCursor();
+
+        $PDO_query_equipe->closeCursor();
         $result = 'success';
         $message = 'Succès de requête';
-        
-    } elseif ($job == 'add_equipe') {
-        try {
-            $query = Bdd::connectBdd()->prepare("INSERT INTO user_equipe_methode (`equipe_name`,`equipe_abr`,`equipe_date`)
-			 VALUES (:equipe_name,:equipe_abr,now())");
 
-            $query->bindParam(":equipe_name", $_GET['nom_equipe'], PDO::PARAM_STR);
-            $query->bindParam(":equipe_abr", $_GET['abreviation_equipe'], PDO::PARAM_STR);
+        $bdd = null;
+        $PDO_query_equipe = null;
+
+
+    } elseif ($job == 'add_equipe') {
+
+        try {
+            $query = Bdd::connectBdd()->prepare("INSERT INTO methode_equipe (`equipe_date`, `equipe_name`, `equipe_abr`, `equipe_statut`, `equipe_user`)
+			 VALUES (now(), :equipe_name, :equipe_abr, :equipe_statut, :equipe_user)");
+
+            $query->bindParam(":equipe_name", $_POST['nom'], PDO::PARAM_STR);
+            $query->bindParam(":equipe_abr", $_POST['abr'], PDO::PARAM_STR);
+            $query->bindParam(":equipe_statut", $_POST['statut'], PDO::PARAM_INT);
+            $query->bindParam(":equipe_user", $_POST['user'], PDO::PARAM_INT);
 
             $query->execute();
             $query->closeCursor();
 
             $result = 'success';
-            $message = 'Equipe ajoutée avec succés';
+            $message = 'Niveau ajouté avec succés';
+            
         } catch (PDOException $x) {
             die("Secured");
             $result = 'error';
             $message = 'Échec de requête';
         }
         $query = null;
-        $bdd = null;
-    } elseif ($job == 'get_equipe_edit') {
-        if ($id == '') {
-            $result = 'error';
-            $message = 'Échec id';
-        } else {
-            try {
-                $query_select_add = Bdd::connectBdd()->prepare("SELECT * FROM user_equipe_methode WHERE equipe_id = :id");
-                $query_select_add->bindParam(":id", $id, PDO::PARAM_INT);
-                $query_select_add->execute();
 
-                while ($traitement_edit = $query_select_add->fetch()) {
-                    $mysql_data[] = [
-                        "nom_equipe" => $traitement_edit['equipe_name'],
-                        "abreviation_equipe" => $traitement_edit['equipe_abr'],
-                    ];
-                }
-
-                $query_select_add->closeCursor();
+    } elseif ($job == 'del_equipe') {
+        
+            
+                $query_select_del = Bdd::connectBdd()->prepare("DELETE FROM methode_equipe WHERE equipe_id = :equipe_id");
+                $query_select_del->bindParam(":equipe_id", $id, PDO::PARAM_INT);
+                $query_select_del->execute(); 
+                $query_select_del->closeCursor();
 
                 $result = 'success';
-                $message = 'Succès de requête';
-            } catch (PDOException $x) {
-                die("Secured");
-                $result = 'error';
-                $message = 'Échec de requête';
-            }
-            $query_del = null;
-            $bdd = null;
-        }
+                $message = 'Succès de requête'.$id;
+           
+        
     } elseif ($job == 'edit_equipe') {
-        if ($id == '') {
-            $result = 'Échec';
-            $message = 'Échec id';
-        } else {
-            $query = Bdd::connectBdd()->prepare("UPDATE user_equipe_methode SET equipe_name = :equipe_name, equipe_abr = :equipe_abr WHERE equipe_id = :equipe_id");
-            $query->bindParam(":equipe_id", $id, PDO::PARAM_INT);
-            $query->bindParam(":equipe_name", $_GET['nom_equipe'], PDO::PARAM_STR);
-            $query->bindParam(":equipe_abr", $_GET['abreviation_equipe'], PDO::PARAM_STR);
+        
+            $query = Bdd::connectBdd()->prepare("UPDATE methode_equipe SET equipe_name = :equipe_name, equipe_abr = :equipe_abr, equipe_date = NOW(), equipe_statut = :equipe_statut, equipe_user = :equipe_user  WHERE equipe_id = :equipe_id");
+
+            $query->bindParam(":equipe_id", $_POST['id'], PDO::PARAM_INT);
+            $query->bindParam(":equipe_name", $_POST['nom'], PDO::PARAM_STR);
+            $query->bindParam(":equipe_abr", $_POST['abr'], PDO::PARAM_STR);
+            $query->bindParam(":equipe_statut", $_POST['statut'], PDO::PARAM_INT);
+            $query->bindParam(":equipe_user", $_POST['user'], PDO::PARAM_INT);
             $query->execute();
             $query->closeCursor();
+
             $result = 'success';
             $message = 'Succès de requête';
         }
-    } elseif ($job == 'del_equipe') {
-        if ($id == '') {
-            $result = 'Échec';
-            $message = 'Échec id';
-        } else {
-            try {
-                $query_del = Bdd::connectBdd()->prepare("DELETE FROM user_equipe_methode WHERE equipe_id = :id");
-                $query_del->bindParam(":id", $id, PDO::PARAM_INT);
-                $query_del->execute();
-                $query_del->closeCursor();
-                $result = 'success';
-                $message = 'Succès de requête';
-            } catch (PDOException $x) {
-                die("Secured");
-                $result = 'error';
-                $message = 'Échec de requête';
-            }
-            $query_del = null;
-            $bdd = null;
-        }
-    }
+    
 }
 
-$data = array(
-    "result"  => $result,
+$data = [
+    "result" => $result,
     "message" => $message,
-    "data"    => $mysql_data
-  );
-  
-  $json_data = json_encode($data, JSON_UNESCAPED_UNICODE);
-  print $json_data;
+    "data" => $mysql_data,
+];
+
+$json_data = json_encode($data, JSON_UNESCAPED_UNICODE);
+print $json_data;
 ?>

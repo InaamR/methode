@@ -2,22 +2,22 @@ Options +FollowSymlinks
 RewriteEngine on
 RewriteOptions Inherit
 
-ErrorDocument 400 http://localhost/ipd/error/erreur.php?erreur=400
-ErrorDocument 401 http://localhost/ipd/error/erreur.php?erreur=401
-ErrorDocument 402 http://localhost/ipd/error/erreur.php?erreur=402
-ErrorDocument 403 http://localhost/ipd/error/erreur.php?erreur=403
-ErrorDocument 404 http://localhost/methode/error/erreur.php?erreur=404
-ErrorDocument 405 http://localhost/ipd/error/erreur.php?erreur=405
-ErrorDocument 500 http://localhost/ipd/error/erreur.php?erreur=500
-ErrorDocument 501 http://localhost/ipd/error/erreur.php?erreur=501
-ErrorDocument 502 http://localhost/ipd/error/erreur.php?erreur=502
-ErrorDocument 503 http://localhost/ipd/error/erreur.php?erreur=503
-ErrorDocument 504 http://localhost/ipd/error/erreur.php?erreur=504
-ErrorDocument 505 http://localhost/ipd/error/erreur.php?erreur=505
+ErrorDocument 400 http://localhost/methode/v2/error/erreur.php?erreur=400
+ErrorDocument 401 http://localhost/methode/v2/error/erreur.php?erreur=401
+ErrorDocument 402 http://localhost/methode/v2/error/erreur.php?erreur=402
+ErrorDocument 403 http://localhost/methode/v2/error/erreur.php?erreur=403
+ErrorDocument 404 http://localhost/methode/v2/error/erreur.php?erreur=404
+ErrorDocument 405 http://localhost/methode/v2/error/erreur.php?erreur=405
+ErrorDocument 500 http://localhost/methode/v2/error/erreur.php?erreur=500
+ErrorDocument 501 http://localhost/methode/v2/error/erreur.php?erreur=501
+ErrorDocument 502 http://localhost/methode/v2/error/erreur.php?erreur=502
+ErrorDocument 503 http://localhost/methode/v2/error/erreur.php?erreur=503
+ErrorDocument 504 http://localhost/methode/v2/error/erreur.php?erreur=504
+ErrorDocument 505 http://localhost/methode/v2/error/erreur.php?erreur=505
 
 RewriteRule ^TableadeBord$ home.php [L]
 
-RewriteRule ^Bye$ logout.php [L]
+RewriteRule ^Bye$ /logout.php [L]
 
 
 RewriteRule ^Config$ admin.php [L]
@@ -27,8 +27,9 @@ RewriteRule ^ListeUsers$  module/admin/liste_contact.php  [L]
 RewriteRule ^PUsers$  module/admin/profil_contact.php  [L]
 RewriteRule ^ListeGroupe$  module/admin/liste_equipe.php  [L]
 
-#EQUIPE
-RewriteRule ^ListeEquipe$  module/equipe/liste_equipe.php  [L]
+#COMM
+RewriteRule ^ComDG$  administrateur/communication/liste_comm_dg.php  [L]
+RewriteRule ^ComDGmodif$  administrateur/communication/modif_comm_dg.php  [L]
 
 #NIVEAU
 RewriteRule ^ListeNiveau$  module/niveau/liste_niveau.php  [L]
@@ -60,7 +61,7 @@ RewriteRule ^ListeGroupeEquipe1$  module/service_et_entretien/liste_equipe.php  
 
 #AuthName "Page d'administration protégée"
 #AuthType Basic
-#AuthUserFile C:/xampp/htdocs/ipd/.htpasswd
+#AuthUserFile C:/xampp/htdocs/intranet_etai/.htpasswd
 #Require valid-user
 
 ###FILTRE CONTRE CERTAINS ROBOTS DES PIRATES

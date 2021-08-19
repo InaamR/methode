@@ -1,5 +1,7 @@
 <?php
 
+session_start();
+
 $page = "";
 if (empty($page)) {
     $page = "function";
@@ -25,245 +27,161 @@ if (preg_match("/config/", $page)) {
     }
 }
 
+if(empty($_SESSION['id'])){
 
-/*page_protect();
-if (!checkAdmin()) {
-    die("Secured");
-    exit();
-}*/
+    ProtectEspace::administrateur("", "", "");
+
+}else{
+
+    ProtectEspace::administrateur($_SESSION['id'], $_SESSION['jeton'], $_SESSION['niveau']);
+
+}
 
 $job = '';
-$id  = '';
-$st = '';
+$id = '';
 
-if (isset($_GET['job'])){
-  $job = $_GET['job'];
-  
-  if (	$job == 'get_liste_sous_chapitre' ||
-  		$job == 'get_liste_chapitre' ||
-  		$job == 'add_sous_chapitre' ||
-		$job == 'get_sous_chapitre_edit' ||
-		$job == 'sous_chapitre_edit' ||
-		$job == 'del_sous_chapitre'){
-		  
-		if (isset($_GET['id'])){
-		  $id = $_GET['id'];
-		  if (!is_numeric($id)){
-			$id = '';
-		  }
-		}
-		
-		if (isset($_GET['st'])){
-		  $st = $_GET['st'];
-		  if (!is_numeric($st)){
-			$st = '';
-		  }
-		}
-		
-		if (isset($_GET['mdp'])){
-		  $mdp = $_GET['mdp'];
-		  if (!is_numeric($mdp)){
-			$mdp = '';
-		  }
-		}
-		
-		
-  } else {
-    $job = '';
-  }
+if (isset($_GET['job'])) {
+    $job = $_GET['job'];
+
+    if ($job == 'get_liste_sous_chapitre' || $job == 'add_sous_chapitre' || $job == 'edit_sous_chapitre' || $job == 'del_sous_chapitre') {
+
+        if (isset($_POST['id'])) {
+            $id = $_POST['id'];
+            if (!is_numeric($id)) {
+                $id = '';
+            }
+        }
+
+    } else {
+        $job = '';
+    }
+
 }
 
-$mysql_data = array();
+$mysql_data = [];
 
-if ($job != ''){  
-  
-  if ($job == 'get_liste_sous_chapitre'){
-	 
-	
-	
-	$PDO_query_sous_chapitre = Bdd::connectBdd()->prepare("SELECT * FROM menu_sous_chapitre ORDER BY menu_sous_chapitre_id ASC");		
-	$PDO_query_sous_chapitre->execute();
-	
-	while ($sous_chapitre = $PDO_query_sous_chapitre->fetch()){	
-													
-         
-		$query = Bdd::connectBdd()->prepare("SELECT menu_chapitre_nom FROM menu_chapitre WHERE menu_chapitre_id = :menu_chapitre_id");
-		$query->bindParam(":menu_chapitre_id", $sous_chapitre['menu_chapitre_id'], PDO::PARAM_INT);
-		$query->execute();	
-		$query_chapitre = $query->fetch();
-		$query->closeCursor();		                                                 
-                                                        
-				
-		$functions = '
+if ($job != '') {
+    if ($job == 'get_liste_sous_chapitre') {
 
-						
-		<td class="product-action">
-		
-		<center>
-		<button type="button" class="btn btn-icon btn-success" id="function_edit_sous_chapitre" data-id="' . $sous_chapitre['menu_sous_chapitre_id'] . '" data-name="' . $sous_chapitre['menu_sous_chapitre_nom'] . '"><i class="feather icon-check-square"></i></button>
-		<button type="button" class="btn btn-icon btn-danger rounded-circle" id="confirm-color" data-id="' . $sous_chapitre['menu_sous_chapitre_id'] . '" data-name="' . $sous_chapitre['menu_sous_chapitre_nom'] . '"><i class="feather icon-x-square"></i></button>
-		</center>
-		
-		</td>
-		
-		';
-		
-				
-		
-		
-		
-		
+        $PDO_query_sous_chapitre = Bdd::connectBdd()->prepare("SELECT * FROM methode_sous_chapitre ORDER BY methode_sous_chapitre_id DESC");
+        $PDO_query_sous_chapitre->execute();
 
-		$date = date_create($sous_chapitre['menu_sous_chapitre_date']);
+        while ($sous_chapitre = $PDO_query_sous_chapitre->fetch()) {
+
+            $functions = '
+            <a href="modif_sous_chapitre.php?id='.$sous_chapitre['methode_sous_chapitre_id'].'" style="font-size:25px"><i class="bi bi-pencil-square"></i></a>
+            <a href="#" id="delete-record" data-id="' .$sous_chapitre['methode_sous_chapitre_id'].'" data-name="' .$sous_chapitre['methode_sous_chapitre_nom'].'" style="font-size:25px"><i class="bi bi-trash"></i></a>
+            ';
+
+            $query = Bdd::connectBdd()->prepare("SELECT * FROM methode_chapitre WHERE methode_chapitre_id = :methode_chapitre_id");
+            $query->bindParam(":methode_chapitre_id", $sous_chapitre['methode_chapitre_id'], PDO::PARAM_INT);
+            $query->execute();	
+            $query_chapitre = $query->fetch();
+            $query->closeCursor();
 
 
-		$chapitre_strong = '<b>'.$query_chapitre['menu_chapitre_nom'].'</b>';
-			
-        $mysql_data[] = array(
-			"Sous_chapitre" => $sous_chapitre['menu_sous_chapitre_nom'],
-			"Chapitre" => $chapitre_strong,
-			"Date_insertion" => date_format($date,"d/m/Y"),
-			"bouton" => $functions
-        );
-	}
-	$PDO_query_sous_chapitre->closeCursor();
-	$result  = 'success';
-	$message = 'Succès de requête';					
-	
-	$bdd = null;
-	$PDO_query_sous_chapitre = null;     
+            $date = date_create($sous_chapitre['methode_sous_chapitre_date']);
+            $date_create = date_format($date, "d/m/Y");
+
+            $name_user = Membre::info($sous_chapitre['methode_sous_chapitre_user'], 'nom').' '.Membre::info($sous_chapitre['methode_sous_chapitre_user'], 'prenom');
+
+            $sous_chapitre_bread = $sous_chapitre['methode_sous_chapitre_nom'];
+            $chapitre_nom = $query_chapitre['methode_chapitre_nom'];
+
+            $chemin = '<b>'.$chapitre_nom.'</b> > '.$sous_chapitre_bread;
+
+
+            $id_sous_chapitre = $sous_chapitre['methode_sous_chapitre_id']; 
+
+
+            switch($sous_chapitre['methode_sous_chapitre_statut'])
+            {
+                case '1':
+                    $statut = '<div class="badge badge-light-success">Actif</div>';
+                break;                         
+                default:
+                    $statut = '<div class="badge badge-light-danger">Inactif</div>';
+            }
+
+            $mysql_data[] = [
+                "responsive_id" => "",
+                "id" => $id,
+                "full_name" => $name_user,
+                "sous_chapitre" => $sous_chapitre_bread,                
+                "post" => $chemin,
+                "start_date" => date_format($date, "d/m/Y"),
+                "status" => $statut,
+                "Actions" => $functions
+            ];
+        }
+
+        $PDO_query_sous_chapitre->closeCursor();
+        $result = 'success';
+        $message = 'Succès de requête';
+
+        $bdd = null;
+        $PDO_query_sous_chapitre = null;
+
+
+    } elseif ($job == 'add_sous_chapitre') {
+
+        try {
+            $query = Bdd::connectBdd()->prepare("INSERT INTO methode_sous_chapitre (`methode_sous_chapitre_date`, `methode_sous_chapitre_nom`, `methode_chapitre_id`, `methode_sous_chapitre_statut`, `methode_sous_chapitre_user`)
+			 VALUES (now(), :methode_sous_chapitre_nom, :methode_chapitre_id, :methode_sous_chapitre_statut, :methode_sous_chapitre_user)");
+
+            $query->bindParam(":methode_sous_chapitre_nom", $_POST['nom'], PDO::PARAM_STR);
+            $query->bindParam(":methode_chapitre_id", $_POST['chapitre'], PDO::PARAM_STR);
+            $query->bindParam(":methode_sous_chapitre_statut", $_POST['statut'], PDO::PARAM_INT);
+            $query->bindParam(":methode_sous_chapitre_user", $_POST['user'], PDO::PARAM_INT);
+
+            $query->execute();
+            $query->closeCursor();
+
+            $result = 'success';
+            $message = 'Sous chapitre ajouté avec succés';
+            
+        } catch (PDOException $x) {
+            die("Secured");
+            $result = 'error';
+            $message = 'Échec de requête';
+        }
+        $query = null;
+
+    } elseif ($job == 'del_sous_chapitre') {
+        
+            
+                $query_select_del = Bdd::connectBdd()->prepare("DELETE FROM methode_sous_chapitre WHERE methode_sous_chapitre_id = :methode_sous_chapitre_id");
+                $query_select_del->bindParam(":methode_sous_chapitre_id", $id, PDO::PARAM_INT);
+                $query_select_del->execute(); 
+                $query_select_del->closeCursor();
+
+                $result = 'success';
+                $message = 'Succès de requête'.$id;
+           
+        
+    } elseif ($job == 'edit_sous_chapitre') {
+        
+            $query = Bdd::connectBdd()->prepare("UPDATE methode_sous_chapitre SET methode_sous_chapitre_nom = :methode_sous_chapitre_nom, methode_chapitre_id = :methode_chapitre_id, methode_sous_chapitre_date = NOW(), methode_sous_chapitre_statut = :methode_sous_chapitre_statut, methode_sous_chapitre_user = :methode_sous_chapitre_user  WHERE methode_sous_chapitre_id = :methode_sous_chapitre_id");
+
+            $query->bindParam(":methode_sous_chapitre_id", $_POST['id_sous_chapitre'], PDO::PARAM_INT);
+            $query->bindParam(":methode_sous_chapitre_nom", $_POST['nom'], PDO::PARAM_STR);
+            $query->bindParam(":methode_chapitre_id", $_POST['chapitre'], PDO::PARAM_STR);
+            $query->bindParam(":methode_sous_chapitre_statut", $_POST['statut'], PDO::PARAM_INT);
+            $query->bindParam(":methode_sous_chapitre_user", $_POST['user'], PDO::PARAM_INT);
+            $query->execute();
+            $query->closeCursor();
+
+            $result = 'success';
+            $message = 'Succès de requête';
+        }
     
-}elseif ($job == 'add_sous_chapitre'){   
-    		
-				
-				try 
-				{  			
-			 
-				$query = Bdd::connectBdd()->prepare("INSERT INTO menu_sous_chapitre (`menu_sous_chapitre_nom`,`menu_chapitre_id`,`menu_sous_chapitre_date`)
-			 VALUES (:menu_sous_chapitre_nom,:menu_chapitre_id,now())");	
-			 	
-				$query->bindParam(":menu_sous_chapitre_nom", $_GET['nom_sous_chapitre'], PDO::PARAM_STR);
-				$query->bindParam(":menu_chapitre_id", $_GET['nom_chapitre'], PDO::PARAM_INT);	
-				
-				$query->execute();
-				$query->closeCursor();        
-
-				$result  = 'success';
-				$message = 'Sous chapitre ajouté avec succés';
-						
-				       	
-                      
-                	
-		
-				}
-				catch(PDOException $x) 
-				{ 	
-					die("Secured");	
-					$result  = 'error';
-					$message = 'Échec de requête'; 	
-				}	
-				$query = null;
-				$bdd = null;
-				
-				
-
-
-
-
-}elseif ($job == 'del_sous_chapitre'){
-	
-	if ($id == ''){
-		
-		  $result  = 'Échec';
-		  $message = 'Échec id';
-		  
-		} else {
-			
-			try 
-			{		
-			$query_del = Bdd::connectBdd()->prepare("DELETE FROM menu_sous_chapitre WHERE menu_sous_chapitre_id = :id");	
-			$query_del->bindParam(":id", $id, PDO::PARAM_INT);
-			$query_del->execute();
-			$query_del->closeCursor();	
-			$result  = 'success';
-			$message = 'Succès de requête';	
-			}
-			catch(PDOException $x) 
-			{ 	
-			die("Secured");	
-			$result  = 'error';
-			$message = 'Échec de requête'; 	
-			}	
-			$query_del = null;
-			$bdd = null;
-			
-		  
-		} 
-
-	}elseif ($job == 'get_sous_chapitre_edit'){
-		
-		if ($id == ''){
-		
-		  $result  = 'error';
-		  $message = 'Échec id';
-		  
-		}else{
-			
-			try 
-			{		
-				$query_select_add = Bdd::connectBdd()->prepare("SELECT * FROM menu_sous_chapitre WHERE menu_sous_chapitre_id = :id");	
-				$query_select_add->bindParam(":id", $id, PDO::PARAM_INT);
-				$query_select_add->execute();
-				
-				while ($traitement_edit = $query_select_add->fetch()){
-					
-					$mysql_data[] = array(
-					"nom_sous_chapitre"  => $traitement_edit['menu_sous_chapitre_nom'],
-					"nom_chapitre"  => $traitement_edit['menu_chapitre_id']
-				  );	
-						}
-						
-						$query_select_add->closeCursor();
-						
-						$result  = 'success';
-						$message = 'Succès de requête';
-					
-					}
-			catch(PDOException $x) 
-						{ 	
-							die("Secured");	
-							$result  = 'error';
-							$message = 'Échec de requête'; 	
-						}	
-			$query_del = null;
-			$bdd = null;
-		}
-	
-	}elseif ($job == 'sous_chapitre_edit'){
-		
-		if ($id == ''){
-		  $result  = 'Échec';
-		  $message = 'Échec id';
-		} else {		
-			$query = Bdd::connectBdd()->prepare("UPDATE menu_sous_chapitre SET menu_sous_chapitre_nom = :menu_sous_chapitre_nom WHERE menu_sous_chapitre_id = :menu_sous_chapitre_id");
-			$query->bindParam(":menu_sous_chapitre_id", $id, PDO::PARAM_INT);
-			$query->bindParam(":menu_sous_chapitre_nom", $_GET['nom_sous_chapitre'], PDO::PARAM_STR);
-			$query->execute();
-			$query->closeCursor();
-			$result  = 'success';
-			$message = 'Succès de requête';
-		} 	
-	
-	}
-    
-  
 }
 
-$data = array(
-  "result"  => $result,
-  "message" => $message,
-  "data"    => $mysql_data
-);
+$data = [
+    "result" => $result,
+    "message" => $message,
+    "data" => $mysql_data,
+];
 
 $json_data = json_encode($data, JSON_UNESCAPED_UNICODE);
 print $json_data;

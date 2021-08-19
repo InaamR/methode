@@ -98,7 +98,7 @@ class Cryptage {
 ###########################################################################################
 
 // La classe captcha
-class Captcha {
+class _Captcha {
 	
 	// Fonction de creation d'un captcha
 	// $a => chiffre entre 1 et 5
@@ -117,7 +117,7 @@ class Captcha {
 	// Creation d'une session contenant le resultat du captcha
 	// Retourne la phrase du captcha
 	public function captcha() {
-		list($resultat, $phrase) = Captcha::captchaCreate();
+		list($resultat, $phrase) = _Captcha::captchaCreate();
 		$_SESSION['captcha'] = $resultat;
 		return $phrase;
 	}
@@ -482,11 +482,11 @@ class Connexion {
 				
 				case 2 :
 				Activation::activationMail($login);
-				$redirect = redirection(URLSITE.'/activationMail.php');
+				$redirect = redirection(URLSITE.'/administrateur/admin/activationMail.php');
 				break;	
 				
 				case 3 :
-				$redirect = redirection(URLSITE.'/activationAdmin.php');
+				$redirect = redirection(URLSITE.'/administrateur/admin/activationAdmin.php');
 				break;	
 			}
 		}
@@ -709,22 +709,7 @@ class ProtectEspace {
 	}
 	// Liste des jeton de connexion du membre
 	public static function listeJeton($id) {
-		$liste = '';
-		$resultat = Bdd::connectBdd()->prepare(SELECT.ALL.JETON.JETONMEMBRE);
-		$resultat -> bindParam(':id', $id, PDO::PARAM_INT, 11);
-		$resultat -> execute();
-		while($jeton = $resultat -> fetch(PDO::FETCH_ASSOC)) {
-			$liste .= '<tr>
-					<td align="center">Le '.date('d/m/Y', $jeton['date']).' &agrave; '.date('H:i:s', $jeton['date']).'</td>
-					<td align="center">'.$jeton['ip_connexion'].'</td>
-					<td align="center">
-					<form method="post" action="">
-					<input type="hidden" value="'.$jeton['id'].'" name="id_jeton">
-					<input type="submit" value="Supprimer" name="supprime_connexion" class="input" />
-					</form>
-					</td>
-				</tr>';
-		}
+		
 		return $liste;
 	}
 	// effacer un jeton de connexion
@@ -801,10 +786,10 @@ class Membre {
 		$resultat -> execute();
 		$donnee = $resultat -> fetch(PDO::FETCH_ASSOC);
 		if($donnee[$info] === '1') {
-			return 'Cacher';
+			return 'Masquer';
 		}
 		else {
-			return 'Rendre Visible';
+			return 'Afficher';
 		}
 	}
 	// Mise a jour du profil du membre
@@ -835,7 +820,7 @@ class Membre {
 				$verifPass -> bindParam(':id', $id, PDO::PARAM_INT, 11);
 				$verifPass -> execute();
 				$dataPass = $verifPass -> fetch(PDO::FETCH_ASSOC);
-				if($dataPass['password'] === Cryptage::crypter($passActuel)) {
+				if(password_verify($passActuel, $dataPass['password'])) {
 					$newPass = Cryptage::crypter($newPassUn);
 					$majPass = Bdd::connectBdd()->prepare(UPDATE.MEMBREZ.MAJPASS.ID);
 					$majPass -> bindParam(':newPass', $newPass);
@@ -899,12 +884,66 @@ class Message {
 		$resultat -> bindParam(':id', $id, PDO::PARAM_INT, 11);
 		$resultat -> execute();
 		if($resultat -> rowCount() === 0) {
-			return 'Vous n\'avez aucun nouveau message';
+			return '0';
 		}
 		else {
-			return 'Vous avez '.$resultat -> rowCount().' nouveau(x) message(s).';
+			return $resultat -> rowCount();
 		}
 	}
+
+	public static function nouveauNbnotif($id) {
+		$liste = '';
+		$resultat = Bdd::connectBdd()->prepare(SELECT.ALL.MESSAGE.NBNEW);
+		$resultat -> bindParam(':id', $id, PDO::PARAM_INT, 11);
+		$resultat -> execute();
+		if($resultat -> rowCount() === 0) {
+			$liste .='
+			<a class="d-flex" href="javascript:void(0)">
+				<div class="media d-flex align-items-start">
+
+					<div class="media-left">
+						<div class="avatar">
+							<img src="http://'.$_SERVER['SERVER_NAME'].'/intranet_etai/app-assets/images/portrait/small/man.png" alt="avatar" width="32" height="32">
+						</div>
+					</div>
+
+					<div class="media-body">
+						<p class="media-heading"><span class="font-weight-bolder">Notification Systéme</span></p>
+						<small class="notification-text">Vous n\'avez aucun nouveau message</small>
+					</div>
+				</div>
+			</a>';
+			return $liste;
+		}
+		else {
+			while($donnee = $resultat -> fetch(PDO::FETCH_ASSOC)) {
+				
+				$exp = Membre::info($donnee['id_expediteur'], 'nom').' '.Membre::info($donnee['id_expediteur'], 'prenom');
+				$liste .='
+				<a class="d-flex" href="javascript:void(0)">
+					<div class="media d-flex align-items-start">
+
+						<div class="media-left">
+							<div class="avatar">
+								<img src="http://'.$_SERVER['SERVER_NAME'].'/intranet_etai/app-assets/images/portrait/small/man.png" alt="avatar" width="32" height="32">
+							</div>
+						</div>
+
+						<div class="media-body">
+							<p class="media-heading"><span class="font-weight-bolder">'.$exp.'</span></p>
+							<small class="notification-text">'.$donnee['titre'].'</small>
+						</div>
+					</div>
+				</a>
+				';
+			}
+			return $liste;
+		}
+	}
+
+	
+
+
 	// liste des messages du membre
 	// liste a vide
 	// recherche des messages adresses au membre connecte et non efface par le membre
@@ -922,30 +961,7 @@ class Message {
 	// Sinon
 	// 		retourne vous n'avez aucun message
 	public static function liste($id) {
-		$liste = '';
-		$resultat = Bdd::connectBdd()->prepare(SELECT.ALL.MESSAGE.MESSAGELISTE);
-		$resultat -> bindParam(':id', $id, PDO::PARAM_INT, 11);
-		$resultat -> execute();
-		while($donnee = $resultat -> fetch(PDO::FETCH_ASSOC)) {
-			if($donnee['lu'] === '1') {
-				$image = '<img src="'.URLSITE.'/design/image/Lu.png" width="24" height="24" align="absmiddle">';
-			}
-			else {
-				$image = '<img src="'.URLSITE.'/design/image/Non_Lu.png" width="24" height="24" align="absmiddle">';
-			}
-			$liste .= '<tr>
-			<td>'.$image.'</td>
-			<td align="center">Le '.date('d/m/Y', $donnee['timestamp']).' &agrave; '.date('H:i:s', $donnee['timestamp']).'</td>
-			<td align="center"><a href="profil_membre.php?id='.$donnee['id_expediteur'].'">'.Membre::info($donnee['id_expediteur'], 'pseudo').'</a></td>
-			<td align="center"><a href="message.php?id='.$donnee['id'].'">'.$donnee['titre'].'</a></td>
-			</tr>';
-		}
-		if(!empty($liste)) {
-			return $liste;
-		}
-		else {
-			return '<tr><td align="center" colspan="4">Vous n\'avez aucun message</td></tr>';
-		}
+		
 	}
 	// Affiche le message recut
 	public static function info($id, $info) {
@@ -1363,12 +1379,22 @@ class Admin {
 		$lien = URLSITE.'/administrateur/niveau/';
 		return $lien;
 	}
-	public static function menusocle() {
-		$lien = URLSITE.'/administrateur/socle/';
+	public static function menunavigation() {
+		$lien = URLSITE.'/administrateur/navigation/';
 		return $lien;
 	}
-	public static function menuchapitre() {
-		$lien = URLSITE.'/administrateur/chapitre/';
+
+	public static function menudevis() {
+		$lien = URLSITE.'/administrateur/devis/';
+		return $lien;
+	}
+
+	public static function menubranding() {
+		$lien = URLSITE.'/administrateur/branding/';
+		return $lien;
+	}
+	public static function menuproduit() {
+		$lien = URLSITE.'/administrateur/produit/';
 		return $lien;
 	}
 	public static function menusouschapitre() {
@@ -1379,7 +1405,26 @@ class Admin {
 		$lien = URLSITE.'/administrateur/identite_vehicule/';
 		return $lien;
 	}
-		
+
+	public static function menuchapitre() {
+		$lien = URLSITE.'/administrateur/chapitre/';
+		return $lien;
+	}
+
+	public static function menusocle() {
+		$lien = URLSITE.'/administrateur/socle/';
+		return $lien;
+	}
+
+	public static function menuavancement() {
+		$lien = URLSITE.'/administrateur/avancement/';
+		return $lien;
+	}
+	
+	public static function menuetude() {
+		$lien = URLSITE.'/administrateur/etude/';
+		return $lien;
+	}
 } // Fin de la classe administrateur
 ?>
 
