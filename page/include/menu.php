@@ -156,6 +156,17 @@
                     
                         <a class="d-flex align-items-center" href="http://<?php echo $_SERVER['SERVER_NAME']?>/<?php echo $PARAM_url_non_doc_site; ?>/page/module/administrateur/avancement/liste_avancement.php"><i class="bi bi-record2"></i><span class="menu-item text-truncate" data-i18n="Avancements">Affectation</span></a>
                     </li>
+
+                    <?php                        
+                            if($file == 'liste_archive.php'){                            
+                                echo'<li class="active">';
+                            }else{
+                                echo'<li class="">';
+                            }
+                        ?>
+                    
+                        <a class="d-flex align-items-center" href="http://<?php echo $_SERVER['SERVER_NAME']?>/<?php echo $PARAM_url_non_doc_site; ?>/page/module/administrateur/etude/liste_archive.php"><i class="bi bi-record2"></i><span class="menu-item text-truncate" data-i18n="Archive">Archive</span></a>
+                    </li>
                     
                 </ul>
             </li>
