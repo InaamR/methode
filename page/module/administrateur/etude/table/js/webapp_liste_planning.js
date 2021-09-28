@@ -30,11 +30,8 @@ $(function () {
         { data: 'GMOD_P' },
         { data: 'md' },
         { data: 'pe' },
-
         { data: 'ident' },
         { data: 'se' },
-
-
         { data: 'start_date' },
         { data: 'statut' },
         { data: 'Actions' }
