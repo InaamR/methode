@@ -35,7 +35,7 @@
                     <span class="menu-title text-truncate" data-i18n="Accueil">Accueil</span>
                 </a>
             </li>
-            <li class=" navigation-header"><span data-i18n="Section Direction">Gestion des services</span><i data-feather="more-horizontal"></i></li>
+            <li class="navigation-header"><span data-i18n="Section Direction">Gestion des services</span><i data-feather="more-horizontal"></i></li>
 
             <li class="nav-item">
                 <a class="align-items-center" href="#">
@@ -52,7 +52,7 @@
                                 echo'<li class="">';
                             }
                         ?>
-                        <a class="d-flex align-items-center" href="http://<?php echo $_SERVER['SERVER_NAME']?>/<?php echo $PARAM_url_non_doc_site; ?>/page/module/administrateur/equipe/liste_equipe.php">
+                        <a class="align-items-center" href="http://<?php echo $_SERVER['SERVER_NAME']?>/<?php echo $PARAM_url_non_doc_site; ?>/page/module/administrateur/equipe/liste_equipe.php">
                             <i class="bi bi-record2"></i>
                             <span class="menu-item text-truncate" data-i18n="Archive">Équipes</span>
                         </a>
@@ -65,7 +65,7 @@
                                 echo'<li class="">';
                             }
                         ?>
-                        <a class="d-flex align-items-center" href="http://<?php echo $_SERVER['SERVER_NAME']?>/<?php echo $PARAM_url_non_doc_site; ?>/page/module/administrateur/niveau/liste_niveau.php">
+                        <a class="align-items-center" href="http://<?php echo $_SERVER['SERVER_NAME']?>/<?php echo $PARAM_url_non_doc_site; ?>/page/module/administrateur/niveau/liste_niveau.php">
                             <i class="bi bi-record2"></i>
                             <span class="menu-item text-truncate" data-i18n="Archive">Gestion des droits</span>
                         </a>
@@ -74,10 +74,10 @@
                 </ul>
             </li>
 
-            <li class=" navigation-header"><span data-i18n="Gestion des planning">Gestion de la Production</span><i data-feather="more-horizontal"></i></li>
+            <li class="navigation-header"><span data-i18n="Gestion des planning">Gestion de la Production</span><i data-feather="more-horizontal"></i></li>
 
             
-            <li class=" nav-item"><a class="d-flex align-items-center" href="#">
+            <li class="nav-item"><a class="d-flex align-items-center" href="#">
                 <i class="bi bi-ui-radios"></i>
                 <span class="menu-title text-truncate" data-i18n="Options planning">Gestion des Niveaux</span></a>
                 <ul class="menu-content">
@@ -90,7 +90,7 @@
                             }
                         ?>
                     
-                        <a class="d-flex align-items-center" href="http://<?php echo $_SERVER['SERVER_NAME']?>/<?php echo $PARAM_url_non_doc_site; ?>/page/module/administrateur/socle/liste_socle.php"><i class="bi bi-record2"></i><span class="menu-item text-truncate" data-i18n="Socles">Socles</span></a>
+                        <a class="align-items-center" href="http://<?php echo $_SERVER['SERVER_NAME']?>/<?php echo $PARAM_url_non_doc_site; ?>/page/module/administrateur/socle/liste_socle.php"><i class="bi bi-record2"></i><span class="menu-item text-truncate" data-i18n="Socles">Socles</span></a>
                     </li>
 
                     <?php                        
@@ -101,7 +101,7 @@
                             }
                         ?>
                     
-                        <a class="d-flex align-items-center" href="http://<?php echo $_SERVER['SERVER_NAME']?>/<?php echo $PARAM_url_non_doc_site; ?>/page/module/administrateur/chapitre/liste_chapitre.php"><i class="bi bi-record2"></i><span class="menu-item text-truncate" data-i18n="Chapitres">Chapitres</span></a>
+                        <a class="align-items-center" href="http://<?php echo $_SERVER['SERVER_NAME']?>/<?php echo $PARAM_url_non_doc_site; ?>/page/module/administrateur/chapitre/liste_chapitre.php"><i class="bi bi-record2"></i><span class="menu-item text-truncate" data-i18n="Chapitres">Chapitres</span></a>
                     </li>
 
                     <?php                        
@@ -112,7 +112,7 @@
                             }
                         ?>
                     
-                        <a class="d-flex align-items-center" href="http://<?php echo $_SERVER['SERVER_NAME']?>/<?php echo $PARAM_url_non_doc_site; ?>/page/module/administrateur/sous_chapitre/liste_sous_chapitre.php"><i class="bi bi-record2"></i><span class="menu-item text-truncate" data-i18n="Sous chapitres">Sous chapitres</span></a>
+                        <a class="align-items-center" href="http://<?php echo $_SERVER['SERVER_NAME']?>/<?php echo $PARAM_url_non_doc_site; ?>/page/module/administrateur/sous_chapitre/liste_sous_chapitre.php"><i class="bi bi-record2"></i><span class="menu-item text-truncate" data-i18n="Sous chapitres">Sous chapitres</span></a>
                     </li>
 
                     <?php   
@@ -124,13 +124,13 @@
                             }
                         ?>
                     
-                        <a class="d-flex align-items-center" href="http://<?php echo $_SERVER['SERVER_NAME']?>/<?php echo $PARAM_url_non_doc_site; ?>/page/module/administrateur/identite_vehicule/liste_idv.php"><i class="bi bi-record2"></i><span class="menu-item text-truncate" data-i18n="Identités véhicules">Base Ident</span></a>
+                        <a class="align-items-center" href="http://<?php echo $_SERVER['SERVER_NAME']?>/<?php echo $PARAM_url_non_doc_site; ?>/page/module/administrateur/identite_vehicule/liste_idv.php"><i class="bi bi-record2"></i><span class="menu-item text-truncate" data-i18n="Identités véhicules">Base Ident</span></a>
                     </li>
 
                 </ul>
             </li>
 
-            <li class=" nav-item"><a class="d-flex align-items-center" href="#">
+            <li class="nav-item"><a class="d-flex align-items-center" href="#">
                 <i class="bi bi-calendar-plus"></i>
                 <span class="menu-title text-truncate" data-i18n="Planning">Planning</span></a>
                 <ul class="menu-content">
@@ -143,7 +143,7 @@
                             }
                         ?>
                     
-                        <a class="d-flex align-items-center" href="http://<?php echo $_SERVER['SERVER_NAME']?>/<?php echo $PARAM_url_non_doc_site; ?>/page/module/administrateur/etude/liste_planning.php"><i class="bi bi-record2"></i><span class="menu-item text-truncate" data-i18n="Etudes">Etudes</span></a>
+                        <a class="align-items-center" href="http://<?php echo $_SERVER['SERVER_NAME']?>/<?php echo $PARAM_url_non_doc_site; ?>/page/module/administrateur/etude/liste_planning.php"><i class="bi bi-record2"></i><span class="menu-item text-truncate" data-i18n="Etudes">Etudes</span></a>
                     </li>
 
                     <?php                        
@@ -154,7 +154,7 @@
                             }
                         ?>
                     
-                        <a class="d-flex align-items-center" href="http://<?php echo $_SERVER['SERVER_NAME']?>/<?php echo $PARAM_url_non_doc_site; ?>/page/module/administrateur/avancement/liste_avancement.php"><i class="bi bi-record2"></i><span class="menu-item text-truncate" data-i18n="Avancements">Affectation</span></a>
+                        <a class="align-items-center" href="http://<?php echo $_SERVER['SERVER_NAME']?>/<?php echo $PARAM_url_non_doc_site; ?>/page/module/administrateur/avancement/liste_avancement.php"><i class="bi bi-record2"></i><span class="menu-item text-truncate" data-i18n="Avancements">Affectation</span></a>
                     </li>
 
                     <?php                        
@@ -165,22 +165,22 @@
                             }
                         ?>
                     
-                        <a class="d-flex align-items-center" href="http://<?php echo $_SERVER['SERVER_NAME']?>/<?php echo $PARAM_url_non_doc_site; ?>/page/module/administrateur/etude/liste_archive.php"><i class="bi bi-record2"></i><span class="menu-item text-truncate" data-i18n="Archive">Archive</span></a>
+                        <a class="align-items-center" href="http://<?php echo $_SERVER['SERVER_NAME']?>/<?php echo $PARAM_url_non_doc_site; ?>/page/module/administrateur/etude/liste_archive.php"><i class="bi bi-record2"></i><span class="menu-item text-truncate" data-i18n="Archive">Archive</span></a>
                     </li>
                     
                 </ul>
             </li>
 
-            <li class=" navigation-header"><span data-i18n="DSI">Statistiques</span><i data-feather="more-horizontal"></i></li>
+            <li class="navigation-header"><span data-i18n="DSI">Statistiques</span><i data-feather="more-horizontal"></i></li>
 
-            <li class=" nav-item">
-                <a class="d-flex align-items-center" href="#">
+            <li class="nav-item">
+                <a class="align-items-center" href="#">
                     <i class="bi bi-clipboard-data"></i>
                     <span class="menu-title text-truncate" data-i18n="Pages" id="Dir. des Systèmes d'information">Reporting</span>
                 </a>
                 <ul class="menu-content">
                     <li>
-                        <a class="d-flex align-items-center" href="#">
+                        <a class="align-items-center" href="#">
                             <i class="bi bi-record2"></i>
                             <span class="menu-item text-truncate" data-i18n="">Excel</span>
                         </a>
@@ -188,20 +188,19 @@
                 </ul>
             </li>
             
-            <li class=" navigation-header"><span data-i18n="">Administration</span><i data-feather="more-horizontal"></i></li>
-            <li class=" nav-item"><a class="d-flex align-items-center" href="#">
+            <li class="navigation-header"><span data-i18n="">Administration</span><i data-feather="more-horizontal"></i></li>
+            <li class="nav-item"><a class="d-flex align-items-center" href="#">
                 <i class="bi bi-sliders"></i>
                 <span class="menu-title text-truncate" data-i18n="Admin">Admin</span></a>
                 <ul class="menu-content">
-                    <li><a class="d-flex align-items-center" title="Gestion du personnel" href="https://<?php echo $_SERVER['SERVER_NAME']?>/<?php echo $PARAM_url_non_doc_site; ?>/page/module/administrateur/admin/listeMembre.php"><i class="bi bi-record2"></i><span class="menu-item text-truncate" data-i18n="G.Personnel">G.Personnel</span></a>
+                    <li><a class="align-items-center" title="Gestion du personnel" href="https://<?php echo $_SERVER['SERVER_NAME']?>/<?php echo $PARAM_url_non_doc_site; ?>/page/module/administrateur/admin/listeMembre.php"><i class="bi bi-record2"></i><span class="menu-item text-truncate" data-i18n="G.Personnel">G.Personnel</span></a>
                     </li>
-                    <li><a class="d-flex align-items-center" title="Type d'activation" href="https://<?php echo $_SERVER['SERVER_NAME']?>/<?php echo $PARAM_url_non_doc_site; ?>/page/module/administrateur/admin/activation.php"><i class="bi bi-record2"></i><span class="menu-item text-truncate" data-i18n="Type d'activation">Type d'activation</span></a>
+                    <li><a class="align-items-center" title="Type d'activation" href="https://<?php echo $_SERVER['SERVER_NAME']?>/<?php echo $PARAM_url_non_doc_site; ?>/page/module/administrateur/admin/activation.php"><i class="bi bi-record2"></i><span class="menu-item text-truncate" data-i18n="Type d'activation">Type d'activation</span></a>
                     </li>
-                    <li><a class="d-flex align-items-center" title="Liste des connexions" href="https://<?php echo $_SERVER['SERVER_NAME']?>/<?php echo $PARAM_url_non_doc_site; ?>/page/module/administrateur/admin/listeJeton.php"><i class="bi bi-record2"></i><span class="menu-item text-truncate" data-i18n="Liste des connexions">Liste des connexions</span></a>
+                    <li><a class="align-items-center" title="Liste des connexions" href="https://<?php echo $_SERVER['SERVER_NAME']?>/<?php echo $PARAM_url_non_doc_site; ?>/page/module/administrateur/admin/listeJeton.php"><i class="bi bi-record2"></i><span class="menu-item text-truncate" data-i18n="Liste des connexions">Liste des connexions</span></a>
                     </li>
                 </ul>
             </li>
-
         </ul>
     </div>
 </div>
