@@ -29,16 +29,16 @@
     <div class="main-menu-content">
         <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation">
             
-            <li class=" nav-item">
-                <a class="nav-lik d-flex" href="http://<?php echo $_SERVER['SERVER_NAME']?>/<?php echo $PARAM_url_non_doc_site; ?>/page/module/administrateur/index.php">
+            <li class="nav-item">
+                <a class="nav-lik" href="http://<?php echo $_SERVER['SERVER_NAME']?>/<?php echo $PARAM_url_non_doc_site; ?>/page/module/administrateur/index.php">
                     <i class="bi bi-house"></i>
                     <span class="menu-title text-truncate" data-i18n="Accueil">Accueil</span>
                 </a>
             </li>
             <li class=" navigation-header"><span data-i18n="Section Direction">Gestion des services</span><i data-feather="more-horizontal"></i></li>
 
-            <li class=" nav-item">
-                <a class="d-flex align-items-center" href="#">
+            <li class="nav-item">
+                <a class="align-items-center" href="#">
                     <i class="bi bi-people"></i>
                     <span class="menu-title text-truncate" data-i18n="Com. Générale" id="communication">Services</span>
                 </a>
