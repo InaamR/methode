@@ -32,7 +32,7 @@
             <li class="nav-item">
                 <a class="nav-lik" href="http://<?php echo $_SERVER['SERVER_NAME']?>/<?php echo $PARAM_url_non_doc_site; ?>/page/module/administrateur/index.php">
                     <i class="bi bi-house"></i>
-                    <span class="menu-title text-truncate" data-i18n="Accueil">Accueil</span>
+                    <span class="menu-title text-truncate" data-i18n="Accueil">Accueil1</span>
                 </a>
             </li>
             <li class="navigation-header"><span data-i18n="Section Direction">Gestion des services</span><i data-feather="more-horizontal"></i></li>
