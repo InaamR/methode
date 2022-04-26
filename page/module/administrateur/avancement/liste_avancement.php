@@ -193,9 +193,6 @@ if(empty($_SESSION['id'])){
             <div class="content-body">
                 <div class="row">
                     <div class="col-12">
-
-                        
-
                         <!-- Basic table -->
                         <section id="basic-datatable">
                             <div class="row">
@@ -388,7 +385,6 @@ if(empty($_SESSION['id'])){
                 });
             }
         })
-    });
     </script>
     <script src="https://kit.fontawesome.com/7791373c6a.js" crossorigin="anonymous"></script>
 </body>
