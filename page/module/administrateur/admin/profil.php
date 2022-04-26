@@ -115,6 +115,7 @@ if(!empty($_POST['maj'])) {
 
     <!-- BEGIN: Custom CSS-->
     <link rel="stylesheet" type="text/css" href="https://<?php echo $_SERVER['SERVER_NAME']?>/<?php echo $PARAM_url_non_doc_site; ?>/assets/css/style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
     <!-- END: Custom CSS-->
 	
     

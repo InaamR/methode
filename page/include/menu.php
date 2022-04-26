@@ -77,7 +77,8 @@
             <li class="navigation-header"><span data-i18n="Gestion des planning">Gestion de la Production</span><i data-feather="more-horizontal"></i></li>
 
             
-            <li class="nav-item"><a class="d-flex align-items-center" href="#">
+            <li class="nav-item">
+                <a class="align-items-center" href="#">
                 <i class="bi bi-ui-radios"></i>
                 <span class="menu-title text-truncate" data-i18n="Options planning">Gestion des Niveaux</span></a>
                 <ul class="menu-content">
@@ -130,7 +131,8 @@
                 </ul>
             </li>
 
-            <li class="nav-item"><a class="d-flex align-items-center" href="#">
+            <li class="nav-item">
+                <a class="align-items-center" href="#">
                 <i class="bi bi-calendar-plus"></i>
                 <span class="menu-title text-truncate" data-i18n="Planning">Planning</span></a>
                 <ul class="menu-content">
@@ -188,10 +190,14 @@
                 </ul>
             </li>
             
-            <li class="navigation-header"><span data-i18n="">Administration</span><i data-feather="more-horizontal"></i></li>
-            <li class="nav-item"><a class="d-flex align-items-center" href="#">
-                <i class="bi bi-sliders"></i>
-                <span class="menu-title text-truncate" data-i18n="Admin">Admin</span></a>
+            <li class="navigation-header">
+                <span data-i18n="">Administration</span><i data-feather="more-horizontal"></i>
+            </li>
+            <li class="nav-item">
+                <a class="align-items-center" href="#">
+                    <i class="bi bi-sliders"></i>
+                    <span class="menu-title text-truncate" data-i18n="Admin">Admin</span>
+                </a>
                 <ul class="menu-content">
                     <li><a class="align-items-center" title="Gestion du personnel" href="https://<?php echo $_SERVER['SERVER_NAME']?>/<?php echo $PARAM_url_non_doc_site; ?>/page/module/administrateur/admin/listeMembre.php"><i class="bi bi-record2"></i><span class="menu-item text-truncate" data-i18n="G.Personnel">G.Personnel</span></a>
                     </li>
